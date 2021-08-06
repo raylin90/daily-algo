@@ -14,20 +14,19 @@ function parensValid(str) {
 
         if(str[i] == "(") {
             stack.push(str[i]);
-        } else if(str[i] == ")" && stack[stack.length-1] == "(") {
+        } else if(str[i] == ")" && stack[stack.length - 1] == "(") {
             stack.pop();
-        } else {
+        } else if(str[i] == ")") {
             return false;
         }
     }
-    
-    console.log(stack);
 
-    if(stack.length == 0){
-        return true
+    if(stack.length == 0) {
+        return true;
     } else {
         return false;
     }
+
 }
 
 console.log(parensValid("y(3(p)p(3)r)s"));
