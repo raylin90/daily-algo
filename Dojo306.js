@@ -209,12 +209,50 @@ class SLList {
 
     // remove the second to last node in the list
     removeSecondToLast() {
+        // edge case, if list is empty
+        if(!this.head) {
+            return false;
+        }
+        // edge case, if list is not right long (3x next), only 2 node.
+        if(this.head.next.next) {
+            this.head = this.head.next;
+        }
+        // what if only one node???
+        //
+        let runner = this.head;
+        let destroyedNode;
 
+        while(runner.next.next.next) {
+            runner = runner.next;
+        }
+        destroyedNode = runner.next;
+        runner.next = runner.next.next;
+        destroyedNode.next = null;
     }
 
     // remove al nodes that have a negative value
     removeNegatives() {
-        
+        // edge case, if list is empty
+        if(!this.head) {
+            return false;
+        }
+        // edge case ,if list only have one value
+        if(this.head.value < 0) {
+            this.removeFromFront();
+        }
+
+        let runner = this.head;
+        let destroyedNode;
+        while(runner.next) {
+            if(runner.next.value < 0) {
+                destroyedNode = runner.next;
+                runner.next = runner.next.next;
+                destroyedNode.next = null;
+                // after the swap and remove, we want to continue running this again, because if we dont, we are bypassing the runner.next and skip if we have negative number continuesly
+                continue;
+            }
+            runner = runner.next;
+        }
     }
 }
 
@@ -224,6 +262,10 @@ sll.addToFront(11);      // 11 5
 sll.addToFront(9);      // 9 11 5
 sll.addToBack(2);       // 9 11 5 2
 sll.addToBack(8);       // 9 11 5 2 8
+sll.addToBack(-8);       // 9 11 5 2 8
+sll.addToBack(-3);       // 9 11 5 2 8 3
+sll.addToBack(-8);       // 9 11 5 2 8
+sll.addToBack(-3);       // 9 11 5 2 8 3
 sll.addToBack(3);       // 9 11 5 2 8 3
 sll.removeFromFront();  // 11 5 2 8 3
 sll.removeFromBack();   // 11 5 2 8
@@ -233,7 +275,11 @@ sll.moveMaxtoBack();    // 2 5 8 11
 sll.prependValue(4, 3)  // 2 5 4 8 11
 sll.appendValue(7, 2)   // 2 5 7 4 8 11
 // if the location is out of order, then we will add it to the end
-sll.prependValue(4, 11)  // 2 5 4 8 11
-sll.appendValue(7, 11)   // 2 5 7 4 8 11
+sll.prependValue(4, 11)  // 2 5 4 8 11 4
+sll.appendValue(7, 11)   // 2 5 7 4 8 11 4 7
+sll.removeSecondToLast();// 2 5 7 4 8 11 7
+sll.addToBack(-8);       // 9 11 5 2 8
+sll.addToBack(-3);       // 9 11 5 2 8 3
+sll.removeNegatives();
 console.log(sll.printValues());
-console.log(sll)
+// console.log(sll)
