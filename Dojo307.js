@@ -157,16 +157,46 @@ class SLQueue{
         }
         tempQueue.print();
     }
+
+    // given a queue, determine whether or not the values therein are a pallindrome
+    // ex: 1 - 2- 3- 3 - 1 - null;
+    // any value that are in the same order going forwards as backwards is a pallindrome, doesn't need to just be letters
+    isPallindrome() {
+
+        let runner = this.head;
+        let arr = [];
+        while(runner) {
+            arr.push(runner.value);
+            runner = runner.next;
+        }
+        console.log(arr);
+
+        for(let i = 0; i < arr.length/2; i++) {
+            let j = arr.length - 1 - i;
+            if(arr[i] !== arr[j]) {
+                return false;
+            }
+            return true;
+        }
+    }
 }
 
 const q = new SLQueue();
-q.enqueue(4);           // 4
-q.enqueue(5);           // 4 - 5
-q.enqueue(2);           // 4 -5 - 2
-q.enqueue(7);           // 4 -5 -2 -7
-console.log(q.contains(7))
-q.enqueue(-1);
-q.removeMin();
-q.print();              // 4 -5 -2 -7
-console.log(q.size());  // 4
-q.interleaveQueue();
+// q.enqueue(4);           // 4
+// q.enqueue(5);           // 4 - 5
+// q.enqueue(2);           // 4 -5 - 2
+// q.enqueue(7);           // 4 -5 -2 -7
+// console.log(q.contains(7))
+// q.enqueue(-1);
+// q.removeMin();
+// q.print();              // 4 -5 -2 -7
+// console.log(q.size());  // 4
+// q.interleaveQueue();
+
+q.enqueue(1);
+q.enqueue(2);
+q.enqueue(3);
+q.enqueue(2);
+q.enqueue(2); 
+q.print();
+console.log(q.isPallindrome());
