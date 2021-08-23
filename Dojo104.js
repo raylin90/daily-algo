@@ -29,3 +29,26 @@ const alwaysHungry = arr => {
 
 alwaysHungry([1, 4, "food", "hello", true, "food"]);
 alwaysHungry([2, true, 5, "hello", 8, "four"]);
+
+
+
+
+// REDO:
+const hungry = arr => {
+
+    let output = false;
+
+    for(let i = 0; i < arr.length; i++) {
+        if(arr[i] == "food"){
+            console.log("yummy");
+            output = true;
+        }
+    }
+
+    if(output == false) {
+        console.log("I'm hungy")
+    }
+}
+
+hungry([1, 4, "food", "hello", true, "food"]);
+hungry([2, true, 5, "hello", 8, "four"]);

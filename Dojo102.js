@@ -58,3 +58,25 @@ const valuesGreaterThanSecond2 = arr => {
 
 valuesGreaterThanSecond2([2, 5, 19, 3, 10, 9]);
 valuesGreaterThanSecond2([2]);
+
+
+
+
+// REDO:
+const printArray2 = arr => {
+
+    if(arr.length <= 1) {
+        console.log("not enough values");
+    } 
+
+    let counter = 0;
+    for(let i = 0; i < arr.length; i++) {
+        if(arr[i] > arr[1]){
+            counter++;
+        }
+    }
+    console.log(counter);
+}
+printArray2([2,5,19,3,10,9])
+printArray2([4,3,10,1,6,9,2])
+printArray2([4,3])

@@ -51,3 +51,36 @@ oddsAndEvens([1, 2, 5, 8, 8, 8]);
 oddsAndEvens([1, 2, 3, 4, 5, 6, 7, 8]);
 oddsAndEvens([2, 2, 1, 1, 6, 6, 5, 5, 5, 5, 5, 5]);
 oddsAndEvens([1, 1, 2, 1, 1, 3, 3]);
+
+
+
+
+// REDO:
+const oddsAndEvens2 = arr => {
+
+    let oddCounter2 = 0;
+    let evenCounter2 = 0;
+
+    for(let i = 0; i < arr.length; i++) {
+        if(arr[i] % 2 == 0) {
+            evenCounter2++;
+            oddCounter2 = 0;
+        } else {
+            oddCounter2++;
+            evenCounter2 = 0;
+        }
+
+        if(evenCounter2 == 3) {
+            console.log("Even more so!");
+            evenCounter2 == 0;
+        }
+        if(oddCounter2 == 3) {
+            console.log("That's odd!");
+            oddCounter2 = 0;
+        }
+    }
+}
+oddsAndEvens2([1, 2, 5, 8, 8, 8]);
+oddsAndEvens2([1, 2, 3, 4, 5, 6, 7, 8]);
+oddsAndEvens2([2, 2, 1, 1, 6, 6, 5, 5, 5, 5, 5, 5]);
+oddsAndEvens2([1, 1, 2, 1, 1, 3, 3]);

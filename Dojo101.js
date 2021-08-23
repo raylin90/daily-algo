@@ -63,3 +63,56 @@ const flexCount2 = (param1, param2, param3, param4) => {
 }
 
 flexCount2(3, 5, 17, 9);
+
+
+
+
+// REDO:
+const countDownByFour = () => {
+    for(let i = 2020; i > 0; i-=4) {
+        console.log(i);
+    }
+}
+
+countDownByFour();
+
+const countDownbyFour2 = () => {
+    
+    let i = 2020;
+    while(i > 0) {
+        console.log(i);
+        i-=4;
+    }
+}
+
+countDownbyFour2();
+
+const flexibleCountDown = (lowNum, highNum, mult) => {
+    for(let i = highNum; i >= lowNum; i--) {
+        if(i % mult ==0) {
+            console.log(i);
+        }
+    }
+}
+flexibleCountDown(2,9,3)
+flexibleCountDown(2,16,3)
+
+const flexibleCountDown2 = (param1, param2, param3, param4) => {
+    for(let i = param2; i <= param3; i++) {
+        if(i % param1 == 0 && i !==param4) {
+            console.log(i);
+        }
+    }
+}
+flexibleCountDown2(3,5,17,9)
+
+const flexibleCountDown3 = (param1, param2, param3, param4) => {
+    let i = param2;
+    while(i <= param3){
+        if(i % param1 == 0 && i !==param4){
+            console.log(i);
+        }
+        i++;
+    }
+}
+flexibleCountDown3(3,5,17,9)
