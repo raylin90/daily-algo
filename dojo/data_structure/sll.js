@@ -124,10 +124,27 @@ class SLL {
     }
 
     prependValue(value, location) {
-
+        if(location <= 1) {
+            this.addToFront(value);
+            return this;
+        }
+        let newNode = new Node(value);
+        let runner = this.head;
+        let count = 1;
+        while(runner.next && count < location-1) {
+            runner = runner.next;
+            count++;
+        }
+        // console.log(count);
+        // console.log(runner.value)
+        let nextNode = runner.next;
+        runner.next = newNode;
+        newNode.next = nextNode;
+        // console.log(runner.next.value)
     }
+
     appendValue(value, location) {
-        if(location === 1 || location === 0) {
+        if(location === 0) {
             this.addToFront(value);
             return this;
         }
@@ -183,8 +200,9 @@ console.log(list.print());
 // list.moveMaxToBack();
 // list.removeFromFront();
 // list.removeFromFront();
-list.appendValue(2,4);
-list.appendValue(3,100);
+// list.appendValue(50,1);
+// list.appendValue(3,100);
+list.prependValue(101,50)
 // list.removeFromBack();
 // console.log(list.contains(2));
 console.log(list.print());
