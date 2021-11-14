@@ -123,6 +123,29 @@ class SLL {
         }
     }
 
+    prependValue(value, location) {
+
+    }
+    appendValue(value, location) {
+        if(location === 1 || location === 0) {
+            this.addToFront(value);
+            return this;
+        }
+        let newNode = new Node(value);
+        let runner = this.head;
+        let count = 1;
+        while(runner.next && count < location) {
+            runner = runner.next;
+            count++;
+        }
+        // console.log(count);
+        // console.log(runner.value)
+        let nextNode = runner.next;
+        runner.next = newNode;
+        newNode.next = nextNode;
+        // console.log(runner.next.value)
+    }
+
     contains(value) {
         let runner = this.head;
         while(runner) {
@@ -157,9 +180,11 @@ list.addToBack(1);
 list.addToFront(31);
 console.log(list.print());
 // list.moveMinToFront();
-list.moveMaxToBack();
+// list.moveMaxToBack();
 // list.removeFromFront();
 // list.removeFromFront();
+list.appendValue(2,4);
+list.appendValue(3,100);
 // list.removeFromBack();
 // console.log(list.contains(2));
 console.log(list.print());
