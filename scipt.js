@@ -58,3 +58,10 @@ queue.enqueue(5)
 queue.enqueue(6)
 queue.enqueue(7)
 console.log(queue.print());
+
+
+
+
+
+// binary recursive algo
+console.log(binarySearh([5,8,9,15,17,23,24,34,77,100], 2));
