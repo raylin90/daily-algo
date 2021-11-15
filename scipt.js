@@ -21,3 +21,40 @@ countEvensAndOdd([1, 1, 2, 1, 1, 3, 3]);
 // Example 1: "({[({})]})" --> true
 // Example 2: "d(i{a}l[t]o)n{e!" --> false
 // Example 2: "{{[]}}(){}{()}" --> true
+
+
+
+
+
+// slque -> interleaveQueue
+class Node {
+    constructor(value) {
+        this.value = value;
+        this.next = null;
+    }
+}
+
+class SLQueue {
+    constructor() {
+        this.head = null;
+        this.tail = null;
+    }
+    enqueue(value) {
+
+    }
+    dequene() {
+
+    }
+    print() {
+
+    }
+}
+let queue = new SLQueue();
+queue.enqueue(1)
+queue.enqueue(2)
+queue.enqueue(3)
+queue.enqueue(4)
+queue.enqueue(5)
+queue.enqueue(6)
+queue.enqueue(7)
+console.log(queue.print());
