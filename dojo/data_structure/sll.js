@@ -2,6 +2,7 @@ class Node {
     constructor(value) {
         this.value = value;
         this.next = null;
+        this.child = null;
     }
 }
 
@@ -219,19 +220,50 @@ class SLL {
         }
         return output;
     }
+
+    reverse() {
+        let runner = this.head;
+        let arr = [];
+        while(runner) {
+            arr.push(runner.value);
+            runner = runner.next;
+        }
+        let newList = new SLL();
+        for(let i = arr.length -1 ; i >=0; i--) {
+            newList.addToBack(arr[i]);
+        }
+        console.log(newList.print());
+    }
+
+    reverseInPlance() {
+        let previous = null;
+        let current = this.head;
+        let after = current.next;
+
+        while(current.next) {
+            current.next = previous;
+            previous = current;
+            // console.log("after: ", after.value);
+            current = after;
+            after = current.next;
+        }
+        current.next = previous;
+        this.head = current;
+        console.log(this.print());
+    }
 }
 
 let list = new SLL();
 list.addToBack(-2);
 list.addToBack(3);
 list.addToBack(-11);
-// list.addToBack(4);
-// list.addToBack(-7);
-// list.addToBack(-17);
-// list.addToBack(-13);
-// list.addToBack(1);
+list.addToBack(4);
+list.addToBack(-7);
+list.addToBack(-17);
+list.addToBack(-13);
+list.addToBack(1);
 list.addToFront(-31);
-// list.addToBack(-5);
+list.addToBack(-5);
 console.log(list.print());
 // list.moveMinToFront();
 // list.moveMaxToBack();
@@ -243,5 +275,7 @@ console.log(list.print());
 // list.removeFromBack();
 // console.log(list.contains(2));
 // list.removeNegative();
-list.removeSecondToLast();
-console.log(list.print());
+// list.removeSecondToLast();
+// list.reverse();
+list.reverseInPlance();
+// console.log(list.print());
