@@ -251,6 +251,59 @@ class SLL {
         this.head = current;
         console.log(this.print());
     }
+
+    addChild() {
+        let runner = this.head;
+        while(runner) {
+            let NumberOfChild = Math.floor(Math.random() * 5);
+            if(NumberOfChild > 0) {
+                let childList = new SLL();
+                for(let i = 0; i < NumberOfChild; i++) {
+                    childList.addToBack(Math.floor(Math.random() * 5) + 1)
+                }
+                runner.child = childList;
+            }
+            runner = runner.next;
+        }
+    }
+
+    printWithChild() {
+        let output = "";
+        let runner = this.head;
+        while(runner) {
+            output += runner.value + " => ";
+            if(runner.child) {
+                let s2Runner = runner.child.head;
+                output += "(";
+                while(s2Runner) {
+                    output += s2Runner.value + " => "; 
+                    s2Runner = s2Runner.next;
+                }
+                output += ")";
+            }
+            runner = runner.next;
+        }
+        console.log(output);
+    }
+
+    flattenChild() {
+        console.log("***");
+        let runner = this.head;
+        while(runner) {
+            if(runner.child) {
+                let s2Runner = runner.child.head;
+                while(s2Runner.next) {
+                    s2Runner = s2Runner.next;
+                }
+                s2Runner.next = runner.next
+                runner.next= runner.child.head;
+            }
+            runner = runner.next
+        }
+        
+        console.log("***");
+        console.log(this.print());
+    }
 }
 
 let list = new SLL();
@@ -264,7 +317,7 @@ list.addToBack(-13);
 list.addToBack(1);
 list.addToFront(-31);
 list.addToBack(-5);
-console.log(list.print());
+// console.log(list.print());
 // list.moveMinToFront();
 // list.moveMaxToBack();
 // list.removeFromFront();
@@ -277,5 +330,8 @@ console.log(list.print());
 // list.removeNegative();
 // list.removeSecondToLast();
 // list.reverse();
-list.reverseInPlance();
+// list.reverseInPlance();
+list.addChild();
+list.printWithChild();
+list.flattenChild();
 // console.log(list.print());
