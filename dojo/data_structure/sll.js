@@ -297,6 +297,7 @@ class SLL {
                 }
                 s2Runner.next = runner.next
                 runner.next= runner.child.head;
+                runner.child = null;
             }
             runner = runner.next
         }
@@ -334,4 +335,5 @@ list.addToBack(-5);
 list.addChild();
 list.printWithChild();
 list.flattenChild();
+list.printWithChild();
 // console.log(list.print());
