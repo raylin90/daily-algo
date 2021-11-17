@@ -65,3 +65,61 @@ console.log(queue.print());
 
 // binary recursive algo
 console.log(binarySearh([5,8,9,15,17,23,24,34,77,100], 2));
+
+
+
+
+// binary search tree
+class Node {
+    constructor(value) {
+
+    }
+}
+
+class BST {
+    constructor() {
+
+    }
+
+    add(value) {
+
+    }
+
+    print(root) {
+
+    }
+
+    findMin() {
+
+    }
+
+    findMax() {
+
+    }
+
+    size(root) {
+
+    }
+
+    height(root) {
+
+    }
+
+    contains(value) {
+
+    }
+}
+
+let tree = new BST();
+tree.add(20);
+tree.add(28);
+tree.add(2);
+tree.add(5);
+tree.add(22);
+tree.add(6);
+// console.log(tree.findMin());
+// console.log(tree.findMax());
+// tree.print(tree.root);
+// console.log(tree.contains(23));
+// console.log(tree.size(tree.root));
+console.log(tree.height(tree.root));

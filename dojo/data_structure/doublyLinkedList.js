@@ -74,8 +74,8 @@ class DLList {
             output += runner.value + " <=> "
             runner = runner.next;
         }
-        // console.log("head: ", this.head.value);
-        // console.log("tail: ", this.tail.value);
+        console.log("head: ", this.head.value);
+        console.log("tail: ", this.tail.value);
         return output;
     }
 
@@ -97,6 +97,7 @@ class DLList {
         let prev = null;
         let current = this.head;
         let after = current.next;
+        this.tail = current;
         while(current.next) {
             current.next = prev;
             current.previous = after;
