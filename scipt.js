@@ -123,3 +123,66 @@ tree.add(6);
 // console.log(tree.contains(23));
 // console.log(tree.size(tree.root));
 console.log(tree.height(tree.root));
+
+
+
+
+
+
+function inOrderSubset(nums) {
+
+}
+console.log(inOrderSubset([1,2,3]));
+
+
+
+
+
+
+
+
+
+class Node {
+    constructor(letter) {
+        this.letter = letter;
+        this.child = {};
+        this.isWord = false;
+    }
+}
+
+class Tries {
+    constructor() {
+        this.root = new Node(""); 
+    }
+    
+    add(string) {
+
+    }
+
+    print(root = this.root, str="") {
+
+    }
+
+    contains(str) {
+
+    }
+
+    contains2(str) {
+
+    }
+
+    autocomplete(str) {
+
+    }
+}
+
+let t = new Tries();
+t.add("cat");
+t.add("cab");
+t.add("can");
+t.add("cbb");
+t.add("dog");
+// t.print();
+// console.log(t.contains2("cac"))
+// console.log(t.contains("cat"))
+console.log(t.autocomplete("c"))
