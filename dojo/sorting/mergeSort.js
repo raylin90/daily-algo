@@ -15,6 +15,20 @@ const merge = (left, right) => {
 // console.log(merge([2,8,15,18,19,25], [5,9,12,17]));
 
 
+const mergeSort = arr => {
+    if(arr.length <= 1) return arr;
+    const midPoint = Math.floor(arr.length / 2);
+    const leftArr = arr.slice(0, midPoint);
+    const rightArr = arr.slice(midPoint, arr.length);
+    return merge(mergeSort(leftArr), mergeSort(rightArr))
+}
+
+console.log(mergeSort([5,7,4,8,3,1,9]));
+
+
+
+
+
 const merge2 = (left, right) => {
     const array = [];
     let i = 0;
@@ -40,14 +54,3 @@ const merge2 = (left, right) => {
     return array
 }
 // console.log(merge2([2,8,15,18,19,25], [5,9,12,17]));
-
-
-const mergeSort = arr => {
-    if(arr.length <= 1) return arr;
-    const midPoint = Math.floor(arr.length / 2);
-    const leftArr = arr.slice(0, midPoint);
-    const rightArr = arr.slice(midPoint, arr.length);
-    return merge(mergeSort(leftArr), mergeSort(rightArr))
-}
-
-console.log(mergeSort([5,7,4,8,3,1,9]));
