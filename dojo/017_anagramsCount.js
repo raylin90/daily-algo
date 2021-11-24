@@ -25,3 +25,7 @@ function anagrams(words){
     return count;
 }
 console.log(anagrams(["tea", "eat", "apple", "ate", "vaja", "cut", "java", "utc"])) // 4
+// tea, eat, ate, utc
+// apple,
+// vaja, java,
+// cut
