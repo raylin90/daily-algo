@@ -186,3 +186,42 @@ t.add("dog");
 // console.log(t.contains2("cac"))
 // console.log(t.contains("cat"))
 console.log(t.autocomplete("c"))
+
+
+const partition = (arr, start, end) => {
+
+    let pivot = arr[start];
+    let pivotIndex = start;
+    while(start < end) {
+        while(arr[start] <= pivot) {
+            start++;
+        }
+        // console.log(arr[start])
+        while(arr[end] > pivot) {
+            end--;
+        }
+        // console.log(arr[end])
+        if(start < end) {
+            [arr[start], arr[end]] = [arr[end], arr[start]];
+        }
+
+        // console.log(arr)
+
+    }
+    // console.log(arr[start])
+    // console.log(arr[end])
+    [arr[pivotIndex], arr[end]] = [arr[end], arr[pivotIndex]];
+    return end;
+}
+
+
+const quickSort = (arr, start, end) => {
+    if(start < end) {
+        let pIndex = partition(arr, start,end);
+        quickSort(arr, start, pIndex)
+        quickSort(arr, pIndex+1, end)
+    }
+    return arr;
+}
+let arr = [5,7,4,8,3,1,9];
+console.log(quickSort(arr, 0, arr.length-1));
