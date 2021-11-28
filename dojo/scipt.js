@@ -188,40 +188,18 @@ t.add("dog");
 console.log(t.autocomplete("c"))
 
 
-const partition = (arr, start, end) => {
 
-    let pivot = arr[start];
-    let pivotIndex = start;
-    while(start < end) {
-        while(arr[start] <= pivot) {
-            start++;
+const removeDuplicate = str => {
+    let output ="";
+    for(let i = 0; i < str.length; i++) {
+        if(output.includes(str[i])) {
+            continue;
+        } else {
+            output += str[i];
         }
-        // console.log(arr[start])
-        while(arr[end] > pivot) {
-            end--;
-        }
-        // console.log(arr[end])
-        if(start < end) {
-            [arr[start], arr[end]] = [arr[end], arr[start]];
-        }
-
-        // console.log(arr)
-
     }
-    // console.log(arr[start])
-    // console.log(arr[end])
-    [arr[pivotIndex], arr[end]] = [arr[end], arr[pivotIndex]];
-    return end;
+    return output;
 }
-
-
-const quickSort = (arr, start, end) => {
-    if(start < end) {
-        let pIndex = partition(arr, start,end);
-        quickSort(arr, start, pIndex)
-        quickSort(arr, pIndex+1, end)
-    }
-    return arr;
-}
-let arr = [5,7,4,8,3,1,9];
-console.log(quickSort(arr, 0, arr.length-1));
+console.log(removeDuplicate("Alabama"));
+console.log(removeDuplicate("Hello World"));
+console.log(removeDuplicate("Good morning all"));
