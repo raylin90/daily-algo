@@ -225,3 +225,16 @@ const isStringRotation = (str1, str2) => {
 console.log(isStringRotation("Hello World", "rldHello Wo"))
 console.log(isStringRotation("Hello World", "o WorldHell"))
 console.log(isStringRotation("Hello World", "Hi"))
+
+
+
+
+
+
+
+const intersectSortedArr = (arr1, arr2) => {
+
+}
+
+console.log(intersectSortedArr([1,2,2,3,4,5], [2,2,4,6,7,8]))   // [2,4]
+console.log(intersectSortedArr([1,1,1,2,3,4],[1,1,3,4,5]))   // [1,3,4]
