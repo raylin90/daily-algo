@@ -25,10 +25,10 @@ const StringToWord2 = str => {
 
 const reverseStringToWord2 = str => {
     let arr = StringToWord2(str)
-    for(let i = 0; i < arr.length / 2; i++) {
-        let j = arr.length - 1 - i;
-        [arr[i],arr[j]] = [arr[j],arr[i]];
+    let output = ""
+    for(let i = arr.length-1; i >=0; i--) {
+        output+=arr[i]
     }
-    return arr;
+    return output;
 }
 console.log(reverseStringToWord2("Happy Monday Everyone!"))

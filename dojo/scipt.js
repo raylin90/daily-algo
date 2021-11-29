@@ -203,3 +203,25 @@ const quickSort = (arr, start, end) => {
 }
 let arr = [7,10,1,4,3,5,8, 11];
 console.log(quickSort(arr, 0 , arr.length - 1))
+
+
+
+
+
+
+
+
+const stringRotation = (str, n) => {
+
+}
+// console.log(stringRotation("Hello World", 3))
+// console.log(stringRotation("Hello World", 7))
+
+
+
+const isStringRotation = (str1, str2) => {
+
+}
+console.log(isStringRotation("Hello World", "rldHello Wo"))
+console.log(isStringRotation("Hello World", "o WorldHell"))
+console.log(isStringRotation("Hello World", "Hi"))
