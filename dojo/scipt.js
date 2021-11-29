@@ -238,3 +238,59 @@ const intersectSortedArr = (arr1, arr2) => {
 
 console.log(intersectSortedArr([1,2,2,3,4,5], [2,2,4,6,7,8]))   // [2,4]
 console.log(intersectSortedArr([1,1,1,2,3,4],[1,1,3,4,5]))   // [1,3,4]
+
+
+
+
+
+
+
+// left child of parent: 2 * parent
+// right child of parent: 2 * parent + 1
+// parent: Math.floor(child / 2)
+
+class minHeap {
+    constructor() {
+        this.heap = [null]
+    }
+
+    size() {
+    }
+
+    top() {
+    }
+
+    print() {
+    }
+
+    insert(value) {
+
+    }
+
+    remove() {
+
+    }
+}
+
+let heap = new minHeap();
+// console.log(heap.size());
+// console.log(heap.top());
+heap.print();
+heap.insert(5);
+heap.insert(10);
+heap.insert(9);
+heap.insert(3);
+heap.insert(7);
+heap.insert(4);
+heap.remove();
+heap.print();
+
+
+
+
+const clockAngle = time => {
+
+}
+console.log(clockAngle(360))
+console.log(clockAngle(180))
+console.log(clockAngle(45))
