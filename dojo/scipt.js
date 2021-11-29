@@ -189,17 +189,17 @@ console.log(t.autocomplete("c"))
 
 
 
-const removeDuplicate = str => {
-    let output ="";
-    for(let i = 0; i < str.length; i++) {
-        if(output.includes(str[i])) {
-            continue;
-        } else {
-            output += str[i];
-        }
-    }
-    return output;
+
+
+
+const partition = (arr, start, end) => {
+
 }
-console.log(removeDuplicate("Alabama"));
-console.log(removeDuplicate("Hello World"));
-console.log(removeDuplicate("Good morning all"));
+let arr = [7,10,1,4,3,5,8, 11];
+console.log(partition(arr, 0 , arr.length - 1))
+
+const quickSort = (arr, start, end) => {
+
+}
+let arr = [7,10,1,4,3,5,8, 11];
+console.log(quickSort(arr, 0 , arr.length - 1))
