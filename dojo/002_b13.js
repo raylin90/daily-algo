@@ -500,3 +500,215 @@ const celsiusEqualFahrenheit = () => {
     
 }
 celsiusEqualFahrenheit();
+
+
+
+// Given an array, write a function that changes all positive numbers in the array to “big”. Example: makeItBig([-1,3,5,-5]) returns that same array, changed to [-1,"big","big",-5].
+const makeItBig = arr => {
+    for(let i = 0; i < arr.length; i++) {
+        if(arr[i] > 0) {
+            arr[i] = "big";
+        }
+    }
+    return arr;
+}
+console.log(makeItBig([-1,3,5,-5]));
+
+
+
+// Create a function that takes array of numbers. The function should print the lowest value in the array, and return the highest value in the array.
+const findMinMax = arr => {
+    let min = arr[0];
+    let max = arr[0];
+    for(let i = 1; i < arr.length; i++) {
+        if(arr[i] < min) {
+            min = arr[i];
+        }
+        if(arr[i] > max) {
+            max = arr[i];
+        }
+    }
+    console.log(min);
+    return max;
+}
+console.log(findMinMax([-1,3,5,-5]));
+
+
+
+// Build a function that takes array of numbers. The function should print second-to-last value in the array, and return first odd value in the array.
+const printOneReturnOne = arr => {
+    console.log(arr[arr.length - 2]);
+    for(let i = 0; i < arr.length; i++) {
+        if(arr[i] % 2 !== 0) {
+            return arr[i];
+        }
+    }
+}
+console.log(printOneReturnOne([2,3,5,-5]));
+
+
+
+// Given array, create a function to return a new array where each value in the original has been doubled. Calling double([1,2,3]) should return [2,4,6] without changing original.
+const double = arr => {
+    let output = []
+    arr.forEach(item => {
+        output.push(item * 2)
+    })
+    return output;
+}
+console.log(double([2,2,3]));
+
+
+
+// Given array of numbers, create function to replace last value with number of positive values. Example, countPositives([-1,1,1,1]) changes array to [-1,1,1,3] and returns it.
+const countPositives = arr => {
+    let counter = 0;
+    for(const value of arr) {
+        if(value > 0) {
+            counter++;
+        }
+    }
+    arr[arr.length - 1] = counter;
+    return arr;
+}
+console.log(countPositives([-1,1,1,1]));
+
+
+
+// Create a function that accepts an array. Every time that array has three odd values in a row, print "That’s odd!" Every time the array has three evens in a row, print "Even more so!"
+const evenOdd = arr => {
+    let evenCounter = 0;
+    let oddCounter = 0;
+    for(let i = 0; i < arr.length; i++) {
+        if(arr[i] % 2 === 0) {
+            evenCounter++;
+            oddCounter = 0;
+        } else {
+            oddCounter++;
+            evenCounter = 0;
+        }
+        if(evenCounter === 3) {
+            console.log("Even more so!");
+            evenCounter = 0;
+        } else if(oddCounter === 3) {
+            console.log("That's odd!")
+            oddCounter = 0;
+        }
+    }
+}
+evenOdd([1,1,2,3,1,3,5,2,2,2]);
+evenOdd([1,2,3,4,5]);
+evenOdd([2,2,2,1,1,4,4,6,1,3]);
+
+
+
+// Given arr, add 1 to odd elements ([1], [3], etc.), console.log all values and return arr.
+const addOddElement = arr => {
+    for(let i = 0; i < arr.length; i++) {
+        if(i % 2 !== 0) {
+            arr[i] = arr[i] + 1;
+        }
+    }
+    console.log(arr);
+    return arr;
+}
+console.log(addOddElement([1,1,2,3,1,3,5,2,2,2]));
+
+
+
+// You are passed an array containing strings. Working within that same array, replace each string with a number – the length of the string at previous array index – and return the array.
+const previousLengths = arr => {
+    let lengthCount = arr[arr.length - 1].length;
+    for(let i = arr.length - 1; i > 0; i--) {
+        arr[i] = arr[i-1].length;
+        // console.log(arr[i-1].length)
+    }
+    arr[0] = lengthCount;
+    return arr;
+}
+console.log(previousLengths(["Hello", "World", "all", "This","is","a", "Nice Array"]))  // 10,5,5,3,4,2,1
+
+
+
+// Build function that accepts array. Return a new array with all values except first, adding 7 to each. Do not alter the original array.
+const addSeven = arr => {
+    let output = [];
+    for(let i = 0; i < arr.length; i++) {
+        output.push(arr[i] + 7);
+    }
+    output.shift();
+    return output;
+}
+console.log(addSeven([10,5,5,3,4,2,1]))
+
+
+
+// Given array, write a function to reverse values, in-place. Example: reverse([3,1,6,4,2]) returns same array, containing [2,4,6,1,3].
+const reverseArray = arr => {
+    for(let i = 0; i < arr.length / 2; i++) {
+        let j = arr.length - 1 - i;
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
+console.log(reverseArray([3,1,6,4,2]));
+
+
+
+// Given an array, create and return a new one containing all the values of the provided array, made negative (not simply multiplied by -1). Given [1,-3,5], return [-1,-3,-5].
+const makeNegative = arr => {
+    let output = [];
+    for(let i = 0; i < arr.length; i++) {
+        if(arr[i] > 0) {
+            output.push(arr[i] * -1);
+        } else {
+            output.push(arr[i]);
+        }
+    }
+    return output;
+}
+console.log(makeNegative([1,-3,-5]));
+
+
+
+// Create a function that accepts an array, and prints "yummy" each time one of the values is equal to "food". If no array elements are "food", then print "I'm hungry" once.
+const alwaysHungry = arr => {
+    let hungry = false;
+    for(let i = 0; i < arr.length; i++) {
+        if(arr[i] === "food") {
+            console.log("yummy");
+            hungry = true;
+        }
+    }
+    if(hungry === false) {
+        console.log("I'm hungry");
+    }
+}
+alwaysHungry(["food",2,5,"food",2,2]);
+alwaysHungry([2,5,2,2]);
+
+
+
+// Given array, swap first and last, third and third-to-last, etc. Input[true,42,"Ada",2,"pizza"] becomes ["pizza",42,"Ada",2,true]. Change [1,2,3,4,5,6] to [6,2,4,3,5,1].
+const swapEvenElement = arr => {
+    for(let i = 0; i < arr.length / 2; i++) {
+        if(i % 2 === 0) {
+            let j = arr.length - 1 - i;
+            [arr[i],arr[j]] = [arr[j],arr[i]];
+        }
+    }
+    return arr;
+}
+console.log(swapEvenElement([true,42,"Ada",2,"pizza"]));
+console.log(swapEvenElement([1,2,3,4,5,6]));
+
+
+
+// Given array arr and number num, multiply each arr value by num, and return the changed arr.
+const multiplyElement = (arr, num) => {
+    for(let i = 0; i < arr.length; i++) {
+        arr[i] = arr[i] * num;
+    }
+    return arr;
+}
+console.log(multiplyElement([2,4,6,4,7,9,2], 3));
