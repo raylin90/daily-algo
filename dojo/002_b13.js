@@ -185,3 +185,202 @@ const SwapStringForArrayNegativeVals = function(arr) {
     return arr;
 }
 console.log(SwapStringForArrayNegativeVals([4,5,7,-2,0,5,-9]));
+
+
+
+// Print integers from -52 to 1066 using a FOR loop.
+const printNum = () => {
+    for(let i = -52; i <= 1066; i++) {
+        console.log(i);
+    }
+}
+printNum();
+
+
+
+// Create beCheerful(). Within it, console.log string "good morning!" Call it 98 times.
+const beCheerful = () => {
+    for(let i = 1; i <= 98; i++) {
+        console.log("good morning", i);
+    }
+}
+beCheerful();
+
+
+
+// Using FOR, print multiples of 3 from -300 to 0. Skip -3 and -6.
+const multiplesOfThree = () => {
+    for(let i = -300; i <=0; i++) {
+        if(i % 3 === 0) {
+            if(i === -3 || i === -6) {
+                continue;
+            }
+            console.log(i)
+        }
+    }
+}
+multiplesOfThree();
+
+
+
+// Print integers from 2000 to 5280, using a WHILE.
+const printNum2 = () => {
+    let i = 2000;
+    while(i <= 5280) {
+        console.log(i);
+        i++;
+    }
+}
+printNum2();
+
+
+
+// If 2 given numbers represent your birth month and day in either order, log "How did you know?", else log "Just another day...."
+const isBirthday = (month, day) => {
+    if((month === 9 && day === 2)) {
+        console.log("How did you know?");
+    } else if((day === 9 && month === 2)) {
+        console.log("How did you know?");
+    } else {
+        console.log("just another day");
+    }
+}
+isBirthday(9,9)
+
+
+
+// Write a function that determines whether a given year is a leap year. If a year is divisible by four, it is a leap year, unless it is divisible by 100. However, if it is divisible by 400, then it is.
+const isLeapYear = year => {
+    if(year % 400 === 0) {
+        return true;
+    } else if(year % 100) {
+        return false
+    } else if(year % 4) {
+        return true;
+    }
+    return false;
+}
+console.log(isLeapYear(8))
+
+
+
+// Print all integer multiples of 5, from 512 to 4096. Afterward, also log how many there were.
+const printNum3 = () => {
+    let count = 0;
+    for(let i = 512; i <=4096; i++) {
+        if(i % 5 === 0) {
+            console.log(i);
+            count ++;
+            console.log("count: ", count);
+        }
+    }
+}
+printNum3();
+
+
+
+// Print multiples of 6 up to 60,000, using a WHILE.
+const printNum4 = () => {
+    let i = 0; 
+    while(i <= 60000) {
+        if(i % 6 === 0) {
+            console.log(i);
+        }
+        i++;
+    }
+}
+printNum4();
+
+
+
+// Print integers 1 to 100. If divisible by 5, print "Coding" instead. If by 10, also print " Dojo".
+const dojoWay = () => {
+    for(let i = 1; i <= 100; i++) {
+        if(i % 10 === 0) {
+            console.log("Dojo");
+        } else if(i % 5 === 0) {
+            console.log("Coding");
+        } else {
+            console.log(i);
+        }
+    }
+}
+dojoWay();
+
+
+
+// Your function will be given an input parameter incoming. Please console.log this value.
+const whatDoYouKnow = param => {
+    console.log(param);
+}
+whatDoYouKnow("Hello World");
+
+
+
+// Add odd integers from -300,000 to 300,000, and console.log the final sum. Is there a shortcut?
+const sumUp = () => {
+    let sum = 0;
+    for(let i = -300000; i <= 300000; i++) {
+        if(i % 2 !== 0) {
+            sum += i;
+            console.log(sum)
+        }
+    }
+    console.log(sum);
+}
+sumUp();
+
+
+
+// Log positive numbers starting at 2016, counting down by fours (exclude 0), without a FOR loop.
+const countDownByFours = () => {
+    let i = 2016;
+    while(i > 0) {
+        console.log(i);
+        i-=4;
+    }
+}
+countDownByFours();
+
+
+
+// Based on earlier “Countdown by Fours”, given lowNum, highNum, mult, print multiples of mult from highNum down to lowNum, using a FOR. For (2,9,3), print 9 6 3 (on successive lines).
+const flexibleCountdown = (lowNum, highNum, mult) => {
+    for(let i = highNum; i >= lowNum; i--) {
+        if(i % mult === 0) {
+            console.log(i);
+        }
+    }
+}
+flexibleCountdown(2,9,3);
+
+
+
+// This is based on “Flexible Countdown”. The parameter names are not as helpful, but the problem is essentially identical; don’t be thrown off! Given 4 parameters (param1,param2,param3,param4), print the multiples of param1, starting at param2 and extending to param3. One exception: if a multiple is equal to param4, then skip (don’t print) it. Do this using a WHILE. Given (3,5,17,9), print 6,12,15 (which are all of the multiples of 3 between 5 and 17, and excluding the value 9).
+const finalCountDown = (param1, param2, param3, param4) => {
+    for(let i = param2; i <= param3; i++) {
+        if(i % param1 === 0) {
+            if(i === param4) {
+                continue;
+            }
+            console.log(i);
+        } 
+    }
+}
+finalCountDown(3,5,17,9)
+
+
+const finalCountDown2 = (param1, param2, param3, param4) => {
+    let i = param2;
+    while(i <= param3) {
+        if(i % param1 === 0) {
+            if(i === param4) {
+                i++;
+                continue;
+            }
+            console.log(i);
+        }
+        i++;
+    }
+}
+finalCountDown2(3,5,17,9)

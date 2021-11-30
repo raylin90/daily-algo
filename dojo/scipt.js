@@ -294,3 +294,8 @@ const clockAngle = time => {
 console.log(clockAngle(360))
 console.log(clockAngle(180))
 console.log(clockAngle(45))
+
+
+let x = 1
+let y = "1"
+console.log(x === y)
