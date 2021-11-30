@@ -384,3 +384,119 @@ const finalCountDown2 = (param1, param2, param3, param4) => {
     }
 }
 finalCountDown2(3,5,17,9)
+
+
+
+// Your function will receive an array with two numbers. Print the first value, and return the second.
+const printAndReturn = arr => {
+    console.log(arr[0]);
+    return arr[1];
+}
+console.log(printAndReturn([2,6,5,8]))
+
+
+
+// Given an array, return the sum of the first value in the array, plus the array’s length. What happens if the array’s first value is not a number, but a string (like "what?") or a boolean (like false).
+const firstPlusLength = arr => {
+    if(arr.length === 0) return 0;
+    if(isNaN(arr[0])) return arr.length;
+    return arr[0] + arr.length;
+}
+console.log(firstPlusLength([2,6,5,8]))
+console.log(firstPlusLength(["hi",6,5,8]))
+
+
+
+// For [1,3,5,7,9,13], print values that are greater than its 2nd value. Return how many values this is.
+const greaterThanSecond = arr => {
+    let counter = 0;
+    for(let i = 0; i < arr.length; i++) {
+        if(arr[i] > arr[1]) {
+            counter++;
+        }
+    }
+    return counter;
+}
+console.log(greaterThanSecond([1,3,5,7,9,13]));
+
+
+
+// Write a function that accepts any array, and returns a new array with the array values that are greater than its 2nd value. Print how many values this is. What will you do if the array is only one element long?
+const greaterThanSecond2 = arr => {
+    let counter = 0;
+    let output = [];
+    for(let i = 0; i < arr.length; i++) {
+        if(arr[i] > arr[1]) {
+            counter++;
+            output.push(arr[i]);
+        }
+    }
+    console.log(counter)
+    return output;
+}
+console.log(greaterThanSecond2([1,3,5,7,9,13]));
+
+
+
+// Given two numbers, return array of length num1 with each value num2. Print "Jinx!" if they are same.
+const generateArray = (num1, num2) => {
+    if(num1 === num2) return "Jinx!";
+    let output = [];
+    for(let i = 1; i <= num1; i++) {
+        output.push(num2);
+    }
+    return output;
+}
+console.log(generateArray(6,5))
+
+
+
+// Your function should accept an array. If value at [0] is greater than array’s length, print "Too big!"; if value at [0] is less than array’s length, print "Too small!"; otherwise print "Just right!".
+const fitFirstValue = arr => {
+    if(arr[0] > arr.length) {
+        return "Too big!";
+    } else if(arr[0] < arr.length) {
+        return "Too small!";
+    } else {
+        return "Just right!";
+    }
+}
+console.log(fitFirstValue([6,6,4,8,6,9]));
+
+
+
+// Kelvin wants to convert between temperature scales. Create fahrenheitToCelsius(fDegrees) that accepts a number of degrees in Fahrenheit, and returns the equivalent temperature as expressed in Celsius degrees. For review, Fahrenheit = (9/5 * Celsius) + 32.
+const fahrenheitToCelsius = temperture => {
+    return (temperture - 32) / 1.8;
+    // 1.8 x cel = f
+    // 
+}
+console.log(fahrenheitToCelsius(-40))
+
+
+
+// Create celsiusToFahrenheit(cDegrees) that accepts number of degrees Celsius, and returns the equivalent temperature expressed in Fahrenheit degrees.
+const celsiusToFahrenheit = temperture => {
+    return 1.8 * temperture + 32;
+}
+console.log(celsiusToFahrenheit(-40))
+
+
+
+// (optional) Do Fahrenheit and Celsius values equate at a certain number? Scientific calculation can be complex, so for this challenge just try a series of Celsius integer values starting at 200, going downward (descending), checking whether it is equal to the corresponding Fahrenheit value.
+const celsiusEqualFahrenheit = () => {
+    let celsius = 200;
+    let fahrenheit;
+    while(celsius !== fahrenheit) {
+        fahrenheit = celsiusToFahrenheit(celsius);
+        if(celsius === fahrenheit) {
+            console.log("f: ", fahrenheit)
+            console.log("c: ", celsius)
+            break;
+
+        }
+        celsius--;
+    }
+    
+}
+celsiusEqualFahrenheit();
