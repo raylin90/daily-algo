@@ -712,3 +712,138 @@ const multiplyElement = (arr, num) => {
     return arr;
 }
 console.log(multiplyElement([2,4,6,4,7,9,2], 3));
+
+
+
+//  Stan learned something today: that directly decrementing an array’s .length immediately shortens it by that amount. Given array arr and number X, remove all except the last X elements, and return arr (changed and shorter). Given ([2,4,6,8,10],3), change the given array to [6,8,10] and return it.
+const removeSomeFront = (arr, num) => {
+    let removedNum = arr.length - num;
+    for(let i = 0; i < removedNum; i++) {
+        arr.shift();
+    }
+    return arr;
+}
+console.log(removeSomeFront([2,4,6,8,10],3));
+
+
+
+// Cartman doesn’t really like math; he needs help. You are given two numbers – coefficients M and B in the equation Y = MX + B. Build a function to return the X-intercept (his older cousin Fiaz wisely reminds him that X-intercept is the value of X where Y equals zero; Cartman just snorts in his general direction).
+const mathHelp = (M, B) => {
+    return (B * -1) / M
+}
+console.log(mathHelp(8,100));
+
+
+
+// Kenny tries to stay safe, but somehow everyday something happens. Out of the last 100 days, there were 10 days with volcanos, 15 others with tsunamis, 20 earthquakes, 25 blizzards and 30 meteors (for 100 days total). If these probabilities continue, write whatHappensToday() to print a day’s outcome.
+const whatHappensToday = () => {
+    let num = Math.ceil(Math.random()*100)
+    console.log(num);
+    if(num > 0 && num <=10) {
+        console.log("volcanos day");
+    } else if(num > 10 && num <= 25) {
+        console.log("tsunamis day");
+    } else if(num > 25 && num <= 45) {
+        console.log("earthquake day");
+    } else if(num > 45 && num <= 70) {
+        console.log("blizzards day");
+    } else if(num > 70 && num <=100) {
+        console.log("meteors day");
+    } else {
+        console.log("meteors day");
+    }
+}
+whatHappensToday();
+
+
+
+// Kyle (smarter than Kenny) notes that the chance of one disaster should be unrelated to the chance of another. Change whatHappensToday() function to create whatReallyHappensToday(). In this new function test for each disaster independently, instead of assuming exactly one disaster will happen. In other words, with this new function, all five might occur today – or none. Maybe Kenny will survive!
+const whatReallyHappensToday = () => {
+    let arr = ["volcanos", "tsunamis", "earthquakes", "blizzards", "meteors", "nothing happend"]
+    
+    let num = Math.ceil(Math.random()*arr.length);
+    for(let i = 0; i < num; i++) {
+        let idx = Math.ceil(Math.random()*arr.length - 1);
+        console.log(arr[idx]);
+    }
+}
+whatReallyHappensToday();
+
+
+
+// Your time at the Dojo will definitely make you smarter! Let’s say a new Dojo student, Bogdan, entered with a modest IQ of 101. Let’s say that during a 14-week bootcamp, his IQ rose by .01 on the first day, then went up by an additional .02 on the second day, then up by .03 more on the third day, etc. all the way until increasing by .98 on his 98th day (the end of 14 full weeks). What is Bogdan’s final IQ?
+const soaringIQ = () => {
+    let num = 101;
+    for(let i = 0.01; i < 0.99; i+=0.01) {
+        console.log(i.toFixed(2))
+        num += i;
+        console.log(num.toFixed(2))
+    }
+    return num.toFixed(2);
+}
+console.log(soaringIQ());
+
+
+
+// Mr. Cerise teaches high school math. Write a function that assigns and prints a letter grade, given an integer representing a score from 0 to 100? Those getting 90+ get an ‘A’, 80-89 earn ‘B’, 70-79 is a ‘C’, 60-69 should get a ‘D’, and lower than 60 receive ‘F’. For example, given 88, you should log "Score: 88. Grade: B". Given the score 61, log the string "Score: 61. Grade: D".
+// For an additional challenge, add ‘-’ signs to scores in the bottom two percent of A, B, C and D scores, and “+” signs to the top two percent of B, C and D scores (sorry, Mr. Cerise never gives an A+). Given 88, console.log "Score: 88. Grade: B+". Given 61, log "Score: 61. Grade: D-" .
+const letterGrade = grade => {
+    if(grade < 0 || grade > 100) {
+        "invalid, enter betw. 0 - 100";
+    } else if(grade >= 90) {
+        if(grade > 92) {
+            return `Score: ${grade}, Grade: A`;
+        } else {
+            return `Score: ${grade}, Grade: A-`;
+        }
+    } else if(grade >=80 && grade < 90) {
+        if(grade >= 88) {
+            return `Score: ${grade}, Grade: B+`;
+        } else if(grade < 82) {
+            return `Score: ${grade}, Grade: B-`;
+        } else {
+            return `Score: ${grade}, Grade: B`;
+        }
+    } else if(grade >=70 && grade < 80) {
+        if(grade >= 78) {
+            return `Score: ${grade}, Grade: C+`;
+        } else if(grade < 72) {
+            return `Score: ${grade}, Grade: C-`;
+        } else {
+            return `Score: ${grade}, Grade: C`;
+        }
+    } else if(grade >=60 && grade < 70) {
+        if(grade >= 68) {
+            return `Score: ${grade}, Grade: D+`;
+        } else if(grade < 62) {
+            return `Score: ${grade}, Grade: D-`;
+        } else {
+            return `Score: ${grade}, Grade: D`;
+        }
+    } else {
+        return `Score: ${grade}, Grade: F`;
+    }
+}
+console.log(letterGrade(61));
+
+
+
+//  Implement function sigma(num) that given a number, returns the sum of all positive integers up to number (inclusive). Ex.: sigma(3) = 6 (or 1 + 2 + 3); sigma(5) = 15 (or 1 + 2 + 3 + 4 + 5).
+const sigma = num => {
+    if(num === 1) {
+        return 1;
+    }
+    return num + sigma(num - 1);
+}
+console.log(sigma(5));
+
+
+
+// Just the Facts, ma’am. Factorials, that is. Write a function factorial(num) that, given a number, returns the product (multiplication) of all positive integers from 1 up to number (inclusive). For example, factorial(3) = 6 (or 1 * 2 * 3); factorial(5) = 120 (or 1 * 2 * 3 * 4 * 5).
+const factorial = num => {
+    if(num === 1) {
+        return 1;
+    }
+    return num * factorial(num - 1);
+}
+console.log(factorial(5));
