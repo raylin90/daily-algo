@@ -255,16 +255,54 @@ Regardless of how hard a Dojo student works (and they should work hard), they ne
 Minute hand: 0 degs. Second hand: 0 degs." For an input parameter seconds of 119730 (which is equivalent to 9:15:30 plus 24 hours!), you should log "Hour hand: 277.745 degs. Minute hand: 93 degs. Second hand: 180 degs." Note: in the second example, the angle for the minute hand is not simply 90 degrees; it has advanced a bit further, because of the additional 30 seconds in that minute so far.
 Second: also calculate and print degrees for an additional “week hand” that rotates once each week.
 */
-const clockHandAngles = seconds => {
-    // 720 m,
-    // let hHand = ;
-    // let mHand = ;
-    // let sHand = ;
-    let mHand = seconds%60 * 6;
-    let hHand = seconds%720*0.5;
-    // let angle = Math.abs(mHand-hHand);
-    // return angle > 180 ? 360 - angle : angle;
-    console.log(mHand)
-    console.log(hHand)
+const clockAngle = seconds => {
+    // hour hand is 30 d
+    // minute hand is 6 deg
+    // second hand is 6 deg
+    // convert second to digital time, ex: 01:00:00
+    time = new Date(seconds * 1000).toISOString().substr(11, 8);
+    // split into an array, so [0] is hr, [1] is min, [2] is second
+    time = time.split(":");
+    // console.log(time)
+
+    // find degree for each angel;
+    let hDegree = 30 * time[0];
+    let mDegree = 6 * time[1];
+    let sDegree = 6 * time[2]
+
+    // hour and min degree angel will depends on where is the second/minutes hand, it might be slightly over
+
+    hDegree = hDegree + mDegree / 12;
+    mDegree = mDegree + sDegree / 60;
+
+    console.log(hDegree);
+    console.log(mDegree);
+    console.log(sDegree);
 }
-console.log(clockHandAngles(3600))
+console.log(clockAngle(3600));
+console.log(clockAngle(119730));
+console.log(clockAngle(45));
+
+
+
+// Return whether a given integer is prime. Prime numbers are only evenly divisible by themselves and 1. Many highly optimized solutions exist, but for now just create one that is easy to understand and debug.
+const isPrime = int => {
+    // var keep track if int is prime or not
+    let prime = true;
+    // 1 is either, 2 is smallest prime
+    if(int === 1) return "neither prime or composite";
+    if(int === 2) return "is prime";
+    // run throught every possible divisition from 2 to int - 1; anytime we encouter divisible, then its not prime
+    for(let i = 2; i < int; i++) {
+        if(int % i === 0) {
+            prime = false;
+            break;
+        }
+    }
+    if(prime) {
+        return "is prime";
+    } else {
+        return "not prime"
+    }
+}
+console.log(isPrime(6));
