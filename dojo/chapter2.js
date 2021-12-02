@@ -378,3 +378,168 @@ const mostSignificantDigit = num => {
 console.log(mostSignificantDigit(12345));   // 1
 console.log(mostSignificantDigit(67.89));   // 6
 console.log(mostSignificantDigit(0.00987));   // 9
+
+
+
+// It’s New Year’s Eve, so let’s play some dice games! It’ll be fun. What could go wrong?
+// 1) Create function rollOne() to return a randomly selected integer between 1 and 6 (inclusive).
+const rollOne = () => {
+    return Math.ceil(Math.random() * 6);
+}
+// console.log(rollOne());
+
+// 2) Second, create a function playFives(num), which should call rollOne() multiple times – ‘num' times, in fact, where 'num' is input parameter to playFives(num). Each time, it should print the value rollOne() returns, and if that return value is 5, also print “That’s good luck!”
+const playFives = num => {
+    for(let i = 0; i < num; i++) {
+        let x = rollOne();
+        console.log("rollOne #: ", x);
+        if(x === 5) {
+            return "That's good luck!";
+        }
+    }
+}
+// console.log(playFives(5));
+
+// 3) Third, create a new function named playStatistics(), which should call rollOne() eight times (but not print anything after each call). After the last of these eight calls, it should print out the lowest and highest values that it received from rollOne, among those eight calls.
+const playStatistics = () => {
+    let random = rollOne();
+    let low = random;
+    let high = random;
+    console.log(`${low} and ${high}`);
+    for(let i = 0; i < 7; i++) {
+        let x = rollOne();
+        console.log(x);
+        if(x < low) {
+            low = x;
+        }
+        if(x > high) {
+            high = x;
+        }
+    }
+    return `${low} and ${high}`;
+}
+// console.log(playStatistics());
+
+// 4) Fourth, make a copy of playStatistics and add code to make playStatistics2(), so that at the end (in addition to printing high/low rolls), it also prints the total sum of all eight rolls.
+const playStatistics2 = () => {
+    let random = rollOne();
+    let low = random;
+    let high = random;
+    let sum = random;
+    console.log(`${low} and ${high}`);
+    for(let i = 0; i < 7; i++) {
+        let x = rollOne();
+        console.log(x);
+        sum += x;
+        if(x < low) {
+            low = x;
+        }
+        if(x > high) {
+            high = x;
+        }
+    }
+    return `${low} and ${high}, sum ${sum}`;
+}
+// console.log(playStatistics2());
+
+// 5) Fifth, copy playStatistics2 and add code to it to make playStatistics3(num), so that it will roll as many times as you want, instead of always doing this eight times.
+const playStatistics3 = num => {
+    let random = rollOne();
+    let low = random;
+    let high = random;
+    let sum = random;
+    console.log(`${low} and ${high}`);
+    for(let i = 0; i < num - 1; i++) {
+        let x = rollOne();
+        console.log(x);
+        sum += x;
+        if(x < low) {
+            low = x;
+        }
+        if(x > high) {
+            high = x;
+        }
+    }
+    return `${low} and ${high}, sum ${sum}`;
+}
+// console.log(playStatistics3(6));
+
+// 6) Finally, make a copy of playStatistics3 and change it to create playStatistics4(num), so that at the end instead of the total sum, it prints the average roll.
+const playStatistics4 = num => {
+    let random = rollOne();
+    let low = random;
+    let high = random;
+    let sum = random;
+    console.log(`${low} and ${high}`);
+    for(let i = 0; i < num - 1; i++) {
+        let x = rollOne();
+        console.log(x);
+        sum += x;
+        if(x < low) {
+            low = x;
+        }
+        if(x > high) {
+            high = x;
+        }
+    }
+    return `${low} and ${high}, sum ${sum}, average ${sum / num}`;
+}
+console.log(playStatistics4(6));
+
+
+
+// Here’s another game for our New Year’s Eve party. Implement a ’20-sided die’ that randomly returns integers between 1 and 20 inclusive. Roll these, tracking statistics until you get a value twice in a row. Display number of rolls, min, max, and average.
+const someGame = () => {
+    let arr = [Math.ceil(Math.random()*20), Math.ceil(Math.random()*20)];
+    let i = 0;
+    while(arr[i] !== arr[i+1]) {
+        arr.push(Math.ceil(Math.random()*20))
+        i++;
+        console.log(arr);
+    }
+    console.log(arr);
+    let min = arr[0];
+    let max = arr[0];
+    let sum = arr[0];
+    for(let i = 1; i < arr.length; i++) {
+        if(arr[i] < min) {
+            min = arr[i];
+        }
+        if(arr[i] > max) {
+            max = arr[i]
+        }
+        sum += arr[i];
+    }
+
+    return `# of rolls ${arr.length}, min: ${min}, max: ${max}, avg: ${sum / arr.length}`
+}
+console.log(someGame());
+
+
+/*
+On New Year’s Eve, have fun but don’t forget your way home! For this challenge create four functions (reset, moveBy, xLocation and yLocation) to track the travels of Claire, a wanderer. Calling reset() moves Claire home to the origin (0,0). The moveBy(xOffset,yOffset) function moves her by those amounts, in those directions. Finally, xLocation() and yLocation()return how far Claire is from home, in X and Y directions respectively. After the calls of reset(), moveBy(1,-2), and moveBy(3,1), subsequently calling xLocation() and yLocation() should return 4 and -1.
+Second: create distFromHome(). Assuming she moves diagonally, return her distance from home.
+*/
+let coordinate = [0, 0];
+const reset = () => {
+    return coordinate = [0, 0];
+}
+const moveBy = (xOffset,yOffset) => {
+    coordinate[0] += xOffset;
+    coordinate[1] += yOffset;
+}
+const xLocation = () => {
+    return coordinate[0];
+}
+const yLocation = () => {
+    return coordinate[1];
+}
+const distFromHome = () => {
+    let sum = Math.pow(coordinate[0], 2) + Math.pow(coordinate[1], 2)
+    return Math.sqrt(sum);
+}
+moveBy(1,-2);
+moveBy(3,1)
+console.log(xLocation());
+console.log(yLocation());
+console.log(distFromHome());
