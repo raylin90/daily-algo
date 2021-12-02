@@ -543,3 +543,181 @@ moveBy(3,1)
 console.log(xLocation());
 console.log(yLocation());
 console.log(distFromHome());
+
+
+
+/*
+After a particularly fabulous New Year’s Eve party to end 2016, Eduardo wakes to find himself stranded on a deserted island. He misses his home in Burbank, but at least now he can spend plenty of time outdoors – and you can’t beat the commute! To pass the time until he is rescued, he counts sunrises.
+*/
+// 1) Help Eduardo track what day of the week it is. Create a weekdayName(weekdayNum) function that, given a number between 1 and 7, will console.log a string containing the day of the week for that number (given 1, log "Sunday"). Use a SWITCH statement.
+const weekdayName = weekdayNum => {
+    switch(weekdayNum) {
+        case 1:
+            day = "Sunday";
+            break;
+        case 2:
+            day = "Monday";
+            break;
+        case 3:
+            day = "Tuesday";
+            break;
+        case 4:
+            day = "Wednesday";
+            break;
+        case 5:
+            day = "Thursday";
+            break;
+        case 6:
+            day = "Friday";
+            break;
+        case 7:
+            day = "Saturday";
+    }
+    return day;
+}
+// console.log(weekdayName(6))
+
+// 2) Expand weekdayName() to create weekdayName2(dayNum) accepting numbers up to 365. Return weekday as before, given number of days total. "Sunday" still corresponds to 1.
+const weekdayName2 = dayNum => {
+    if(dayNum < 0 || dayNum > 365) return "undefined"
+    if(dayNum > 7) {
+        dayNum = dayNum % 7
+    }
+    switch(dayNum) {
+        case 1:
+            day = "Sunday";
+            break;
+        case 2:
+            day = "Monday";
+            break;
+        case 3:
+            day = "Tuesday";
+            break;
+        case 4:
+            day = "Wednesday";
+            break;
+        case 5:
+            day = "Thursday";
+            break;
+        case 6:
+            day = "Friday";
+            break;
+        default:
+            day = "Saturday";
+    }
+    return day;
+}
+// console.log(weekdayName2(21));
+
+// 3) Create a new function someDays() that calls weekDayName2() seventeen times, with randomly generated integers as high as 365. Log each result string. If it is a weekday, add the phrase "Work hard!", and if it is a weekend day, add "Enjoy your day off!"
+const someDays = () => {
+    for(let i = 0; i < 17; i++) {
+        let randomNum = Math.ceil(Math.random() * 365)
+        let day = weekdayName2(randomNum);
+        if(day === "Saturday" || day === "Sunday") {
+            console.log("Enjoy your day off!");
+        } else {
+            console.log("Work hard!");
+        }
+    }
+}
+// someDays();
+
+// 4) Build function monthName(monthNum) that, given a number from 1 to 12, returns a string containing month for that number ("May" corresponds to 5). Use an array, without loops.
+const monthName = monthNum => {
+    let arr = ["Jan.", "Feb", "March", "April", "May", "June", "July", "August", "Sep.", "Oct.", "Nov.", "Dec."];
+    return arr[monthNum-1];
+}
+// console.log(monthName(12));
+
+// 5) Now expand monthName() to create monthToDays(monthNum), returning the number of days in that month, in the year 2021. Hint: use a SWITCH statement for the days in each month.
+const monthToDays = monthNum => {
+    switch(monthNum) {
+        case 1:
+            days = 31;
+            break;
+        case 2:
+            days = 28;
+            break;
+        case 3:
+            days = 31;
+            break;
+        case 4:
+            days = 30;
+            break;
+        case 5:
+            days = 31
+            break;
+        case 6:
+            days = 30;
+            break;
+        case 7:
+            days = 31;
+            break;
+        case 8:
+            days = 31;
+            break;
+        case 9:
+            days = 30;
+            break;
+        case 10:
+            days = 31;
+            break;
+        case 11:
+            days = 30;
+            break;
+        case 12:
+            days = 31;
+            break;
+    }
+    return days;
+}
+// console.log(monthToDays(6))
+
+// 6) Despite using his ember expertise to create a glowing SOS visible from space, the days go by and sadly Eduardo is still not rescued. Is it spring yet? It might as well be. Build on monthName() to create dayToMonth(dayNum). If given a day number since the year began, return the current month (assume it is not a Leap Year). Given 75, return "March".
+const dayToMonth = dayNum => {
+    if(dayNum >= 1 && dayNum <= 31) {
+        return "Jan.";
+    } else if(dayNum >= 32 && dayNum <= 59) {
+        return "Feb.";
+    } else if(dayNum >= 60 && dayNum <= 90) {
+        return "Mar.";
+    } else if(dayNum >= 91 && dayNum <= 120) {
+        return "Apr.";
+    } else if(dayNum >= 121 && dayNum <= 151) {
+        return "May";
+    } else if(dayNum >= 152 && dayNum <= 181) {
+        return "June";
+    } else if(dayNum >= 182 && dayNum <= 212) {
+        return "July";
+    } else if(dayNum >= 213 && dayNum <= 243) {
+        return "Aug.";
+    } else if(dayNum >= 244 && dayNum <= 273) {
+        return "Sep.";
+    } else if(dayNum >= 274 && dayNum <= 304) {
+        return "Oct.";
+    } else if(dayNum >= 305 && dayNum <= 334) {
+        return "Nov.";
+    } else if(dayNum >= 335 && dayNum <= 365) {
+        return "Dec.";
+    }
+}
+// console.log(dayToMonth(75));
+
+// 7) Eduardo builds a Dojo bootcamp on the island. Initially his students only find Ninja Gold in caves, but eventually even his tree sloths can write code quickly! Dojo classes meet Monday thru Friday, so let’s reincorporate weekday to our calculations. Construct fullDate(dayNum) to accept number of days so far in 2017, and return a full date string. He hardly remembers that fateful New Year’s Eve party, but he knows it was a Saturday. Given 217, return "Saturday, Aug. 5, 2021".
+const fullDate = dayNum => {
+    let days = [31,28,31,30,31,30,31,31,30,31,30,31]
+
+    let weekDay = weekdayName2(dayNum);
+    let month = dayToMonth(dayNum);
+    let day = dayNum;
+    for(let i = 0; i < 8 - 1; i++) {
+        day -= days[i];
+    }
+    let year = 2021;
+
+    return `${weekDay}, ${month} ${day}, ${year}`
+} 
+console.log(fullDate(217));
+
+// 9) Times flies when you’re at a Dojo – months in fact. Build fullDate2(dayNum) that will be given a 4-digit integer: the days that have passed since December 31, 2016. This number can stretch into future years! You can assume that any year number divisible by four is a leap year and has a 29-day February. Given 8475, return "Thursday, March 15, 2040".
