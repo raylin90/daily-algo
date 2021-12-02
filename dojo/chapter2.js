@@ -271,7 +271,6 @@ const clockAngle = seconds => {
     let sDegree = 6 * time[2]
 
     // hour and min degree angel will depends on where is the second/minutes hand, it might be slightly over
-
     hDegree = hDegree + mDegree / 12;
     mDegree = mDegree + sDegree / 60;
 
@@ -306,3 +305,76 @@ const isPrime = int => {
     }
 }
 console.log(isPrime(6));
+
+
+
+// Ever since you arrived at the Dojo, you wanted one of those cool Coding Dojo sweatshirts – maybe even more than one. Let’s say they cost $20 (including tax), but friendly Josh gives a 9% discount if you buy two, a nice 19% discount if you buy three, or a sweet 35% discount if you buy four or more. He only accepts cash and says he doesn’t have coins, so you should round up to the nearest dollar. Build function sweatshirtPricing(num) that, given a number of sweatshirts, returns the cost.
+const sweatshirtPricing = num => {
+    let cost = 20;
+    let price;
+    if(num === 1) return 20;
+    if(num === 2) {
+        // 9% discount
+        price = (20 - 20 * 0.09) * num;
+    } else if(num === 3) {
+        // 19%
+        price = (20 - 20 * 0.19) * num;
+    } else {
+        // 35%
+        price = (20 - 20 * 0.35) * num;
+    }
+    return Math.ceil(price);
+}
+console.log(sweatshirtPricing(3));
+
+
+
+// Create the extractDigit(num,digitNum) function that given a number and a digit number, returns the numeral value of that digit. 0 represents the ones digit, 1 represents the tens digit, etc. Given (1824,2), return 8. Given (1824,0), return 4. Given (1824,7), return 0.
+// Second: handle negative digitNum values, where -1 represents tenths digit (0.x), -2 represents hundredths digit (0.0x), etc. Given (123.45,-1), return 4.
+// Third: handle negative num values as well, doing what you think is appropriate.
+const extractDigit = (num, digitNum) => {
+    // handle negative num input;
+    if(num < 0) {
+        num = Math.abs(num);
+    }
+    // negative digitNum, we need to move decimal BACKWATD
+    if(digitNum < 0) {
+        // get divider to show which palce of num we need;
+        let divider = Math.pow(10, Math.abs(digitNum));
+        return (Math.floor(num * divider) % 10);
+    // positive digitNum, we need to move decimal FORWARD
+    } else {
+        let divider = Math.pow(10, digitNum);
+        return (Math.floor(num / divider) % 10);
+    }
+}
+console.log(extractDigit(-1824, 2)); // 8
+console.log(extractDigit(1824, 0)); // 4
+console.log(extractDigit(1824, 7)); // 0
+console.log(extractDigit(123.45,-1)); // 4
+console.log(extractDigit(123.45,-2)); // 5
+
+
+
+// If you already know who Ada Lovelace is, that’s great! In a History of Science, she is significant. Given number of any size, return the most significant digit. If you already know what strings are, that’s great! However, don’t use them here . Hint: use WHILE to bring the most significant digit into range where you can use the friendly modulus operator (%). The most significant digit is the leftmost non-zero digit of a number. Given 12345, return 1. Given 67.89, return 6. Given 0.00987, return 9.
+// Second: handle negative num values as well, doing what you think is appropriate.
+const mostSignificantDigit = num => {
+    // handle negative num;
+    if(num < 0) {
+        num = Math.abs(num);
+    }
+    if(num > 1) {
+        while(num > 1) {
+            num = num / 10;
+        }
+        return (Math.floor(num * 10) % 10);
+    } else {
+        while(num < 1) {
+            num = num * 10;
+        }
+        return Math.floor(num);
+    }
+}
+console.log(mostSignificantDigit(12345));   // 1
+console.log(mostSignificantDigit(67.89));   // 6
+console.log(mostSignificantDigit(0.00987));   // 9
