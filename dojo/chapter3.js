@@ -330,3 +330,72 @@ const isCreditCardValid = digitArr => {
 
 }
 console.log(isCreditCardValid([5,2,2,8,2]));    // true;
+
+
+
+// In JavaScript, the Array object has numerous useful methods. It does not, however, contain a method that will randomize the order of an array’s elements. Let’s create shuffle(arr), to efficiently shuffle a given array’s values. Work in-place, naturally. Do you need to return anything from your function?
+const shuffle = arr => {
+    let randomTimes = Math.ceil(Math.random()*50);
+    for(let i = 0; i < randomTimes; i++) {
+        let random1 = Math.floor(Math.random()*arr.length);
+        let random2 = Math.floor(Math.random()*arr.length);
+        [arr[random1],arr[random2]] = [arr[random2],arr[random1]];
+    }
+    return arr;
+}
+console.log(shuffle([20,30,40,50,60,70]));
+
+
+
+// Given array, and indices start and end, remove vals in that index range, working in-place (hence shortening the array). Given ([20,30,40,50,60,70],2,4), change to [20,30,70] and return it. 
+const removeAt = (arr, idx) => {
+    let i = idx;
+    while(i < arr.length) {
+        arr[i] = arr[i+1];
+        i++;
+    }
+    arr.pop();
+    return arr;
+}
+const removeRange = (arr, start, end) => {
+    let loopTime = end - start + 1;
+    for(let i = 0; i < loopTime; i++) {
+        removeAt(arr, start)
+    }
+    return arr;
+}
+console.log(removeRange([20,30,40,50,60,70],2,4));
+
+
+
+// You will be given an array of numbers. After every tenth element, add an additional element containing the sum of those ten values. If the array does not end aligned evenly with ten elements, add one last sum that includes those last elements not yet been included in one of the earlier sums. Given the array [1,2,1,2,1,2,1,2,1,2,1,2,1,2], change it to [1,2,1,2,1,2,1,2,1,2,15,1,2,1,2,6].
+const insertAt = (arr, idx, val) => {
+    let i = arr.length;
+    while(i > idx) {
+        arr[i] = arr[i-1]
+        i--;
+    }
+    arr[idx] = val;
+    return arr;
+}
+const intermediateSums = arr => {
+    let sum = 0;
+    for(let i = 0; i < arr.length; i++) {
+        sum += arr[i];
+        if((i+1) % 10 === 0) {
+            insertAt(arr,i+1,sum);
+            i++;
+            sum = 0;
+        }
+    }
+    if(arr.length < 10) {
+        arr.push(sum);
+    } else {
+        if(arr.length - 1 % 10 !== 0) {
+            arr.push(sum);
+        }
+    }
+    return arr;
+}
+console.log(intermediateSums([1,2,1,2,1,2,1,2,1,2,1,2,1,2]));   // [1,2,1,2,1,2,1,2,1,2,15,1,2,1,2,6]
+console.log(intermediateSums([1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,]));   // [1,2,1,2,1,2,1,2,1,2,15,1,2,1,2,6]
