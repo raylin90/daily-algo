@@ -380,22 +380,53 @@ const insertAt = (arr, idx, val) => {
 }
 const intermediateSums = arr => {
     let sum = 0;
+    let count = 0;
     for(let i = 0; i < arr.length; i++) {
         sum += arr[i];
-        if((i+1) % 10 === 0) {
+        count ++;
+        if(count % 10 === 0) {
             insertAt(arr,i+1,sum);
             i++;
             sum = 0;
+            count = 0;
         }
     }
-    if(arr.length < 10) {
+    if(count < 10 && count !== 0) {
         arr.push(sum);
-    } else {
-        if(arr.length - 1 % 10 !== 0) {
-            arr.push(sum);
-        }
     }
     return arr;
 }
 console.log(intermediateSums([1,2,1,2,1,2,1,2,1,2,1,2,1,2]));   // [1,2,1,2,1,2,1,2,1,2,15,1,2,1,2,6]
-console.log(intermediateSums([1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,]));   // [1,2,1,2,1,2,1,2,1,2,15,1,2,1,2,6]
+console.log(intermediateSums([1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,]));   // [1,2,1,2,1,2,1,2,1,2,15,1,2,1,2,1,2,1,2,1,2,15]
+
+
+
+// Create a function that changes a given array to list each original element twice, retaining original order. Convert [4,"Ulysses",42,false] to [4,4,"Ulysses","Ulysses",42,42,false,false].
+const doubleTrouble = arr => {
+    for(let i = 0; i < arr.length; i++) {
+        arr.splice(i, 0, arr[i]);
+        i++;
+    }
+    return arr;
+}
+console.log(doubleTrouble([4,"Ulysses",42,false])); // [4,4,"Ulysses","Ulysses",42,42,false,false]
+
+
+
+// Create a standalone function that accepts two arrays and combines their values sequentially into a new array, at alternating indices starting with first array. Extra values from either array should be included afterward. Given [1,2] and [10,20,30,40], return new array containing [1,10,2,20,30,40].
+// Second: combine the two arrays’ values into the first array, instead of into a new array. Much more fun!
+const zipIt = (arr1, arr2) => {
+    let index = 0;
+    for(let i = 0; i < arr1.length; i++) {
+        arr1.splice(i+1,0,arr2[index]);
+        i++;
+        index++;
+    }
+    if(index < arr2.length) {
+        for(let i = index; i < arr2.length; i++) {
+            arr1.push(arr2[i])
+        }
+    }
+    return arr1;
+}
+console.log(zipIt([1,2],[10,20,30,40]));    // [1,10,2,20,30,40]
