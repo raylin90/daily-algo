@@ -206,3 +206,127 @@ const skylineHeights = arr => {
 }
 console.log(skylineHeights([-1,1,1,7,3]));  // 1 7
 console.log(skylineHeights([0,4]));  // 4
+
+
+
+// Implement removeNegatives() that accepts an array, removes negative values, and returns the same array (not a copy), preserving non-negatives’ order. As always, do not use built-in array functions.
+const removeAt = (arr, idx) => {
+    let i = idx;
+    while(i < arr.length) {
+        arr[i] = arr[i+1];
+        i++;
+    }
+    arr.pop();
+    return arr;
+}
+const removeNegatives = arr => {
+    for(let i = 0; i < arr.length; i++) {
+        if(arr[i] < 0) {
+            removeAt(arr, i);
+            i--;
+        }
+    }
+    return arr;
+}
+console.log(removeNegatives([1,2,-1,-2,3,-6,-6,-1,4,4,9,5,6,7]));
+
+const removeNegatives2 = arr => {
+    for(let i = 0; i < arr.length; i++) {
+        if(arr[i] < 0) {
+            [arr[i], arr[arr.length-1]] = [arr[arr.length-1], arr[i]];
+            arr.pop();
+        }
+    }
+    return arr;
+}
+console.log(removeNegatives2([1,2,-1,-2,3,-6,-6,-1,4,4,9,5,6,7]));
+
+
+
+// Return the second-to-last element of an array. Given [42,true,4,"Kate",7], return "Kate". If array is too short, return null.
+const secondToLast = arr => {
+    if(!arr[arr.length - 2]) return null;
+    return arr[arr.length - 2];
+}
+console.log(secondToLast([42, true, 4, "Kate", 7]))
+console.log(secondToLast([42]))
+
+
+
+// Return the element that is N-from-array’s-end. Given ([5,2,3,6,4,9,7],3), return 4. If the array is too short, return null.
+const nthToLast = (arr, n) => {
+    if(!arr[arr.length - n]) return null;
+    return arr[arr.length - n];
+}
+console.log(nthToLast([5,2,3,6,4,9,7],8));
+
+
+
+// Return the second-largest element of an array. Given [42,1,4,Math.PI,7], return 7. If the array is too short, return null.
+const bubbleSort = arr => {
+    for(let i = 0; i < arr.length; i++) {
+        if(arr[i+1] < arr[i]) {
+            [arr[i+1], arr[i]] = [arr[i], arr[i+1]];
+            return bubbleSort(arr)
+        }
+    }
+    return arr;
+}
+const secondLargest = arr => {
+    if(arr.length < 2) return null;
+    bubbleSort(arr);
+    // console.log(arr);
+    return arr[arr.length - 2];
+}
+console.log(secondLargest([42,1,4,Math.PI,7]));
+
+
+
+// Liam has "N" number of Green Belt stickers for excellent Python projects. Given arr and N, return the Nth-largest element, where (N-1) elements are larger. Return null if needed.
+const selectSort = arr => {
+    for(let i = 0; i < arr.length; i++) {
+        let minIndex = i;
+        for(let j = i+1; j < arr.length; j++) {
+            if(arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+        [arr[i],arr[minIndex]] = [arr[minIndex],arr[i]];
+    }
+    return arr;
+}
+const nthLargest = (arr, n) => {
+    if(n > arr.length || n < 1) return null;
+    selectSort(arr);
+    console.log(arr);
+    return arr[arr.length - n];
+}
+console.log(nthLargest([5,2,3,6,4,9,7],0));
+
+
+
+// The Luhn formula is sometimes used to validate credit card numbers. Create the function isCreditCardValid(digitArr) that accepts an array of digits on the card (13-19 depending on the card), and returns a boolean whether the card digits satisfy the Luhn formula, as follows:
+
+// For example, when given digit array [5,2,2,8,2], after step 1) it becomes [5,2,2,8], then after step 2) it is [5,4,2,16]. Post-3) we have [5,4,2,7], then following 4) it becomes 18. After step 5) our value is 20, so ultimately we return true. If the final digit were any non-multiple-of-10, we would instead return false.
+const isCreditCardValid = digitArr => {
+    // 1) Set aside the last digit; do not include it in these calculations (until step 5);
+    let lastDigit = digitArr.pop();
+    // 2) Starting from the back, multiply the digits in odd positions (last, third-to-last, etc.) by 2;
+    for(let i = digitArr.length-1; i >=0; i-=2) {
+        digitArr[i] *= 2;
+        // console.log(digitArr[i])
+        // 3) If any results are larger than 9, subtract 9 from them;
+        if(digitArr[i] > 9) {
+            digitArr[i] -= 9;
+        }
+    }
+    // 4) Add all numbers (not just our odds) together;
+    let total = 0;
+    for(let i = 0; i < digitArr.length; i++) {
+        total += digitArr[i];
+    }
+    // 5) Now add the last digit back in – the sum should be a multiple of 10.
+    return (total + lastDigit) % 10 === 0 ? true : false;;
+
+}
+console.log(isCreditCardValid([5,2,2,8,2]));    // true;
