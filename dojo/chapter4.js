@@ -63,3 +63,39 @@ const removeShorterStrings = (arr, length) => {
     }return arr;
 }
 console.log(removeShorterStrings(["hello", "world", "this", "is", "NYC", "good", "morning", "new", "yokers"],4));
+
+
+
+// Implement reverseString(str) that, given string, returns that string with characters reversed. Given "creature", return "erutaerc". Tempting as it seems, do not use the built-in reverse()!
+const stringReverse = str => {
+    let output = "";
+    for(let i = str.length - 1; i >= 0; i--) {
+        output += str[i];
+    }
+    return output;
+}
+console.log(stringReverse("creature"))
+
+const stringReverse2 = str => {
+    let arr = str.split("");
+    for(let i = 0; i < arr.length/2; i++) {
+        let j = arr.length - 1 - i;
+        [arr[i],arr[j]] = [arr[j],arr[i]];
+    }
+    return arr.join("");
+}
+console.log(stringReverse2("creature"))
+
+
+
+// Build a standalone function to remove strings of even lengths from a given array. For array containing ["Nope!","Its","Kris","starting","with","K!"," (instead","of","Chris","with","C)","."], change that same array to ["Nope !","Its","Chris","."].
+const removeEvenLengthStrings = arr => {
+    for(let i = 0; i < arr.length; i++) {
+        if(arr[i]. length % 2 === 0) {
+            arr.splice(i, 1);
+            i--;
+        }
+    }
+    return arr;
+}
+console.log(removeEvenLengthStrings(["Nope!","Its","Kris","starting","with","K!","(instead","of","Chris","with","C)","."]));
