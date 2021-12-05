@@ -99,3 +99,55 @@ const removeEvenLengthStrings = arr => {
     return arr;
 }
 console.log(removeEvenLengthStrings(["Nope!","Its","Kris","starting","with","K!","(instead","of","Chris","with","C)","."]));
+
+
+const intToRomanNum = num => {
+    var roman = {
+        M: 1000,
+        CM: 900,
+        D: 500,
+        CD: 400,
+        C: 100,
+        XC: 90,
+        L: 50,
+        XL: 40,
+        X: 10,
+        IX: 9,
+        V: 5,
+        IV: 4,
+        I: 1
+    };
+
+    var str = '';
+    for (var i of Object.keys(roman)) {
+        console.log(i)
+        // var q = Math.floor(num / roman[i]);
+        // num -= q * roman[i];
+        // str += i.repeat(q);
+    }
+    return str;
+}
+console.log(intToRomanNum(4));
+console.log(intToRomanNum(349));
+console.log(intToRomanNum(444));
+
+
+
+var roman = {
+    M: 1000,
+    CM: 900,
+    D: 500,
+    CD: 400,
+    C: 100,
+    XC: 90,
+    L: 50,
+    XL: 40,
+    X: 10,
+    IX: 9,
+    V: 5,
+    IV: 4,
+    I: 1
+};
+for(const key in roman) {
+    console.log(key)
+}
