@@ -77,3 +77,4 @@ const bracesValid2 = str => {
 console.log(bracesValid2("({[({})]})")) // true
 console.log(bracesValid2("d(i{a}l[t]o)n{e!")) // false
 console.log(bracesValid2("{{[]}}(){}{()}")) // true
+console.log(bracesValid2("A(1)s[O (n]0{t) 0}k"));    // false

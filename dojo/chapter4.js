@@ -173,3 +173,173 @@ const romanNumToInt = str => {
 // console.log(romanNumToInt("III"));
 console.log(romanNumToInt("DCIX"));
 console.log(romanNumToInt("MXDII"));
+
+
+// Create a function that, given an input string str, returns a boolean whether parentheses in str are valid. Valid sets of parentheses always open before they close, for example. For "Y(3(p)p(3)r)s", return true. Given "N(0(p)3", return false: not every parenthesis is closed. Given "N(0)t )0(k", return false, because the underlined ")" is premature: there is nothing open for it to close.
+const parensValid = str => {
+    let arr = [];
+    for(let i = 0; i < str.length; i++) {
+        if(str[i] === "(") {
+            arr.push(str[i]);
+        } else if(str[i] === ")" && arr[arr.length-1] === "(") {
+            arr.pop();
+        } else if(str[i] === ")") {
+            return false;
+        }
+    }
+    if(arr.length === 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+console.log(parensValid("Y(3(p)p(3)r)s"));  // true;
+console.log(parensValid("N(0(p)3"));  // false;
+console.log(parensValid("N(0)t )0(k"));  // false;
+
+const parensValid2 = str => {
+    let obj = {"(" : 0};
+    for(let i = 0; i < str.length; i++) {
+        if(str[i] === "(") {
+            obj["("] ++;
+        } else if(str[i] === ")") {
+            obj["("] --;
+        }
+        if(obj["("] < 0) {
+            return false;
+        }
+    }
+    if(obj["("] === 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+console.log(parensValid2("Y(3(p)p(3)r)s"));  // true;
+console.log(parensValid2("N(0(p)3"));  // false;
+console.log(parensValid2("N(0)t )0(k"));  // false;
+
+
+
+// Given a sequence of parentheses, braces and brackets, determine whether it is valid. Example: "W(a{t}s[o(n{ c}o)m]e )h[e{r}e]!" => true. "D(i{a}l[ t]o)n{e" => false. "A(1)s[O (n]0{t) 0}k" => false.
+const bracesValid = str => {
+    let arr = [];
+    for(let i = 0; i < str.length; i++) {
+        if(str[i] === "(" || str[i] === "{" || str[i] === "[") {
+            arr.push(str[i]);
+        } else if(str[i] === ")" && arr[arr.length -1 ] === "(") {
+            arr.pop();
+        } else if(str[i] === "}" && arr[arr.length -1 ] === "{") {
+            arr.pop();
+        }else if(str[i] === "]" && arr[arr.length -1 ] === "[") {
+            arr.pop();
+        } else if(str[i] === ")" || str[i] === "}" || str[i] === "]") {
+            return false;
+        }
+    }
+    if(arr.length === 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+console.log(bracesValid("W(a{t}s[o(n{ c}o)m]e )h[e{r}e]!"));  // true
+console.log(bracesValid("D(i{a}l[ t]o)n{e"));    // false
+console.log(bracesValid("A(1)s[O (n]0{t) 0}k"));    // false
+
+const bracesValid2 = str => {
+    let obj = {
+        "(" : 0,
+        "[" : 0,
+        "{" : 0,
+    };
+    for(let i = 0; i < str.length; i++) {
+        if(str[i] === "(") {
+            obj["("]++;
+        } else if(str[i] === "[") {
+            obj["["]++;
+        } else if(str[i] === "{") {
+            obj["{"]++;
+        } else if(str[i] === ")") {
+            obj["("]--;
+        } else if(str[i] === "]") {
+            obj["["]--;
+        } else if(str[i] === "}") {
+            obj["{"]--;
+        }
+        if(obj["("] < 0 || obj["["] < 0 || obj["{"] < 0) {
+            return true;
+        }
+    }
+    if(obj["("] === 0 && obj["["] === 0 && obj["{"] === 0) {
+        return true;
+    } else {
+        return false;
+    }
+    console.log(obj);
+}
+console.log(bracesValid2("W(a{t}s[o(n{ c}o)m]e )h[e{r}e]!"));  // true
+console.log(bracesValid2("D(i{a}l[ t]o)n{e"));    // false
+// need to consider edge case
+console.log(bracesValid2("A(1)s[O (n]0{t) 0}k"));    // false
+
+
+
+// Create a function that returns a boolean whether the string is a strict palindrome. For "a x a" or "racecar", return true. Do not ignore spaces, punctuation and capitalization: if given "Dud" or "oho!", return false
+const isPalindrome = str => {
+    for(let i = 0; i < str.length / 2; i++) {
+        let j = str.length - 1 - i;
+        if(str[i] !== str[j]) {
+            return false;
+        }
+    }
+    return true;
+}
+// console.log(isPalindrome("a x a")); // true
+// console.log(isPalindrome("racecar")); // true
+// console.log(isPalindrome("Dud")); // false
+// console.log(isPalindrome("oho!")); // false
+
+
+
+// For this challenge, we will look not only at the entire string provided, but also at the substrings within it. Return the longest palindromic substring. Given "what up, daddy-o?", return "dad". Given "uh... not much", return "u". Include spaces as well (i.e. be strict, as in previous challenge): given "Yikes! my favorite racecar erupted!", return "e racecar e". Strings longer or shorter than complete words are OK.
+// Second: re-solve the above problem, but ignore spaces, tabs, returns, capitalization and punctuation. Given "Hot puree eruption!", return "tpureeerupt".
+const longerestPalindrome = str => {
+    let output = "";
+    for(let i = 0; i < str.length; i++) {
+        for(let j = i+1; j < str.length; j++) {
+            if(isPalindrome(str.slice(i, j)) && str.slice(i, j).match(/[a-z]/)) {
+                if(str.slice(i, j).length > output.length) {
+                    output = str.slice(i, j);
+                }
+            }
+        }
+    }
+    return output;
+}
+// console.log(longerestPalindrome("what up, daddy-o?"))   // dad
+// console.log(longerestPalindrome("uh... not much"))   // u
+// console.log(longerestPalindrome("Yikes! my favorite racecar erupted!"))   // e racecar e
+
+const longerestPalindrome2 = str => {
+    str = str.toLowerCase().split("");
+    let arr = ["!", ".", ","];
+    for(let i = 0; i < str.length; i++) {
+        if(arr.includes(str[i]) || str[i] === " ") {
+            str.splice(i, 1);
+        }
+    }
+    str = str.join("");
+    let output = "";
+    for(let i = 0; i < str.length; i++) {
+        for(let j = i+1; j < str.length; j++) {
+            if(isPalindrome(str.slice(i, j)) && str.slice(i, j).match(/[a-z]/)) {
+                if(str.slice(i, j).length > output.length) {
+                    output = str.slice(i, j);
+                }
+            }
+        }
+    }
+    return output;
+}
+console.log(longerestPalindrome2("H,ot p.uree eruption!"))   // tpureeerupt
