@@ -101,7 +101,10 @@ const removeEvenLengthStrings = arr => {
 console.log(removeEvenLengthStrings(["Nope!","Its","Kris","starting","with","K!","(instead","of","Chris","with","C)","."]));
 
 
+
+// Given a positive integer that is less than 4000, return a string containing that value in Roman numeral representation. In this representation, I is 1, V is 5, X is 10, L = 50, C = 100, D = 500, and M = 1000. Remember that 4 is IV, 349 is CCCIL and 444 is CDXLIV.
 const intToRomanNum = num => {
+    // roman character object
     var roman = {
         M: 1000,
         CM: 900,
@@ -117,13 +120,17 @@ const intToRomanNum = num => {
         IV: 4,
         I: 1
     };
-
-    var str = '';
-    for (var i of Object.keys(roman)) {
-        console.log(i)
-        // var q = Math.floor(num / roman[i]);
-        // num -= q * roman[i];
-        // str += i.repeat(q);
+    // variable to hold output string
+    let str = "";
+    // for loop the roman character object
+    for(const key in roman) {
+        // console.log(key);
+        // divide the num with each roman obj key, and find the floor
+        let q = Math.floor(num / roman[key]);
+        // subtract it from given num, so we get the num different
+        num -= q * roman[key];
+        // if q for example is 2, then we repeat key 2 times, and concat. into output string
+        str += key.repeat(q);
     }
     return str;
 }
@@ -133,21 +140,36 @@ console.log(intToRomanNum(444));
 
 
 
-var roman = {
-    M: 1000,
-    CM: 900,
-    D: 500,
-    CD: 400,
-    C: 100,
-    XC: 90,
-    L: 50,
-    XL: 40,
-    X: 10,
-    IX: 9,
-    V: 5,
-    IV: 4,
-    I: 1
-};
-for(const key in roman) {
-    console.log(key)
+// Sept 16, 2014 headline: “Ancient Computer Found in Roman Shipwreck”. Comprising 30 bronze gears, its wooden frame features 2000 characters. Given a string containing a Roman numeral representation of a positive integer, return the integer. Remember that III is 3, DCIX is 609 and MXDII is 1492.
+const romanNumToInt = str => {
+    var roman = {
+        M: 1000,
+        CM: 900,
+        D: 500,
+        CD: 400,
+        C: 100,
+        XC: 90,
+        L: 50,
+        XL: 40,
+        X: 10,
+        IX: 9,
+        V: 5,
+        IV: 4,
+        I: 1
+    };
+    let num = 0;
+    // for loop the str input
+    for(let i = 0; i < str.length; i++) {
+        // set current and next value as current = str[i] roman character and next = str[i+1] roman character
+        const curr = roman[str[i]];
+        const next = roman[str[i+1]];
+        console.log("current", curr)
+        console.log("next: ", next)
+        // if current < next, which means we can subtract (because we have some code to get XL is 40, curr = 10, next is 50, so we subtract first, then add), else add
+        curr < next ? num -= curr : num += curr;
+    }
+    return num;
 }
+// console.log(romanNumToInt("III"));
+console.log(romanNumToInt("DCIX"));
+console.log(romanNumToInt("MXDII"));
