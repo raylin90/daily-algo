@@ -446,3 +446,211 @@ const dropTheMike = str => {
 }
 console.log(dropTheMike("   hello world, I started to program!   "));   // Hello World, I Started To Program!
 console.log(dropTheMike("   hello world, I Mike to program!   "));  // stunned silence
+
+
+
+
+// As before, given a number of U.S. cents, return the optimal configuration of coins, in an object.
+const coinChange = money => {
+    let obj = {
+        q: 0,
+        d: 0,
+        n: 0,
+        p: 0,
+    }
+    console.log(Math.floor(money / 25))
+    if(money >= 25) {
+        obj.q = Math.floor(money / 25);
+        money = money - obj.q * 25;
+    } 
+    if(money >= 10) {
+        obj.d = Math.floor(money / 10);
+        money = money - obj.d * 10;
+    } 
+    if(money >= 5) {
+        obj.n = Math.floor(money / 5);
+        money = money - obj.n * 5;
+    } 
+    obj.p = money;
+    return obj;
+}
+console.log(coinChange(94));
+
+
+
+// Given an array, return an object containing the array’s max, min and average values.
+const maxMinAvg = arr => {
+    let obj = {
+        max: arr[0],
+        min: arr[0],
+        avg: 0,
+    }
+    let sum = 0;
+    for(let i = 0; i < arr.length; i++) {
+        sum += arr[i];
+        if(arr[i] < obj.min) {
+            obj.min = arr[i];
+        }
+        if(arr[i] > obj.max) {
+            obj.max = arr[i];
+        }
+    }
+    obj.avg = sum / arr.length;
+    return obj;
+}
+console.log(maxMinAvg([1,2,3,4,5,6,7,8,9,10,-2]));
+
+
+
+// Associative arrays are sometimes called maps because a key (string) maps to a value. Given two arrays, create an associative array (map) containing keys of the first, and values of the second. For arr1 = ["abc", 3, "yo"] and arr2 = [42, "wassup", true], return {"abc": 42, 3: "wassup", "yo": true}.
+const zipArraysIntoMap = (arr1, arr2) => {
+    let obj = {};
+    while(arr1.length && arr2.length) {
+        obj[arr1.shift()] = arr2.shift();
+    }
+    return obj;
+}
+console.log(zipArraysIntoMap( ["abc", 3, "yo"],[42, "wassup", true]));
+
+
+
+// Associative arrays are also called hashes (we’ll learn why later). Build invertHash(assocArr) to convert hash keys to values, and values to keys. Example: given {"name": "Zaphod", "charm": "high", "morals": "dicey"}, return object {"Zaphod": "name", "high": "charm", "dicey": "morals"}.
+const invertHash = assocArr => {
+    for(let key in assocArr) {
+        // console.log(key);
+        // console.log(assocArr[key]);
+        let temp = key;
+        key = assocArr[key];
+        assocArr[key] = temp;
+        delete assocArr[temp];
+    }
+    return assocArr;
+}
+console.log(invertHash({"name": "Zaphod", "charm": "high", "morals": "dicey"}));
+
+
+
+// Without using the .length property that is present on all arrays, determine and return the number of values in the given array. If we were to do this on a numerical array, we might check to see whether the element at a certain numerical index was undefined. Unfortunately, we can’t do that here because the keys don’t have any sort of predictable order or first value. So, for object { band: "Travis Shredd & the Good Ol’ Homeboys", style: "Country/Metal/Rap", album: "668: The Neighbor of the Beast" }, you should return the value 3, because there are three keys in this object: band, style and album.
+const countObj = obj => {
+    // let counter = 0;
+    // for(const key in obj) {
+    //     counter++;
+    // }
+    // return counter;
+    return Object.keys(obj).length;
+}
+console.log(countObj({ band: "Travis Shredd & the Good Ol’ Homeboys", style: "Country/Metal/Rap", album: "668: The Neighbor of the Beast" }));
+
+
+
+// String.concat(str2,str3,...,strX) - add string(s) to end of existing one. Return new string.
+const stringConcat = (str2, str3) => {
+    let newStr = "";
+    for(let i = 0; i < str2.length; i++) {
+        newStr += str2[i];
+    }
+    for(let j = 0; j < str3.length; j++) {
+        newStr += str3[j];
+    }
+    return newStr;
+}
+console.log(stringConcat("hello","world"));
+
+
+
+// String.slice(start,end) - extract part of a string and return in a new one. Start and end are indices into the string, with the first character at index 0. End param is optional and if present, refers to one beyond the last character to include.
+// Bonus: include support for negative indices, representing offsets from string-end. Example: String.slice(-1) returns the string’s last character.
+const stringSlice = (str, start, end=str.length) => {
+    let newStr = "";
+    if(start > 0) {
+        for(let i = start; i < end; i++) {
+            newStr += str[i];
+        }
+        return newStr;
+    }
+    if(start < 0) {
+        if(end < 0) {
+            for(let i = str.length - Math.abs(start); i < str.length - Math.abs(end); i++) {
+                newStr += str[i];
+            }
+            return newStr;
+        } else {
+            for(let i = str.length - Math.abs(start); i < end; i++) {
+                newStr += str[i];
+            }
+            return newStr;
+        }
+    }
+}
+console.log(stringSlice("The quick brown fox jumps over the lazy dog.", 31));
+console.log(stringSlice("The quick brown fox jumps over the lazy dog.", 4,19));
+console.log(stringSlice("The quick brown fox jumps over the lazy dog.", -4));
+console.log(stringSlice("The quick brown fox jumps over the lazy dog.", -9, -5));
+
+
+
+// String.trim() - remove whitespace (spaces, tabs, newlines) from both sides, and return a new string. Example: " \n hello goodbye \t ".trim() should return "hello goodbye".
+const stringTrim = str => {
+    let newStr = "";
+    str = str.replace("\t", "");
+    str = str.replace("\n", "")
+    // console.log(str);
+    for(let i = 0; i < str.length; i++) {
+        if(str[i] === " ") {
+            continue;
+        }
+        newStr += str[i];
+    }
+    return newStr;
+}
+console.log(stringTrim(" \n hello goodbye \t "));
+
+
+
+// String.split(separator,limit) - split string into an array of substrings, returning array. Separator specifies where to divide substrings and is not included in any substring. If "" is specified, split the string on every character. Limit is optional and indicates number of splits; additional post-limit items should be discarded. Note: existing string is unaffected.
+const stringSplit = (str, separator, limit) => {
+    let arr = [];
+    let temp = "";
+    for(let i = 0; i < str.length; i++) {
+        if(str[i] === separator) {
+            arr.push(temp);
+
+            if(limit) {
+                if(arr.length === limit) {
+                    return arr;
+                }
+            }
+
+            temp = "";
+        } else {
+            temp += str[i];
+        }
+    }
+    arr.push(temp);
+    return arr;
+}
+console.log(stringSplit("The quick brown fox jumps over the lazy dog.", "o", 3))
+
+
+
+// String.search(val) - search string for the given val (another string). Return the index position of the first match found (or -1 if not found).
+const stringSearch = (str, word) => {
+    let index;
+    for(let i = 0; i < str.length; i++) {
+        if(str[i] === word[0]) {
+            index = i;
+            let j = 0;
+            while(j < word.length) {
+                if(str[i] === word[j]) {
+                    i++;
+                    j++;
+                } else {
+                    return -1;
+                }
+            }
+            return index;
+        }
+    }
+    return -1;
+}
+console.log(stringSearch("Mr. Blue has a blue house", "Blue"));
