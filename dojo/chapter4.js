@@ -407,3 +407,42 @@ const commonSuffix = arr => {
 console.log(commonSuffix(["deforestation", "citation", "conviction", "incarceration"]));    // tion
 console.log(commonSuffix(["nice", "ice", "baby"]));    // ""
 console.log(commonSuffix(["nice", "ice", "healce"]));    // ce
+
+
+
+// Martin is writing his opus: a book of algorithm challenges, set as lyrics to a suite of a cappella fugues. Some of ‘those fugueing challenges’ are less popular than others, so he needs an index. Given a sorted array of pages where a term appears, produce an index string. Consecutive pages should form ranges separated by a hyphen. For [1,13,14,15,37,38,70], return string "1, 13-15, 37-38, 70". Take care to get all the commas and spaces correct: Martin is palpably particular (practically persnickety!) about patchy punctuation.
+const bookIndex = arr => {
+    let output = "";
+    for(let i = 0; i < arr.length; i++) {
+        if(arr[i]+1 === arr[i+1]) {
+            output += arr[i] + "-";
+            while(arr[i]+1 === arr[i+1]) {
+                i++;
+            }
+            output += arr[i] + ",";
+        } else {
+            output += arr[i] + ",";
+        }
+    }
+    return output;
+}
+console.log(bookIndex([1,13,14,15,37,38,70]));
+
+
+
+// Create a standalone function that accepts an input string, removes leading and trailing white space (at beginning and end only), capitalizes the first letter of every word, and returns that string. If original string contains the word "Mike" anywhere, immediately return "stunned silence" instead.
+const dropTheMike = str => {
+    str = str.trim().split(" ");
+    // console.log(str);
+    if(str.includes("Mike")) return "stunned silence";
+
+    for(let i = 0; i < str.length; i++) {
+        // str[i][0] = str[i][0].toUpperCase();
+        str[i] = str[i].split("");
+        str[i][0] = str[i][0].toUpperCase();
+        str[i] = str[i].join("");
+    }
+    return str;
+}
+console.log(dropTheMike("   hello world, I started to program!   "));   // Hello World, I Started To Program!
+console.log(dropTheMike("   hello world, I Mike to program!   "));  // stunned silence
