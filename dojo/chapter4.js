@@ -343,3 +343,67 @@ const longerestPalindrome2 = str => {
     return output;
 }
 console.log(longerestPalindrome2("H,ot p.uree eruption!"))   // tpureeerupt
+
+
+
+// Nikki, a queen of gentle sarcasm, loves the word facetiously. Lance helpfully points out that it is the only known English word that contains all five vowels in alphabetical order, and it even has a ‘y’ on the end! Nikki takes a break from debugging to turn and give him an acid stare – indeed a look that was delivered arseniously. Given a string, return whether all contained letters are in alphabetical order.
+const isWordAlphabetical = str => {
+    let alphabetic = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+    let order = [];
+    str = str.toLowerCase();
+    for(let i = 0; i < str.length; i++) {
+        for(let j = 0; j < alphabetic.length; j++) {
+            if(str[i] === alphabetic[j]) {
+                order.push(j);
+            }
+        }
+    }
+    // console.log(order)
+    for(let i = 1; i < order.length; i++) {
+        if(order[i] < order[i-1]) {
+            return false;
+        }
+    }
+    return true;
+}
+console.log(isWordAlphabetical("abc")); // true
+console.log(isWordAlphabetical("Hello"));   // false
+console.log(isWordAlphabetical("boy"));   // true
+
+
+
+// Write a function that accepts as a parameter a string containing someone’s name. Return a string containing the following oh-so-cool greeting: strip off the first letter of the name, capitalize this new word, and add " to the [first letter]!" Given "Dylan", return "Ylan to the D!"
+const dGetsJiggy = str => {
+    str = str.split("");
+    // console.log(str);
+    let firstChar = str.shift().toUpperCase();
+    // console.log(firstChar);
+    // console.log(str);
+    return `${str.join("")} to the ${firstChar}!`;
+}
+console.log(dGetsJiggy("Dylan"));
+
+
+
+// Lance is writing his opus: Epitome, an epic tome of beat poetry. Always ready for a good rhyme, he constantly seeks words that end with the same letters. Write a function that, when given a word array, returns the largest suffix (word-end) common to all words in the array. For inputs ["deforestation", "citation", "conviction", "incarceration"], return "tion" (not all that creative a rhyming point). If it is ["nice", "ice", "baby"], return "", because that’s just ... not.
+const commonSuffix = arr => {
+    for(let i = 0; i < arr.length; i++) {
+        arr[i] = arr[i].split("").reverse().join("");
+    }
+    let suffix = "";
+
+    for(let i = 0; i < arr[0].length; i++) {
+        let char = arr[0][i];
+        for(let j = 1 ; j < arr.length; j++) {
+            // console.log(arr[j][i])
+            if(char !== arr[j][i]) {
+                return suffix.split("").reverse().join("");
+            }
+        }
+        suffix += char;
+    }
+    return suffix.split("").reverse().join("");
+}
+console.log(commonSuffix(["deforestation", "citation", "conviction", "incarceration"]));    // tion
+console.log(commonSuffix(["nice", "ice", "baby"]));    // ""
+console.log(commonSuffix(["nice", "ice", "healce"]));    // ce
