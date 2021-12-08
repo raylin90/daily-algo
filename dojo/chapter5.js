@@ -123,18 +123,127 @@ class SLists {
         }
         return sum / count;
     }
+
+    // Create a function that accepts a ListNode pointer and returns the last value in the list.
+    getBack() {
+        if(!this.head) return null;
+        if(!this.head.next) return this.head.value;
+        let runner = this.head;
+        while(runner.next) {
+            runner = runner.next;
+        }
+        return runner.value;
+    }
+
+    // Create a standalone function that removes the last ListNode in the list and returns the new list.
+    removeBack() {
+        if(!this.head) return null;
+        if(!this.head.next) {
+            this.head = null;
+            return this.display();
+        }
+        let runner = this.head;
+        while(runner.next.next) {
+            runner = runner.next;
+        }
+        runner.next = null;
+        // console.log(runner.value)
+        return this.display();
+    }
+
+    // Create a function that creates a ListNode with given value and inserts it at end of a linked list.
+    addBack(value) {
+        let newNode = new Node(value);
+        if(!this.head) {
+            this.head = newNode;
+            return this;
+        }
+        let runner = this.head;
+        while(runner.next) {
+            runner = runner.next;
+        }
+        runner.next = newNode;
+        return this.display();
+    }
+
+    // Create a standalone function that locates the minimum value in a linked list, and moves that node to the front of the list. Return the new list, with all nodes still present, and all (except for the new head node) in their original order.
+    moveMinToFront() {
+        if(!this.head) return null;
+        if(!this.head.next) return this.head.value;
+
+        let runner = this.head;
+        let min = this.head;
+        let beforeMin, afterMin;
+        while(runner.next) {
+            if(runner.next.value < min.value) {
+                beforeMin = runner;
+                min = runner.next
+                afterMin = runner.next.next;
+            }
+            runner = runner.next;
+        }
+        // console.log(min)
+        // console.log(beforeMin)
+        // console.log(afterMin)
+
+        if(this.head.value === min.value) {
+            return this.display();
+        } else {
+            beforeMin.next = afterMin;
+            min.next = this.head;
+            this.head = min;
+            return this.display();
+        }
+    }
+
+    // Create a standalone function that locates the maximum value in a linked list, and moves that node to the back of the list. Return the new list, with all nodes still present, and all in their original order except for the node you moved to the end of the singly linked list.
+    moveMaxToBack() {
+        if(!this.head) return null;
+        if(!this.head.next) return this.head.value;
+        let runner = this.head;
+        let max = this.head;
+        let beforeMax, afterMax;
+
+        while(runner.next) {
+            if(runner.next.value > max.value) {
+                beforeMax = runner;
+                max = runner.next
+                afterMax = runner.next.next;
+            }
+            runner = runner.next;
+        }
+        // console.log(max)
+        // console.log(beforeMax)
+        // console.log(afterMax)
+        // console.log(runner.value)
+
+        if(runner.value === max.value) {
+            return this.display();
+        } else if(this.head.value === max.value) {
+            this.head = this.head.next;
+            runner.next = max;
+            max.next = null;
+            return this.display();
+        } else {
+            beforeMax.next = afterMax;
+            runner.next = max;
+            max.next = null;
+            return this.display();
+        }
+    }
 }
 
 let list = new SLists();
+
 list.addFront(-5);
-list.addFront(20);
-list.addFront(2);
-list.addFront(5);
-list.addFront(6);
-list.addFront(4);
-list.addFront(-2);
-list.addFront(9);
-list.addFront(-9);
+// list.addFront(2);
+// list.addFront(5);
+// list.addFront(20);
+// list.addFront(6);
+// list.addFront(4);
+// list.addFront(-2);
+// list.addFront(-9);
+
 // list.removeFront();
 // list.removeFront();
 // list.removeFront();
@@ -143,5 +252,9 @@ list.addFront(-9);
 // console.log(list.length());
 // console.log(list.getMax());
 // console.log(list.getMin());
-console.log(list.getAverage());
+// console.log(list.getAverage());
 console.log(list.display());
+// console.log(list.addBack(99));
+// console.log(list.getBack());
+// console.log(list.moveMinToFront());
+console.log(list.moveMaxToBack());
