@@ -231,18 +231,127 @@ class SLists {
             return this.display();
         }
     }
+
+    // Create prependVal(ListNode,val,before) to insert a new ListNode with val immediately before the node containing before (or at end, if no node contains before). Return the new list.
+    prependVal(val,before) {
+        if(!this.head) {
+            this.addFront(val);
+            return this;
+        }
+        if(this.head.value === before) {
+            this.addFront(val);
+            return this;
+        }
+
+        let newNode = new Node(val);
+        let afterNode;
+
+        let runner = this.head;
+        while(runner.next) {
+            if(runner.next.value === before) {
+                afterNode = runner.next;
+                runner.next = newNode;
+                newNode.next = afterNode;
+                return this.display();
+            }
+            runner = runner.next;
+        }
+        runner.next = newNode;
+        return this.display
+    }
+
+    // Create appendVal(list,val,after) that inserts a new ListNode containing given val immediately after the node containing after (or at end, if after not found). Return the new list.
+    appendVal(val,after) {
+        let newNode = new Node(val);
+        if(!this.head) {
+            this.head = newNode;
+            return this;
+        }
+        let runner = this.head;
+        let afterNode;
+        while(runner.next) {
+            if(runner.value === after) {
+                afterNode = runner.next;
+                runner.next = newNode;
+                newNode.next = afterNode;
+                return this.display();
+            }
+            runner = runner.next;
+        }
+        runner.next = newNode;
+        return this.display
+    }
+
+    // Create removeVal(ListNode,val). Given a pointer to the head ListNode, remove the node with the given val. Return the new list. What will you do if val is not found?
+    removeVal(value) {
+        if(!this.head) return null;
+        if(this.head.value === value) return this.removeFront();
+        let runner = this.head;
+        let before, after, removedNode;
+        let found = false;
+
+        while(runner.next) {
+            if(runner.next.value === value) {
+                found = true;
+                removedNode = runner.next;
+                before = runner;
+                after = runner.next.next;
+            }
+            runner = runner.next;
+        }
+
+        if(found === false) {
+            console.log("no found");
+            return -1;
+        } else if(runner.value === value) {
+            this.removeBack();
+        } else {
+            before.next = after;
+            removedNode.next = null;
+        }
+        return this.display();
+    }
+
+    // Create splitOnVal(list,num) that, given number, splits a list in two. The latter half of the list should be returned, starting with node containing num. E.g.: splitOnVal(5) for the list (1=>3=>5=>2=>4) will change list to (1=>3), and the return value will be (5=>2=>4).
+    splitOnValue(num) {
+        let firstHalf = new SLists();
+        let secondHalf = new SLists();
+        let breakPoint = false;
+
+        let runner = this.head;
+        while(runner) {
+            if(runner.value === num) {
+                breakPoint = true;
+            }
+            if(breakPoint) {
+                secondHalf.addBack(runner.value);
+            } else {
+                firstHalf.addBack(runner.value);
+            }
+            runner = runner.next;
+        }
+        console.log("first: ", firstHalf.display());
+        return secondHalf.display();
+    }
+
+    // Given a pointer to the head node of a singly linked list, remove any nodes containing negative values and return (a pointer to) the new list.
+    removeNegatives() {
+
+
+
+        let runner = this.head;
+    }
 }
 
 let list = new SLists();
-
 list.addFront(-5);
-// list.addFront(2);
-// list.addFront(5);
-// list.addFront(20);
-// list.addFront(6);
-// list.addFront(4);
-// list.addFront(-2);
-// list.addFront(-9);
+list.addFront(2);
+list.addFront(5);
+list.addFront(20);
+list.addFront(6);
+list.addFront(4);
+list.addFront(-2);
+list.addFront(-9);
 
 // list.removeFront();
 // list.removeFront();
@@ -257,4 +366,10 @@ console.log(list.display());
 // console.log(list.addBack(99));
 // console.log(list.getBack());
 // console.log(list.moveMinToFront());
-console.log(list.moveMaxToBack());
+// console.log(list.moveMaxToBack());
+// list.prependVal(3,100)
+// list.appendVal(3,20)
+// list.removeVal(200);
+// console.log(list.splitOnValue(20))
+list.removeNegatives();
+console.log(list.display());
