@@ -336,21 +336,75 @@ class SLists {
 
     // Given a pointer to the head node of a singly linked list, remove any nodes containing negative values and return (a pointer to) the new list.
     removeNegatives() {
-
-
-
         let runner = this.head;
+        while(runner.next) {
+            if(runner.next.value < 0) {
+                let removedNode = runner.next;
+                runner.next = runner.next.next;
+                removedNode.next = null;
+                continue;
+            }
+            runner = runner.next;
+        }
+        // console.log(runner.value)
+        if(this.head.value < 0) {
+            this.removeFront();
+        }
+        if(runner.value < 0) {
+            this.removeBack();
+        }
+    }
+
+    // Given two pointers to separate linked lists, concatenate the second list to the end of the first one, and return the new list.
+    concatList(list2) {
+        let runner = list2.head;
+        while(runner) {
+            this.addBack(runner.value);
+            runner = runner.next;
+        }
+        return this,this.display();
+    }
+
+    // Create partition(ListNode,value) that locates the first node with that value, and moves all nodes with values less than that value to be earlier, and all nodes with values greater than that value to be later. Otherwise, original order need not be perfectly preserved. Return the new head ListNode.
+    partition(value) {
+        let arr = [];
+        let runner = this.head;
+        while(runner) {
+            arr.push(runner.value);
+            runner = runner.next;
+        }
+        // console.log("start", arr);
+        let start = 0;
+        let end = arr.length - 1;
+        while(start < end) {
+            while(arr[start] < value) {
+                start++;
+            }
+            while(arr[end] > value) {
+                end--;
+            }
+            if(start < end) {
+                [arr[start],arr[end]] = [arr[end],arr[start]];
+                // console.log(arr);
+            }
+        }
+        // console.log("end", arr);
+        for(let i = 0; i < arr.length; i++) {
+            this.addBack(arr[i]);
+            this.removeFront();
+        }
+        return this.display();
     }
 }
 
 let list = new SLists();
 list.addFront(-5);
-list.addFront(2);
+list.addFront(-2);
 list.addFront(5);
 list.addFront(20);
 list.addFront(6);
-list.addFront(4);
-list.addFront(-2);
+list.addFront(-4);
+list.addFront(-5);
 list.addFront(-9);
 
 // list.removeFront();
@@ -371,5 +425,17 @@ console.log(list.display());
 // list.appendVal(3,20)
 // list.removeVal(200);
 // console.log(list.splitOnValue(20))
-list.removeNegatives();
-console.log(list.display());
+// list.removeNegatives();
+console.log(list.partition(6));
+
+// let listA = new SLists();
+// listA.addFront(-5);
+// listA.addFront(-2);
+// listA.addFront(5);
+// listA.addFront(20);
+// let listB = new SLists();
+// listB.addFront(6);
+// listB.addFront(-4);
+// listB.addFront(-5);
+// listB.addFront(-9);
+// console.log(listA.concatList(listB));
