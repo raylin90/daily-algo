@@ -427,21 +427,110 @@ class SLists {
         return this.display();
     }
 
-    
+    // Given a pointer to a singly linked list, return a copy of that list. Do not return the same list, but instead make a copy of each node in the list and connect them in the same order as the original.
+    copyList() {
+        let newList = new SLists();
+        let runner = this.head;
+        while(runner) {
+            newList.addBack(runner.value);
+            runner = runner.next;
+        }
+        return `new list: ${newList.display()}`;
+    }
+
+    // Given a headNode, a lowVal and a highVal, remove from the list any nodes that have values less than lowVal or higher than highVal. Return the new list.
+    filterList(lowVal, highVal) {
+        let runner = this.head;
+        while(runner.next) {
+            if(runner.next.value < lowVal || runner.next.value > highVal) {
+                // remove;
+                let removedNode = runner.next;
+                runner.next = runner.next.next;
+                removedNode.next = null;
+                continue;
+            } 
+            runner = runner.next;
+        }
+        if(this.head.value < lowVal || this.head.value > highVal) {
+            this.removeFront();
+        }
+        return this.display();
+    }
+
+    // Given a pointer to the first node in a singly linked list, return the second-largest value contained in the list.
+    getSecondLargestValue() {
+        let arr = [];
+        let runner = this.head;
+        while(runner) {
+            arr.push(runner.value)
+            runner = runner.next;
+        }
+        console.log(arr);
+        return arr.sort(function(a,b){return a-b})[arr.length-2]
+    }
+
+    // Provided two pointers to independent linked lists, ‘zip’ the two lists together by alternating nodes. Start with the first list, and return the new combined list.
+    zipIt(list2) {
+        console.log(this.display());
+        console.log(list2.display());
+
+        let newList = new SLists();
+        while(this.head && list2.head) {
+            newList.addBack(this.getFront());
+            newList.addBack(list2.getFront());
+            this.removeFront();
+            list2.removeFront();
+        }
+        if(this.head) {
+            let runner = this.head;
+            while(runner) {
+                newList.addBack(runner.value)
+                runner = runner.next;
+            }
+        }
+        if(list2.head) {
+            let runner = list2.head;
+            while(runner) {
+                newList.addBack(runner.value)
+                runner = runner.next;
+            }
+        }
+        return newList.display();
+    }
+
+    // Remove nodes with duplicate values. Following this call, all remaining nodes should have unique values. Retain only first instance of each value.
+    removeDuplicate() {
+        let obj = {};
+        let firstNode = this.head.value;
+        obj[firstNode] = 1;
+        // console.log(obj);
+        let runner = this.head;
+        while(runner.next) {
+            if(obj[runner.next.value]) {
+                let removedNde = runner.next;
+                runner.next = runner.next.next;
+                removedNde.next = null;
+                continue;
+            } else {
+                obj[runner.next.value] = 1;
+            }
+            runner = runner.next;
+        }
+        return this.display();
+    }
 }
 
 let list = new SLists();
 
-list.addFront(-2);
+list.addFront(9);
 list.addFront(5);
-list.addFront(20);
+list.addFront(-2);
 list.addFront(6);
-list.addFront(-4);
+list.addFront(-2);
 list.addFront(-5);
 list.addFront(-5);
-list.addFront(-9);
+list.addFront(9);
 list.addFront(-5);
-
 // list.removeFront();
 // list.removeFront();
 // list.removeFront();
@@ -463,16 +552,24 @@ console.log(list.display());
 // list.removeNegatives();
 // console.log(list.partition(6));
 // console.log(list.getSecondToLastValue());
-console.log(list.removeSelf(-5));
+// console.log(list.removeSelf(-5));
+// console.log(list.copyList());
+// console.log(list.filterList(-4,5));
+// console.log(list.getSecondLargestValue());
+console.log(list.removeDuplicate());
 
 // let listA = new SLists();
 // listA.addFront(-5);
 // listA.addFront(-2);
 // listA.addFront(5);
-// listA.addFront(20);
+
 // let listB = new SLists();
 // listB.addFront(6);
 // listB.addFront(-4);
 // listB.addFront(-5);
 // listB.addFront(-9);
+// listA.addFront(20);
+// listA.addFront(11);
+// listA.addFront(7);
 // console.log(listA.concatList(listB));
+// console.log(listA.zipIt(listB));
