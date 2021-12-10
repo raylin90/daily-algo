@@ -395,17 +395,52 @@ class SLists {
         }
         return this.display();
     }
+
+    // Create a standalone function that, given a pointer to the first node in a singly linked list, will return the second-to-last value in that list. What will you return if the list is not long enough?
+    getSecondToLastValue() {
+        if(!this.head.next) {
+            return -1;
+        }
+        let runner = this.head;
+        while(runner.next.next) {
+            runner = runner.next;
+        }
+        return runner.value;
+    }
+
+    // Create ListNode method removeSelf() to disconnect (remove) itself from linked lists that include it. Note: the node might be the first in a list (it won’t be the last), and you do NOT have a pointer to the previous node. Also, don’t lose any subsequent nodes pointed to by .next.
+    removeSelf(remove) {
+        let runner = this.head;
+        while(runner.next) {
+            if(runner.next.value === remove) {
+                let removedNode = runner.next;
+                runner.next = runner.next.next;
+                removedNode.next = null;
+                // console.log(runner.next.value)
+                continue;
+            }
+            runner = runner.next;
+        }
+        if(this.head.value === remove) {
+            this.removeFront();
+        }
+        return this.display();
+    }
+
+    
 }
 
 let list = new SLists();
-list.addFront(-5);
+
 list.addFront(-2);
 list.addFront(5);
 list.addFront(20);
 list.addFront(6);
 list.addFront(-4);
 list.addFront(-5);
+list.addFront(-5);
 list.addFront(-9);
+list.addFront(-5);
 
 // list.removeFront();
 // list.removeFront();
@@ -426,7 +461,9 @@ console.log(list.display());
 // list.removeVal(200);
 // console.log(list.splitOnValue(20))
 // list.removeNegatives();
-console.log(list.partition(6));
+// console.log(list.partition(6));
+// console.log(list.getSecondToLastValue());
+console.log(list.removeSelf(-5));
 
 // let listA = new SLists();
 // listA.addFront(-5);
