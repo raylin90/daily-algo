@@ -43,9 +43,10 @@ class SLQueue {
     dequeue() {
         if(!this.head) return null;
         if(!this.head.next) {
+            let value = this.head.value;
             this.head = null;
             this.tail = null;
-            return this;
+            return value;
         }
         let removedNode = this.head;
         this.head = this.head.next;
@@ -156,7 +157,21 @@ class SLQueue {
 
     // Reorder SLQueue values to alternate first half values with second half values, in order. For example: (1,2,3,4,5) becomes (1,4,2,5,3). You may create one additional SLQueue, if needed.
     interleave() {
-        
+        let length = Math.ceil(this.size()/2);
+        let newQueue = new SLQueue();
+        for(let i = 0; i < length; i++) {
+            newQueue.enqueue(this.dequeue());
+        }
+        for(let j = 0; j < length; j++) {
+            newQueue.enqueue(newQueue.dequeue());
+            if(this.head) {
+                newQueue.enqueue(this.dequeue());
+            }
+        }
+
+        return newQueue.display();
+        // console.log("this ", this.display());
+
     }
 
     display() {
@@ -174,14 +189,13 @@ class SLQueue {
 
 let q = new SLQueue();
 // q.enqueue(-10);
-q.enqueue(8);
-q.enqueue(3);
+q.enqueue(1);
+q.enqueue(2);
 q.enqueue(3);
 // q.enqueue(-8);
-q.enqueue(20);
-q.enqueue(3);
-q.enqueue(-10);
+q.enqueue(4);
 q.enqueue(5);
+
 console.log(q.display());
 // console.log(q.front());
 // console.log(q.isEmpty());
@@ -191,10 +205,10 @@ console.log(q.display());
 // console.log(q.size());
 // console.log(q.removeMin());
 // console.log(q.removeMin());
-console.log(q.removeMin2());
+// console.log(q.removeMin2());
 // console.log(q.display());
-
-
+console.log("*************************")
+console.log(q.interleave());
 
 
 // let q2 = new SLQueue();

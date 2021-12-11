@@ -146,14 +146,14 @@ let queue = new SLQueue();
 queue.enqueue(1)
 queue.enqueue(2)
 queue.enqueue(3)
-queue.enqueue(2)
-queue.enqueue(1)
+queue.enqueue(4)
+queue.enqueue(5)
 console.log(queue.print());
 // queue.dequeue();
 // queue.dequeue();
 // console.log(queue.contains(32));
 // queue.removeMin();
 // queue.size();
-// queue.interleaveQueue();
-console.log(queue.isPallindrome());
+queue.interleaveQueue();
+// console.log(queue.isPallindrome());
 // console.log(queue.print());
