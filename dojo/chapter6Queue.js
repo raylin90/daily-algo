@@ -184,17 +184,41 @@ class SLQueue {
         console.log(`head: ${this.head.value}, and tail: ${this.tail.value}`);
         return output;
     }
+
+    // Rob sees the world in clear black-and-white terms. Scott, however, is more likely to say “it depends” and see shades of grey. Create a standalone function that accepts a Queue of numbers, sequenced in absolute-value order, such as (10,-20,30,-40,50). Using only an additional Stack for storage, reorder the Queue values so that they are in increasing order, such as (-40,-20,10,30,50).
+    
+    bubbleSort(arr) {
+        for(let i = 0; i < arr.length; i++) {
+            console.log(arr[i])
+            console.log(arr[i+1])
+            if(arr[i] > arr[i+1]) {
+                [arr[i],arr[i+1]] = [arr[i+1],arr[i]];
+                return this.bubbleSort(arr);
+            }
+        }
+    }
+
+    reOrder() {
+        let runner = this.head;
+        let arr = [];
+        while(runner) {
+            arr.push(runner.value);
+            runner = runner.next;
+        }
+        this.bubbleSort(arr);
+        console.log(arr);
+    }
 }
 
 
 let q = new SLQueue();
 // q.enqueue(-10);
-q.enqueue(1);
-q.enqueue(2);
-q.enqueue(3);
+q.enqueue(10);
+q.enqueue(-20);
+q.enqueue(30);
 // q.enqueue(-8);
-q.enqueue(4);
-q.enqueue(5);
+q.enqueue(-40);
+q.enqueue(50);
 
 console.log(q.display());
 // console.log(q.front());
@@ -208,8 +232,8 @@ console.log(q.display());
 // console.log(q.removeMin2());
 // console.log(q.display());
 console.log("*************************")
-console.log(q.interleave());
-
+// console.log(q.interleave());
+console.log(q.reOrder());
 
 // let q2 = new SLQueue();
 // q2.enqueue(12);
