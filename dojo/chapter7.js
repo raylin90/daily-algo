@@ -57,3 +57,26 @@ const BalanceIndex = arr => {
 console.log(BalanceIndex([-2,5,7,0,3]));
 console.log(BalanceIndex([9,9]));
 console.log(BalanceIndex([9,1,9]));
+
+
+
+// Given a sorted array and a value, return whether the array contains that value. Do not sequentially iterate the array. Instead, ‘divide and conquer’, taking advantage of the fact that the array is sorted. As always, only use built-in functions that you are prepared to recreate (write yourself) on demand!
+const binarySearch = (arr, value) => {
+    if(arr.length === 1) {
+        return (arr[0] === value) ? true : false;
+    }
+    let midPoint = Math.floor((arr.length / 2));
+    if(arr[midPoint] === value) {
+        return true;
+    } else if(arr[midPoint] < value) {
+        // look right
+        console.log(arr.slice(midPoint+1, arr.length))
+        return binarySearch(arr.slice(midPoint+1, arr.length),value);
+    } else {
+        // look left
+        console.log(arr.slice(0, midPoint))
+        return binarySearch(arr.slice(0, midPoint),value);
+    }
+
+}
+console.log(binarySearch([2,4,7,9,12,16,9,25,47,49,57,59,60,64,78,99,101,110],2));
