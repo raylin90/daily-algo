@@ -132,3 +132,75 @@ const stringBinarySearch = (string, char) => {
 }
 console.log(stringBinarySearch("&-0379DEFXZ[abcz|", "6"));
 console.log(stringBinarySearch("&-0379DEFXZ[abcz|", "c"));
+
+
+
+// Flatten a given array, eliminating nested & empty arrays. Do not alter it; return a new one retaining order. For [1,[2,3],4,[]] return [1,2,3,4].
+const flattenArr = arr => {
+    // return arr.flat();
+    // return [].concat.apply([], arr);
+    let result = [];
+    for(let i = 0; i < arr.length; i++) {
+        // console.log(typeof(arr[i]))
+        if(typeof(arr[i]) === "object") {
+            arr[i].forEach(val => result.push(val));
+        } else {
+            result.push(arr[i]);
+        }
+    }
+    return result;
+}
+console.log(flattenArr([1,[2,3],4,[],5]));
+
+
+
+// Remove array duplicates. Do not alter original. Return new array with results ‘stable’ (original order). For [1,2,1,3,4,2] return [1,2,3,4].
+// Second: work ‘in-place’ in given array. Alter order if needed (stability is not required). Ex.: [1,2,1,3,4,2] could become [1,2,4,3].
+// Third: make it in-place and stable. 
+// Fourth: eliminate any second (inner) loop.
+const removeDuplicates = arr => {
+    let obj = {};
+    for(let i = 0; i < arr.length; i++) {
+        if(!obj[arr[i]]) {
+            obj[arr[i]] = 1;
+        } else {
+            arr.splice(i, 1);
+            i--;
+        }
+    }
+    return arr;
+}
+console.log(removeDuplicates([1,2,1,1,1,3,4,2]));
+
+
+
+// Back in the Basic 13, you wrote code to compute an array’s minimum and maximum values. You also wrote code to determine average value (the “mean”). What about the “mode” – the most common value in that data set. Create a function that, given an array, returns the most frequent value in the array.
+// Second: memory constraints prevent your using a new array. How does this affect your solution?
+const ModeArr = arr => {
+    let obj = {};
+    for(const value of arr) {
+        if(!obj[value]) {
+            obj[value] = 1;
+        } else {
+            obj[value]++;
+        }
+        // console.log(obj);
+    }
+    let count = 0;
+    let letter;
+    for(const key in obj) {
+        if(obj[key] > count) {
+            count = obj[key];
+            letter = key;
+        }
+    }
+    return letter;
+}
+console.log(ModeArr([1,2,2,2,1,3,4,2]));
+
+
+
+// // Create arrBufferCopy(sourceArr,destArr,sourceStartIdx,destStartIdx,numVals) to copy numVals values starting at sourceArr[sourceStartIdx] to destArr[destStartIdx] etc. Do not lengthen destArr, nor read off the end of sourceArr.
+// const arrBufferCopy = (sourceArr,destArr,sourceStartIdx,destStartIdx,numVals) => {
+
+// }
