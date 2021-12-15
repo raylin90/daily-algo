@@ -1,26 +1,27 @@
 function miniMaxSum(arr) {
-    // sum variable to store total; min to store min value, and max to store max value;
-    let sum = 0;
-    // iterate the array list
-    for(let i = 0; i < arr.length; i++) {
-        sum += arr[i]
+    // get the total of entire array;
+    let total = 0;
+    for(const value of arr) {
+        total += value;
     }
-    // console.log(sum)
-    let min = sum;
-    let max = 0;
-    // find max
+    // console.log(total)
+
+    let minSum = total;
+    let maxSum = 0;
+    // loop through the entire array again and subtract each arr[i], so we have 4 out of 5 sum;
     for(let i = 0; i < arr.length; i++) {
-        // console.log(sum - arr[i])
-        if(sum - arr[i] > max) {
-            max = sum - arr[i];
+        // set minSum and maxSum base on comparison
+        if((total - arr[i]) > maxSum) {
+            maxSum = total - arr[i];
         }
-        if(sum - arr[i] < min) {
-            min = sum - arr[i];
+        if(total - arr[i] < minSum) {
+            minSum = total - arr[i];
         }
     }
-    console.log(min, max);
+    console.log(minSum,maxSum)
 }
-miniMaxSum([1,2,3,4,5]);
+console.log(miniMaxSum([1,3,5,7,9]));
+console.log(miniMaxSum([1,2,3,4,5]));
 
 
 
@@ -29,8 +30,13 @@ miniMaxSum([1,2,3,4,5]);
 function miniMaxSum(arr) {
     // call back function to add everything from array;
     let sum = arr.reduce((a, b) => a+b)
-
+    // console.log(sum);
+    // console.log(Math.min(...arr));
+    // console.log(Math.max(...arr));
+    
     // use Math.min and Math.max to find the min and max from the arr, and subtract from sum
+    // max = total - min of the array;
+    // min = total - max of the array;
     let max = sum - Math.min(...arr);
     let min = sum - Math.max(...arr);
     console.log(min, max)

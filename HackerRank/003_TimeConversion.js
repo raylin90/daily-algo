@@ -1,28 +1,29 @@
 function timeConversion(s) {
-    // seperate out the AM/PM, hh, mm, ss
-    let time = s[s.length - 2] + s[s.length - 1]
-    let hh = s[0] + s[1];
-    let mm = s[3] + s[4];
-    let ss = s[6] + s[7];
-    // two logic: AM & PM
+    // seperate out the time base on hour, minutes, second and AM/PM
+    let hr = s[0]+s[1];
+    let min = s[3]+s[4];
+    let second = s[6]+s[7];
+    let time = s[8]+s[9];
+    // console.log(hr,min,second,time);
+
+    // AM/PM will read different:
     if(time === "AM") {
-        // if AM, everything remains the same, except 12 change ot 00
-        if(hh === "12") {
-            return `00:${mm}:${ss}`
+        // morning time: 12 == 00, 1-11 remains the same
+        if(hr === "12") {
+            return `00:${min}:${second}`;
         } else {
-            return `${hh}:${mm}:${ss}`;
+            return `${hr}:${min}:${second}`;
         }
     } else {
-        // if PM, everything from 1 - 11(including 11) + 12, if it's 12, then just 12
-        if(hh > 1 && hh <= 11) {
-            hh = parseInt(hh) + 12;
-            return `${hh}:${mm}:${ss}`
+        // afternoon time: 12 remains 12, 1-11 need to plus 12
+        if(hr === "12") {
+            return `${hr}:${min}:${second}`;
         } else {
-            return `${hh}:${mm}:${ss}`;
+            return `${parseInt(hr)+12}:${min}:${second}`;
         }
     }
-    // console.log(time, hh, mm, ss)
 }
+
 console.log(timeConversion("07:05:45AM"));
 console.log(timeConversion("12:01:00AM"));
 console.log(timeConversion("12:01:00PM"));
