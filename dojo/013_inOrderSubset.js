@@ -7,6 +7,7 @@
 function inOrderSubset(nums) {
     const output = [[]]
     for (const str of nums) {
+        console.log("str", str)
         output.forEach(list => {
             output.push([...list, str])
         })
