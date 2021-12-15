@@ -1,23 +1,26 @@
-const lonelyInteger = a => {
-    // create obj to hold unique value;
+function lonelyinteger(a) {
+    // obj to count the array during each iteration
     let obj = {};
-    // iterate the array;
-    for(let i = 0; i < a.length; i++) {
-        // if obj does not have a[i], then it's unique, add to obj
-        if(!obj[a[i]]) {
-            obj[a[i]] = 1;
+    // interate the array input;
+    for(const value of a) {
+        // if obj does not has the value key, set the key = 1
+        if(!obj[value]) {
+            obj[value] = 1;
+        // else increase the key:value by 1;
         } else {
-            // if exist already, we do ++;
-            obj[a[i]]++;
+            obj[value]++;
         }
     }
-    // iterate throught the obj
-    for(const property in obj) {
-        // find the unique value, which will be 1
-        if(obj[property] === 1) {
-            // return the obj key
-            return property;
+    // once iteration is done, we should have obj key of each occurance
+    // console.log(obj)
+
+    // for loop the obj, and if the value === 1, then the key is unique;
+    for(const key in obj) {
+        if(obj[key] === 1) {
+            return key;
         }
     }
 }
-console.log(lonelyInteger([1,2,3,4,3,2,1]))
+
+
+console.log(lonelyinteger([1,2,3,4,3,2,1]));
