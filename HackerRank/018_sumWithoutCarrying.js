@@ -1,6 +1,4 @@
-// add number together without carrying 10th.
-
-const sumWithoutCarrying = (param1, param2) => {
+const sumWithoutCarrying2 = (param1, param2) => {
     // convert number to string, and make them as array, reversed
     newString1 = param1.toString().split("").reverse();
     newString2 = param2.toString().split("").reverse();
@@ -31,4 +29,4 @@ const sumWithoutCarrying = (param1, param2) => {
     // output as number
     return parseInt(stringOutput);
 }
-console.log(sumWithoutCarrying(456,1734));
+console.log(sumWithoutCarrying2(456,1734));
