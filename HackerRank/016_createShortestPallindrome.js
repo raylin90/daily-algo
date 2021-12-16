@@ -3,6 +3,20 @@
 // Ex: st = "rada" => "radar"
 // Ex: st = "raco" => "racocat"
 
+function isPallindrome(inputString) {
+    // for loop iterate the input, half of the length, because we comparing start vs end
+    for(let i = 0; i < inputString.length / 2; i++) {
+        // set j to keep track end element of the input, so we can compare with i (start element)
+        let j = inputString.length - 1 - i;
+        // compare start (i) an end (j), any moment when it's not equal, then we dont have palindrome
+        if(inputString[i] !== inputString[j]) {
+            // return false if not match
+            return false;
+        }
+    }
+    // once finish looping, which means everything matching, then it's true
+    return true;
+}
 const shortestPallindrome = st => {
     let tempStr = "";
     let index;
@@ -25,22 +39,6 @@ const shortestPallindrome = st => {
     }
     return output;
 }
-
-function isPallindrome(inputString) {
-    // for loop iterate the input, half of the length, because we comparing start vs end
-    for(let i = 0; i < inputString.length / 2; i++) {
-        // set j to keep track end element of the input, so we can compare with i (start element)
-        let j = inputString.length - 1 - i;
-        // compare start (i) an end (j), any moment when it's not equal, then we dont have palindrome
-        if(inputString[i] !== inputString[j]) {
-            // return false if not match
-            return false;
-        }
-    }
-    // once finish looping, which means everything matching, then it's true
-    return true;
-}
-
 console.log(shortestPallindrome("race"));   // "racecar"
 console.log(shortestPallindrome("rada"));   // "radar"
 console.log(shortestPallindrome("raco"));   // "racocat"

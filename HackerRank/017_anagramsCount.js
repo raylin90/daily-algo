@@ -1,6 +1,3 @@
-// define aa group of anagrams as aa list of wors, where for each pair of words w1 and w2, w1 is an anagram of w2;
-
-
 function anagrams(words){
     newList = [];
     // iterate the array;
