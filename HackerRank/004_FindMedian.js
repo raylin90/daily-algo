@@ -46,3 +46,13 @@ const mergeSort = arr => {
     return merge(mergeSort(leftArr), mergeSort(rightArr));
 }
 // console.log(mergeSort([5,7,4,8,3,1,9]));
+
+
+function findMedian(arr) {
+    arr = mergeSort(arr);
+    console.log(arr);
+    let midPoint = Math.floor(arr.length/2);
+    return arr[midPoint];
+}
+
+console.log(findMedian([5,7,4,8,3,1,9]));
