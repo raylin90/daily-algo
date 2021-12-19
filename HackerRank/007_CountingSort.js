@@ -31,3 +31,21 @@ const coutingSort = arr => {
     return counts;
 }
 console.log(coutingSort([1,0,3,1,3,1]));
+
+
+
+
+
+
+
+
+function countingSort(arr) {
+    // create an empty array, with 100 index, fill with 0s
+    let result = Array(100).fill(0);
+    // console.log(result.length)
+
+    // iterate the arr input, and store the occurance under result index;
+    arr.forEach(num => result[num]++)
+    return result;
+}
+console.log(countingSort([1,1,3,2,1]));
