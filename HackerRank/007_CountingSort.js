@@ -49,3 +49,10 @@ function countingSort(arr) {
     return result;
 }
 console.log(countingSort([1,1,3,2,1]));
+
+
+
+
+
+let x = [2,0,2,1]
+console.log(x.toString().split())
