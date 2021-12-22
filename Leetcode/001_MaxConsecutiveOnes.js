@@ -1,9 +1,12 @@
 // Given a binary array nums, return the maximum number of consecutive 1's in the array.
+// https://leetcode.com/problems/max-consecutive-ones/
+
 /**
  * @param {number[]} nums
  * @return {number}
 
-You need to think about two things as far as any window is concerned. One is the starting point for the window. How do you detect that a new window of 1s has started? The next part is detecting the ending point for this window. How do you detect the ending point for an existing window? If you figure these two things out, you will be able to detect the windows of consecutive ones. All that remains afterward is to find the longest such window and return the size.
+1) think about start window and end window
+2) have two variables, current and max to keep track of consercutive occurance
  */
 
 const findMaxConsecutiveOnes = function(nums) {

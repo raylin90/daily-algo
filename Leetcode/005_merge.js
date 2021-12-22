@@ -16,18 +16,22 @@ The final sorted array should not be returned by the function, but instead be st
 
 var merge = function(nums1, m, nums2, n) {
 
-    nums1 = nums1.concat(nums2).sort(function(a,b){return a-b});
-    let total = m+n;
-
-    for(let i = 0; i < nums1.length; i++) {
-        if(nums1.length <= total) {
-            break;
+    let k = m+n-1
+    let i = m-1
+    let j = n-1
+    
+    while(j >= 0){
+        if(nums1[i]>nums2[j]){
+            nums1[k]=nums1[i] 
+            i--
         }
-        if(nums1[i] === 0) {
-            nums1.splice(i,1);
+        else{
+            nums1[k]=nums2[j]
+            j--
         }
+        k--
     }
-    console.log(nums1);
+    return nums1 
 };
 console.log(merge([1,2,3,0,0,0],3,[2,5,6],3));      // [1,2,2,3,5,6]
 console.log(merge([1],1,[],0));     // [1]  
