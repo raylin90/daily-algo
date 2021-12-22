@@ -3,6 +3,10 @@
 /**
  * @param {number[]} arr
  * @return {void} Do not return anything, modify arr in-place instead.
+
+1. loop through the array, if we found zero
+2. insert a zero
+3. REMOVE the last element, because the length is fixed
  */
 
 var duplicateZeros = function(arr) {

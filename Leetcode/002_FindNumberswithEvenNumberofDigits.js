@@ -4,6 +4,8 @@
 /**
  * @param {number[]} nums
  * @return {number}
+
+1. think on how to check the even num, string.length might be an option
  */
 
 var findNumbers = function(nums) {
