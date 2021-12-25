@@ -16,6 +16,7 @@ Do not allocate extra space for another array. You must do this by modifying the
  * @return {number}
 
 1. track the start and start+1 is same or not, if yes,splice, i--, to re-check
+2. two pointer method, i= 0, j = 1; if j element = i element, then splice j, else i = j, j = i+1, continue
  */
 
 // remove element from array by for loop each element
@@ -46,6 +47,34 @@ var removeDuplicates = function(nums) {
             j = i+ 1; 
         }
     }
+    return nums;
+};
+console.log(removeDuplicates([1,1,2]));     // [1,2]
+console.log(removeDuplicates([0,0,1,1,1,2,2,3,3,4]));       // [0,1,2,3,4,_,_,_,_,_]
+
+
+
+
+
+// two pointer method
+var removeDuplicates = function(nums) {
+    let i = 0;
+    let j = 1;
+    while(j < nums.length) {
+        if(nums[j] <= nums[i]) {
+            j++;
+        } else {
+            // console.log(nums[i])
+            // console.log(nums[j])
+
+
+            [nums[i+1],nums[j]] = [nums[j],nums[i+1]];
+            i = i+1;
+            j = i+1; 
+
+        }
+    }
+    console.log(nums[i],"ending")
     return nums;
 };
 console.log(removeDuplicates([1,1,2]));     // [1,2]
