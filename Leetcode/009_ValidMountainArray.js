@@ -14,8 +14,8 @@ Recall that arr is a mountain array if and only if:
  * @param {number[]} arr
  * @return {boolean}
 
-1. two pointer method, like partition, keep track of start and end element
-        a. once finishd looping, start should === end, then we have a mountain(start !== 0, and end !== arr.length -1, because those two needs to move)
+1. two pointer method like partition, keep track of start and end element
+        a. once finishd looping, start should === end, then we have a mo,untain(start !== 0, and end !== arr.length -1, because those two needs to move)
 
 2. find the max index
         a. if max index = 0, or = arr.length - 1, then false
