@@ -31,7 +31,7 @@ function greaterThanK2(a, k) {
         const oldFrequency = frequency.get(remainder) || 0;
         frequency.set(remainder, oldFrequency+1);
     }
-    console.log(frequency)
+    console.log(frequency);
 
     for(let [key, value] of frequency.entries()) {
         if(key === 0 || key * 2 === k) {
@@ -42,4 +42,4 @@ function greaterThanK2(a, k) {
     }
     return pairs / 2;
 }
-console.log(greaterThanK2([1,2,3,4,5],3))      // [4, 5, -1, 2, 1]
+console.log(greaterThanK2([1,2,3,4,5],4))      

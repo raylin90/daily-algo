@@ -1,3 +1,5 @@
+// https://leetcode.com/problems/reconstruct-original-digits-from-english/
+
 var originalDigits = function(s) {
 
     // empty array from index 0 - 9
