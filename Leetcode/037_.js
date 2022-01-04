@@ -1,39 +1,39 @@
-var findDisappearedNumbers = function(nums) {
-    let counting = new Array(nums.length+1).fill(0);
+var spiralOrder = function(matrix) {
 
-    for(const num of nums) {
-        counting[num]++;
-    }
-
-    console.log(counting);
-
-    let result = [];
-    for(let i = 1; i < counting.length; i++) {
-        if(counting[i] === 0) {
-            result.push(i);
-        }
-    }
-    return result;
-};
-console.log(findDisappearedNumbers([4,3,2,7,8,2,3,1]));
-console.log(findDisappearedNumbers([1,1]));
-
-
-
-
-
-
-var findDisappearedNumbers = function(nums) {
-    let set =  new Set(nums);
-    // console.log(set);
+    let top = 0, bottom = matrix.length - 1, left = 0, right = matrix[0].length - 1;
     let result = [];
 
-    for(let i = 0; i < nums.length; i++) {
-        if(!set.has(i+1)) {
-            result.push(i+1);
+    while(top <= bottom && left <= right) {
+
+        for(let i = left; i <= right; i++) {
+            result.push(matrix[top][i]);
+            console.log(result);
+        }
+        top++;
+
+        for(let j = top; j <= bottom; j++) {
+            result.push(matrix[j][right]);
+            console.log(result)
+        }
+        right--;
+
+        if(top <= bottom) {
+            for(let x = right; x >= left; x--) {
+                result.push(matrix[bottom][x]);
+                console.log(result)
+            }
+            bottom--;
+        }
+
+        console.log("*****", top, bottom, left, right)
+
+        if(left <= right) {
+            for(let y = bottom; y >= top; y--) {
+                result.push(matrix[y][left]);
+                console.log(result)
+            }
+            left++;
         }
     }
-    return result;
 };
-console.log(findDisappearedNumbers([4,3,2,7,8,2,3,1]));
-console.log(findDisappearedNumbers([1,1]));
+console.log(spiralOrder([[1,2,3,4],[5,6,7,8],[9,10,11,12]]));
