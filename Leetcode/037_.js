@@ -1,40 +1,39 @@
-/**
- * @param {number[]} arr
- * @return {boolean}
- */
+var findDisappearedNumbers = function(nums) {
+    let counting = new Array(nums.length+1).fill(0);
 
-var checkIfExist = function(arr) {
-    
-    for(let i = 0; i < arr.length; i++) {
-        for(let j = i+1; j < arr.length; j++) {
-            if(arr[i] * 2 === arr[j] || arr[i] / 2 === arr[j]) {
-                return true;
-            }
+    for(const num of nums) {
+        counting[num]++;
+    }
+
+    console.log(counting);
+
+    let result = [];
+    for(let i = 1; i < counting.length; i++) {
+        if(counting[i] === 0) {
+            result.push(i);
         }
     }
-    return false;
+    return result;
 };
-console.log(checkIfExist([10,2,5,3]));
-console.log(checkIfExist([7,1,14,11]));
-console.log(checkIfExist([3,1,7,11]));
+console.log(findDisappearedNumbers([4,3,2,7,8,2,3,1]));
+console.log(findDisappearedNumbers([1,1]));
 
 
 
 
-var checkIfExist = function(arr) {
-    
-    let map = new Map();
 
-    for(let i = 0; i < arr.length; i++) {
 
-        if(map.has(arr[i] * 2) || map.has(arr[i] / 2)) {
-            return true;
-        } else {
-            map.set(arr[i], 1)
+var findDisappearedNumbers = function(nums) {
+    let set =  new Set(nums);
+    // console.log(set);
+    let result = [];
+
+    for(let i = 0; i < nums.length; i++) {
+        if(!set.has(i+1)) {
+            result.push(i+1);
         }
     }
-    return false;
+    return result;
 };
-console.log(checkIfExist([10,2,5,3]));
-console.log(checkIfExist([7,1,14,11]));
-console.log(checkIfExist([3,1,7,11]));
+console.log(findDisappearedNumbers([4,3,2,7,8,2,3,1]));
+console.log(findDisappearedNumbers([1,1]));
