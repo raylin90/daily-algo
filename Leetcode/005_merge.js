@@ -23,37 +23,6 @@ The final sorted array should not be returned by the function, but instead be st
 
 var merge = function(nums1, m, nums2, n) {
 
-    let k = m+n-1
-    let i = m-1
-    let j = n-1
-    
-    while(j >= 0){
-        if(nums1[i]>nums2[j]){
-            nums1[k]=nums1[i] 
-            i--
-            console.log("i--: ", nums1);
-        }
-        else{
-            nums1[k]=nums2[j]
-            j--
-            console.log("j--: ", nums1);
-        }
-        k--
-        console.log("k-- ", nums1);
-    }
-    return nums1 
-};
-console.log(merge([1,2,3,0,0,0],3,[2,5,6],3));      // [1,2,2,3,5,6]
-// console.log(merge([1],1,[],0));     // [1]  
-// console.log(merge([0],0,[1],1));        // [1]
-
-
-
-
-
-
-var merge = function(nums1, m, nums2, n) {
-
     // set i to keep track of nums1's last idx, and j to keep track of nums2's last idx
     let i = m - 1;
     let j = n - 1;
