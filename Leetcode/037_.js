@@ -1,39 +1,25 @@
-var spiralOrder = function(matrix) {
+/**
+ * @param {string[]} strs
+ * @return {string}
+ */
 
-    let top = 0, bottom = matrix.length - 1, left = 0, right = matrix[0].length - 1;
-    let result = [];
+let longestCommonPrefix = function(strs) {
+    let prefix = strs[0];
 
-    while(top <= bottom && left <= right) {
+    for(let i = 1; i < strs.length; i++) {
+        // console.log(strs[i]);
+        for(let j = 0; j < strs[i].length; j++) {
 
-        for(let i = left; i <= right; i++) {
-            result.push(matrix[top][i]);
-            console.log(result);
-        }
-        top++;
-
-        for(let j = top; j <= bottom; j++) {
-            result.push(matrix[j][right]);
-            console.log(result)
-        }
-        right--;
-
-        if(top <= bottom) {
-            for(let x = right; x >= left; x--) {
-                result.push(matrix[bottom][x]);
-                console.log(result)
+            // console.log(strs[i][j])
+            // console.log(prefix[j])
+            if(strs[i][j] !== prefix[j]) {
+                // console.log(prefix.slice(0, j));
+                prefix = prefix.slice(0, j);
+                // console.log("ha")
             }
-            bottom--;
-        }
-
-        console.log("*****", top, bottom, left, right)
-
-        if(left <= right) {
-            for(let y = bottom; y >= top; y--) {
-                result.push(matrix[y][left]);
-                console.log(result)
-            }
-            left++;
         }
     }
+    return prefix;
 };
-console.log(spiralOrder([[1,2,3,4],[5,6,7,8],[9,10,11,12]]));
+console.log(longestCommonPrefix(["flower","flow","flight"]));
+console.log(longestCommonPrefix(["dog","racecar","car"]));

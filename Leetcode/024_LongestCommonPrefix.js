@@ -36,29 +36,6 @@ let longestCommonPrefix = function(strs) {
     }
     return prefix;
 };
-console.log(longestCommonPrefix(["flower","flow","flight"]));       // "fl"
-console.log(longestCommonPrefix(["dog","racecar","car"]));       // ""
 
-
-
-
-
-let longestCommonPrefix = function(strs) {
-
-    if(strs.length === 0) return "";
-
-    // set the prefix as first word of the input array
-    let prefix = strs[0];
-    // console.log(prefix);
-    
-    // first loop run through the rest of the input array
-    for(let i = 1; i < strs.length; i++) {
-
-        let currentWord = strs[i];
-        // inner loop to iterate the prefix
-        console.log(currentWord)
-    }
-    return prefix;
-};
 console.log(longestCommonPrefix(["flower","flow","flight"]));       // "fl"
 console.log(longestCommonPrefix(["dog","racecar","car"]));       // ""
