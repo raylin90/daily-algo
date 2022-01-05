@@ -11,11 +11,11 @@ var arrayPairSum = function(nums) {
     let sum = 0;
     nums.sort(function(a,b){return a-b});
 
-    console.log(nums);
+    // console.log(nums);
 
     for(let i = 0; i < nums.length; i+=2) {
         sum += nums[i];
-        console.log(sum);
+        // console.log(sum);s
     }
     return sum;
 };
