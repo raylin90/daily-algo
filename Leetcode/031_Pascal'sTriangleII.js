@@ -38,7 +38,7 @@ console.log(getRow(1));     // [1,1]
 var getRow = function(rowIndex) {
     // fill with 0's
     let result = new Array(rowIndex+1).fill(1);
-
+    console.log(result);
     // forloop and backloop to sum it up
     for(let i = 0; i < rowIndex; i++) {
         for(let j = i; j > 0; j--) {
