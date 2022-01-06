@@ -10,6 +10,20 @@ You must write an algorithm with `O(log n)` runtime complexity.
  * @param {number[]} nums
  * @param {number} target
  * @return {number}
+
+1. recursive call, since we need to keep track of index, we cannot use slice
+    1. find out the start & end index
+    2. recursive call and find out the midPoint
+    3. if midPoint element match, then we have index to return
+    4. if nums[midPoint] > target, check left by decrease midPoint
+    5. else check right by increase midPoint
+    6. if no found at end, return -1
+2. while loop
+    1. find start and end indices
+    2. while(start < end)
+    3. find midPoint
+    4. check left or right base on logic and increase midPoint accordingly
+    5. edge case at end if we dealing with length === 1 array, or even indices array [2,5],5
  */
 
 var binarySearch = function(nums, target, start, end) {
