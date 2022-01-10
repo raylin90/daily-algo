@@ -35,25 +35,62 @@
 // // console.log(findClosestElements([1,2,3,4,5],4,-1));     // [1,2,3,4]
 // console.log(findClosestElements([0,0,0,1,3,5,6,7,8,8],2,2));     // [1,3]
 
+var findClosestElements = function(arr, k, x) {
+
+    // keep the loop going as long as arr.length > k limit
+    while(arr.length > k) {
+
+        // compare the different betw. start vs end element
+        let diffStart = Math.abs(x - arr[0]);
+        let diffEnd = Math.abs(arr[arr.length-1] - x);
+        // console.log(diffStart, diffEnd)
+
+        // remove whichever the greater different from the array
+        if(diffStart > diffEnd) {
+            arr.shift();
+        } else {
+            arr.pop();
+        }
+        // console.log(arr);
+    }
+    return arr;
+    
+}
+
+console.log(findClosestElements([1,2,3,4,5],4,3));      // [1,2,3,4]
+console.log(findClosestElements([1,2,3,4,5],4,-1));     // [1,2,3,4]
+console.log(findClosestElements([0,0,0,1,3,5,6,7,8,8],2,2));     // [1,3]
+
+
 
 
 
 
 var findClosestElements = function(arr, k, x) {
-    
-    let i = 0, j = arr.length - 1;
-    console.log(i, j);
-    while(j-i > k) {
-        if(x - arr[i] > arr[j] - x) {
-            i++
-        } else {
-            j--;
-        }
-        console.log(i,j);
+
+
+    let closestChain = [];
+
+    for(let i=0; i<arr.length; i++){
+        // push each key: value different to map, and push into output array
+        let mapIn = {};
+        mapIn.key = arr[i];
+        mapIn.val = Math.abs(arr[i] - x);
+        closestChain.push(mapIn);
     }
-    console.log(arr[i], arr[j]);
-    return arr.slice(i,j)
+    // console.log(closestChain)
+
+    // sort array by it's value
+    closestChain.sort((a,b)=>a.val-b.val);
+    // console.log(closestChain)
+
+    // slice out and sort by key
+    return closestChain.slice(0,k).map(a=>a.key).sort((a,b)=>a-b);
 };
-// console.log(findClosestElements([1,2,3,4,5],4,3));      // [1,2,3,4]
-// console.log(findClosestElements([1,2,3,4,5],4,-1));     // [1,2,3,4]
+
+console.log(findClosestElements([1,2,3,4,5],4,3));      // [1,2,3,4]
+console.log(findClosestElements([1,2,3,4,5],4,-1));     // [1,2,3,4]
 console.log(findClosestElements([0,0,0,1,3,5,6,7,8,8],2,2));     // [1,3]
+
+
+
