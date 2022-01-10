@@ -7,6 +7,52 @@
 //  * @return {number[]}
 //  */
 
+
+/*
+case 1: x - A[mid] < A[mid + k] - x, need to move window go left
+-------x----A[mid]-----------------A[mid + k]----------
+
+case 2: x - A[mid] < A[mid + k] - x, need to move window go left again
+-------A[mid]----x-----------------A[mid + k]----------
+
+case 3: x - A[mid] > A[mid + k] - x, need to move window go right
+-------A[mid]------------------x---A[mid + k]----------
+
+case 4: x - A[mid] > A[mid + k] - x, need to move window go right
+-------A[mid]---------------------A[mid + k]----x------
+*/
+
+var findClosestElements = function(arr, k, x) {
+    let start = 0, end = arr.length - 1;
+
+    while(start < end) {
+
+        let midPoint = Math.floor((start+end)/2);
+
+        console.log(start, midPoint, end);
+        if(x - arr[midPoint] > arr[midPoint + k] - x) {
+            // move window to right
+            start = midPoint + 1;
+            // move windwo to left
+        } else {
+            end = midPoint;
+        }
+    }
+
+
+
+    let result = [];
+    for(let i = start; i < start+k; i++) {
+        result.push(arr[i]);
+    }
+    return result;
+};
+// console.log(findClosestElements([1,2,3,4,5],4,3));      // [1,2,3,4]
+// console.log(findClosestElements([1,2,3,4,5],4,-1));     // [1,2,3,4]
+console.log(findClosestElements([0,0,0,1,3,5,6,7,8,8],2,2));     // [1,3]
+
+
+
 // var findClosestElements = function(arr, k, x) {
     
 //     let start = 0, end = arr.length - 1;
