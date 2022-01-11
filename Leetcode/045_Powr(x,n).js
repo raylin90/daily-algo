@@ -1,3 +1,5 @@
+// https://leetcode.com/problems/powx-n/
+
 /**
  * @param {number} x
  * @param {number} n
@@ -48,13 +50,11 @@ var myPow = function(x, n) {
     }
 
     while(n > 0) {
-        if(n % 2 === 0) {
-            x *= x;
-            n = n/2;
-        } else {
+        if(n % 2 === 1) {
             result *= x;
-            n = n-1;
         }
+        x *= x;
+        n = Math.floor(n/2);
     }
     if(num < 0) {
         return 1/result;
