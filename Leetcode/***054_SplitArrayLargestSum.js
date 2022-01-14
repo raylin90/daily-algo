@@ -87,10 +87,10 @@ var splitArray = function(nums, m) {
 
         if (count <= m) {
             right = mid - 1
-            console.log("move left")
+            // console.log("move left")
         } else {
             left = mid + 1
-            console.log("move right")
+            // console.log("move right")
         }
     }
     return left
