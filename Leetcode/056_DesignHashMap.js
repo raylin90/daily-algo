@@ -13,7 +13,7 @@ void remove(key) removes the key and its corresponding value if the map contains
 
 
 var MyHashMap = function() {
-    
+    this.obj = {};
 };
 
 /** 
@@ -22,7 +22,7 @@ var MyHashMap = function() {
  * @return {void}
  */
 MyHashMap.prototype.put = function(key, value) {
-    
+    this.obj[key] = value
 };
 
 /** 
@@ -30,7 +30,7 @@ MyHashMap.prototype.put = function(key, value) {
  * @return {number}
  */
 MyHashMap.prototype.get = function(key) {
-    
+    return this.obj[key] ? this.obj[key] : -1;
 };
 
 /** 
@@ -38,7 +38,7 @@ MyHashMap.prototype.get = function(key) {
  * @return {void}
  */
 MyHashMap.prototype.remove = function(key) {
-    
+    this.obj.hasOwnProperty(key) ? delete this.obj[key] : ""
 };
 
 /** 
