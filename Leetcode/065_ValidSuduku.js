@@ -2,20 +2,29 @@
 
 
 var isValidSudoku = function(board) {
+
+    // have set record each element occurance in row/col/box
     let set = new Set();
+
+    // nested for loop each element
     for(let row = 0; row < 9; row++) {
         for(let col = 0; col < 9; col++) {
             let num = board[row][col];
+            // if ".", skip it
             if(num  === ".") {
                 continue;
             }
             // console.log(num);
-            let boxNum = 3 * Math.floor(row/3) + Math.floor(col/3);
 
+            // need to count each box
+            let boxNum = 3 * Math.floor(row/3) + Math.floor(col/3);
+            console.log(boxNum);
+            
             let inRow = `row ${row}, value ${num}`;
             let inCol = `col ${col}, value ${num}`;
             let subBox = `box ${boxNum}, value ${num}`;
 
+            // check with set if it ever occured before or not
             if(set.has(inRow) || set.has(inCol) || set.has(subBox)) {
                 return false;
             }
