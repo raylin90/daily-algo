@@ -37,3 +37,13 @@ function solution(A, B) {
 }
 console.log(solution(10,21));
 console.log(solution(13,11));
+
+/**
+1. two edge case, if A+B < 4 and === 4
+2. 4-0, 1-3, 2-2, 3-1, 0-4
+
+3. C is the average longer INT stick we can get
+5.25 => 5
+
+4. 4-0 and 0-4 first shorter than C, then we take the other number / 4,
+ */
