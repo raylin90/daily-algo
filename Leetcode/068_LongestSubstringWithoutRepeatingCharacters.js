@@ -13,26 +13,29 @@ var lengthOfLongestSubstring = function(s) {
     let set = new Set();
     let max = 0;
 
+    // nested for loop to run throught each element, and concat. them together, so we have every possible occurance
     for(let i = 0; i < s.length; i++) {
         for(let j = i; j < s.length; j++) {
+            // concat. and add to set
             if(!set.has(s[j])) {
                 tempStr += s[j];
                 set.add(s[j]);
             } else {
+                // else, we have a set existed already, we compare the max, and re-set tempStr and set to empty
                 if(tempStr.length > max) {
                     max = tempStr.length;
                 }
                 tempStr = "";
                 set = new Set();
+                // IF WE HVAE A MATCH, THEN NO NEED TO CONTINUE THE LOOP, SINCE IT'S NOT NECESSARY, WE CAN START AGAIN AT NEXT i++
                 break;
             }
-            // console.log(set)
+            console.log(set)
         }
     }
     return max;
 };
-console.log(lengthOfLongestSubstring("abcabcbb"));
-console.log(lengthOfLongestSubstring("bbbbb"));
+
 console.log(lengthOfLongestSubstring("pwwkew"));
 console.log(lengthOfLongestSubstring("aab"));
 console.log(lengthOfLongestSubstring("dvdf"));
@@ -42,52 +45,28 @@ console.log(lengthOfLongestSubstring("dvdf"));
 
 
 var lengthOfLongestSubstring = function(s) {
-    
+
+    // sliding window
+    let l = 0, r = 0, max = 0;
     let set = new Set();
-    let count = 0;
-    let max = 0;
 
-    for(const char of s) {
-        // console.log(char);
-        if(!set.has(char)) {
-            count++;
-            set.add(char);
-        } else {
-            if(count > max) {
-                max = count;
-            }
-
-            // edge case: "aab"
-            count = 1;
-            set = new Set();
-            set.add(char);
-        }
-        console.log(count, max)
-        console.log(set);
-    }
-    return max > count ? max : count;
-};
-// console.log(lengthOfLongestSubstring("abcabcbb"));
-// console.log(lengthOfLongestSubstring("bbbbb"));
-// console.log(lengthOfLongestSubstring("pwwkew"));
-// console.log(lengthOfLongestSubstring("aab"));
-console.log(lengthOfLongestSubstring("dvdf"));
-
-
-
-
-var lengthOfLongestSubstring = function(s) {
-    let l = 0, r = 0, max = 0
-    let set = new Set()
-    
     while(r < s.length) {
-        if (set.has(s.charAt(r))) {
-            set.delete(s.charAt(l++)) // Important! explained below
+        if(set.has(s[r])) {
+            // delete left index, and move left++
+            set.delete(s[l]);
+            l++;
         } else {
-            set.add(s.charAt(r++))
-            max = Math.max(max, set.size)
+            // add right index, and move right++
+            set.add(s[r]);
+            r++;
+            // we can either check it after set been add, or before been removed
+            max = Math.max(set.size, max)
         }
+        // console.log(set);
     }
-    
-    return max
+    return max;
 };
+
+console.log(lengthOfLongestSubstring("abcabcbb"));
+console.log(lengthOfLongestSubstring("bbbbb"));
+console.log(lengthOfLongestSubstring("pwwkew"));
