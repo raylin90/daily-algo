@@ -41,7 +41,7 @@ console.log(smallestDistancePair([62,100,4], 2));
 
 var smallestDistancePair = function (nums, k) {
 
-    nums.sort((a,b) => a-b);
+    nums.sort((a,b) => a-b); 
     // console.log(nums);
     let max = nums[nums.length - 1] - nums[0];
     // console.log(max);
