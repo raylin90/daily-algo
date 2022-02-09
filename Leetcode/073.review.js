@@ -1,14 +1,10 @@
-class MyLog {
-    
-    // name;
-    // time;
+// https://leetcode.com/problems/alert-using-same-key-card-three-or-more-times-in-a-one-hour-period/
 
-    constructor(name, time) {
-        this.name = name;
-        this.time = time;
-    }
-}
-
+/**
+ * @param {string[]} keyName
+ * @param {string[]} keyTime
+ * @return {string[]}
+ */
 
 const isWithinOneHr = (time1, time2) => {
     let t1h = parseInt(time1.split(":")[0]);
@@ -83,6 +79,3 @@ var alertNames = function(keyName, keyTime) {
     return result.sort();
 };
 console.log(alertNames(["daniel","daniel","daniel","luis","luis","luis","luis"], ["10:00","10:40","11:00","09:00","11:00","13:00","15:00"]));
-
-
-
