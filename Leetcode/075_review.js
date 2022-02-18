@@ -1,236 +1,373 @@
+function solution(nums) {
 
-/**
-input: arr;
-output: boolean
- */
+    let prefix = nums[0];
+
+    for(let i = 1; i < nums.length; i++) {
+
+        let word = nums[i];
+
+        for(let j = 0; j < prefix.length; j++) {
+            if(prefix[j] !== word[j]) {
+                console.log(prefix.slice(0, j));
+                prefix = prefix.slice(0, j)
+            }
+        }
+    }
+    return prefix;
+}
+console.log(solution(["flower","flow","flight"]))
+
+
 
 
 
 function solution(nums) {
+
+    let start = 0;
+    let end = nums.length - 1;
+
+    while(start < end) {
+        [nums[start], nums[end]] = [nums[end], nums[start]];
+        start++;
+        end--;
+    }
+    return nums;
+}
+console.log(solution(["h","e","l","l","o"]))
+
+
+
+
+
+
+function solution(nums) {
+
+    let sum = 0;
+    for(let i = 1; i < nums.length; i+=2) {
+        sum += nums[i];
+    }
+
+    return sum;
+}
+console.log(solution([6,2,6,5,1,2]))
+
+
+
+
+
+function solution(nums, k) {
+    
+    for(let i = 0; i < nums.length; i++) {
+        for(let j = i+1; j < nums.length; j++) {
+            if(nums[i] + nums[j] === k) {
+                return [i, j]
+            }
+        }
+    }
+}
+console.log(solution([2,7,11,15], 9))
+console.log(solution([3,2,4], 6))
+console.log(solution([3,3], 6))
+
+
+
+
+
+
+function solution(nums, k) {
+    
+    let map = new Map();
 
     for(let i = 0; i < nums.length; i++) {
+        let remaining = k - nums[i];
 
-        let leftSum = 0;
-        let rightSum = 0;
-
-        for(let x = 0; x < i; x++) {
-            leftSum += nums[x];
-        }
-
-        for(let y = i+1; y < nums.length; y++) {
-            rightSum += nums[y];
-        }
-
-        if(leftSum === rightSum) {
-            return i;
-        }
-    }
-    return -1;
-}
-
-console.log(solution([1,7,3,6,5,6]));        // 1
-console.log(solution([1,2,3]));        // 1
-console.log(solution([2,1,-1]));        // 1
-
-
-
-
-function solution(nums) {
-
-    let total = 0;
-    for(const num of nums) {
-        total += num;
-    }
-    // console.log(total);
-
-    let leftSum = 0;
-    for(let i = 0; i < nums.length; i++) {
-        leftSum += (nums[i-1] || 0);
-        let rightSum = total - leftSum - nums[i];
-        if(leftSum === rightSum) {
-            return i;
-        }
-    }
-    return -1;
-}
-
-console.log(solution([1,7,3,6,5,6]));        // 1
-console.log(solution([1,2,3]));        // 1
-console.log(solution([2,1,-1]));        // 1
-
-
-
-
-
-function solution(nums) {
-
-    let max = Math.max(...nums);
-    // console.log(max);
-
-    for(let i = 0; i < nums.length; i++) {
-        if(nums[i] === max) {
-            continue;
-        }
-
-        let sqt = nums[i] * 2;
-        // console.log(sqt);
-        if(sqt > max) {
-            return -1;
-        }
-    }
-    return nums.indexOf(max);
-}
-
-console.log(solution([3,6,1,0]));        // 1
-console.log(solution([1,2,3,4]));        // 1
-console.log(solution([1]));        // 1
-
-
-
-
-
-function solution(nums) {
-
-    let carry = 0;
-
-    for(let i = digits.length - 1; i >= 0; i--) {
-        if(digits[i] === 9) {
-            carry = 1;
-            digits[i] = 0;
+        if(map.has(remaining)) {
+            return [i, map.get(remaining)];
         } else {
-            digits[i] += carry+1;
-            carry = 0;
-            break;
+            map.set(nums[i], i)
         }
     }
-    if(carry === 1) {
-        digits.unshift(1);
-    }
-    return digits;
 }
-
-console.log(solution([1,2,3]));        // 1
-console.log(solution([4,3,2,1]));        // 1
-console.log(solution([9]));        // 1
-
+console.log(solution([2,7,11,15], 9))
+console.log(solution([3,2,4], 6))
+console.log(solution([3,3], 6))
 
 
 
 
-function solution(num) {
+function solution(nums, k) {
+    
+    let start = 0;
+    let end = nums.length - 1;
+
+    while(start < end) {
+        // console.log(nums[start] + nums[end], [start, end]);
+        if((nums[start] + nums[end]) > k) {
+            end --;
+        } else if((nums[start] + nums[end]) < k) {
+            start ++;
+        } else if((nums[start] + nums[end] === k)) {
+            return [start+1, end+1];
+        }
+    }
+}
+console.log(solution([2,7,11,15],9));     // [1,2]
+console.log(solution([2,3,4],6));     // [1,3]
+console.log(solution([-1,0],-1));     // [1,2]
+
+
+
+
+
+function solution(k) {
+    
+    // if(k === 0) return [1];
+    // if(k === 1) return [1,1];
 
     let triangle = [];
 
-    for(let i = 0; i < num; i++) {
-        // console.log(i+1);
-        let tempArr = [];
-        let lastArr = triangle[triangle.length - 1];
-        console.log(lastArr);
+    for(let i = 0; i <= k; i++) {
 
-        for(let j = 0 ; j <= i; j++) {
+        let row = [];
+        let last = triangle[triangle.length - 1];
+
+        for(let j = 0; j <=i; j++) {
             if(j === 0 || j === i) {
-                tempArr.push(1);
+                row.push(1);
             } else {
-                tempArr.push((lastArr[j]) + lastArr[j-1]);
-                console.log("i ", j);
-                console.log("last j ", lastArr[j])
-                console.log("last j-1 ", lastArr[j-1])
+                row.push(last[j] + last[j-1])
             }
         }
-        triangle.push(tempArr);
+        triangle.push(row);
     }
-    return triangle;
+    return triangle[triangle.length-1];
 }
-
-console.log(solution(5));        // 1
-
+console.log(solution(3));     // [1,2]
 
 
 
 
 
-function solution(a,b) {
+function solution(str) {
+    
+    let result = str.split(" ");
+    console.log(result);
 
-    let aString = a.split("").reverse();
-    let bString = b.split("").reverse();
-    // console.log(aString, bString);
+    for(let i = 0; i < result.length; i++) {
+        result[i] = result[i].split("").reverse().join("")
+        // console.log(result[i].split("").reverse().join(""))
+    }
+
+    console.log(result.join(" "));
+
+}
+console.log(solution("Let's take LeetCode contest"));     // [1,2]
+
+
+
+
+
+
+
+function solution(str1, str2) {
+    
+    if(str2.length < str1.length) return false
+
+    let str1Idx = 0;
+
+    for(let i = 0; i < str2.length; i++) {
+        // console.log(str2[i])
+        if(str2[i] === str1[str1Idx]) {
+            str1Idx++;
+        }
+    }
+    // console.log(str1Idx);
+    return str1Idx === str1.length
+}
+console.log(solution("axc", "ahbgdc"));     // [1,2]
+
+
+
+
+
+
+
+
+
+function solution(str1, str2) {
+    
+    let set = new Set(str1);
+    let resutl = [];
+
+    for(let i = 0; i < str2.length; i++) {
+        if(set.has(str2[i]) && !resutl.includes(str2[i])) {
+            resutl.push(str2[i]);
+        }
+    }
+    return resutl;
+}
+console.log(solution([1,2,2,1], [2,2]));     // [1,2]
+
+
+
+
+function solution(str1, str2) {
+    
+    let map = new Map();
+    let resutl = [];
+
+    for(const key of str1) {
+        map.set(key, 1);
+    }
+
+    for(const val of str2) {
+        if(map.has(val)) {
+            resutl.push(val);
+            map.delete(val);
+        }
+    }
+    console.log(map);
+    return resutl;
+}
+console.log(solution([1,2,2,1], [2,2]));     // [1,2]
+
+
+
+
+
+function solution(str1, str2) {
+    
+    let set1 = new Set(str1);
+    let set2 = new Set(str2);
+
+    return [...set1].filter(num => set2.has(num))
+
+}
+console.log(solution([1,2,2,1], [2,2]));     // [1,2]
+
+
+
+
+
+function solution(str1, str2) {
+    
+    let set1 = new Set(str1);
     let result = [];
-    let carry = 0;
 
-    const maxLength = Math.max(aString.length, bString.length)
-
-    for(let i = 0; i < maxLength; i++) {
-        // console.log(aString[i], bString[i]);
-        let total = (parseInt(aString[i]) || 0) + (parseInt(bString[i]) || 0) + carry;
-        carry = 0;
-        console.log(total)
-
-        if(total === 1) {
-            result.push(1);
-        } else if(total === 2) {
-            result.push(0);
-            carry++;
-        } else if(total === 3) {
-            result.push(1);
-            carry++;
+    for(const val of str2) {
+        if(set1.has(val)) {
+            result.push(val);
         }
     }
-    if(carry > 0) result.push(1);
-    console.log(result.reverse().join(""));
+    return result
 }
-
-console.log(solution("11", "1"));        // 1
-
+console.log(solution([1,2,2,1], [2,2]));     // [1,2]
 
 
 
 
 
-function solution(a,b) {
 
-    if(b.length === 0) return 0;
 
-    // return a.indexOf(b);
-    for(let i = 0; i < a.length; i++) {
-        if(a[i] === b[0]) {
-            // console.log(a.slice(i, i+b.length));
-            if(a.slice(i, i+b.length) === b) {
-                return i;
+function solution(str1, str2) {
+    
+    let map = new Map();
+    let result = [];
+
+    for(const val of str1) {
+        map.set(val, (map.get(val) || 0)+1);
+    }
+    console.log(map)
+
+    for(const val of str2) {
+        if(map.has(val) && map.get(val) > 0) {
+            result.push(val);
+            map.set(val, map.get(val)-1)
+        }
+    }
+    return result
+}
+console.log(solution([1,2,2,1], [2,2,2]));     // [1,2]
+
+
+
+
+
+function solution(str1) {
+    
+    for(let i = 0; i < str1.length; i++) {
+        for(let j = i+1; j < str1.length; j++) {
+            if(str1[i] === str1[j]) {
+                return str1[i]
             }
         }
     }
-    return -1;
 }
-
-console.log(solution("mississippi", "issip"));        // 1
-
-
+console.log(solution([1,3,4,2,2]));     // [1,2]
+console.log(solution([3,1,3,4,2]));     // [1,2]
 
 
 
 
-function solution(a,b) {
 
-    if(b.length === 0) return 0;
+function solution(str1) {
+    
+    let set = new Set();
 
-    // return a.indexOf(b);
-    for(let i = 0; i < a.length; i++) {
-        if(a[i] === b[0]) {
+    for(const num of str1) {
 
-            let match = true;
-
-            for(let j = 0; j < b.length; j++) {
-                if(b[j] !== a[i+j]) {
-                    match = false;
-                    break;
-                }
-            }
-            if(match) {
-                return i;
-            }
+        if(set.has(num)) {
+            return num;
         }
+        set.add(num);
     }
-    return -1;
 }
+console.log(solution([1,3,4,2,2]));     // [1,2]
+console.log(solution([3,1,3,4,2]));     // [1,2]
 
-console.log(solution("mississippi", "issip"));        // 1
+
+
+
+
+
+
+function solution(str1) {
+    
+    let map = new Map();
+
+    for(const num of str1) {
+
+        if(map.has(num)) {
+            return num;
+        }
+        map.set(num, 1);
+    }
+}
+console.log(solution([1,3,4,2,2]));     // [1,2]
+console.log(solution([3,1,3,4,2]));     // [1,2]
+
+
+
+
+
+
+function solution(str1) {
+    
+    let tort = str1[0];
+    let hare = str1[tort]
+
+    while(tort !== hare) {
+        tort = str1[tort];
+        hare = str1[str1[hare]];
+    }
+
+    tort = 0;
+
+    while(tort !== hare) {
+        tort = str1[tort];
+        hare = str1[hare];
+    }
+    return [tort, hare]
+}
+console.log(solution([1,3,4,2,2]));     // [1,2]
+console.log(solution([3,1,3,4,2]));     // [1,2]
