@@ -707,3 +707,362 @@ const solution = (a, b) => {
     return result.reverse().join("");
 }
 console.log(solution("1010","1011"))
+
+
+
+const solution = (str1, s2) => {
+
+    if(s2.length === 0) return 0;
+    return str1.indexOf(s2);
+}
+
+const solution = (str1, s2) => {
+
+    if(s2.length === 0) return 0;
+
+    for(let i = 0; i < str1.length; i++) {
+        // console.log(str1[i])
+        if(str1[i] === s2[0]) {
+            // console.log(str1.slice(i, i + s2.length));
+            if(str1.slice(i, i + s2.length) === s2) {
+                return i;
+            }
+        }
+    }
+    return -1;
+}
+
+const solution = (str1, s2) => {
+
+    for(let i = 0; i < str1.length; i++) {
+        // console.log(str1[i])
+        if(str1[i] === s2[0]) {
+            // console.log(str1.slice(i, i + s2.length));
+            let match = true;
+
+            for(let j = 0; j < s2.length; j++) {
+                if(s2[j] !== str1[i+j]) {
+                    match = false;
+                    break
+                }
+            }
+            if(match) return i;
+        }
+    }
+    return -1;
+}
+console.log(solution("mississippi","ssip"))
+
+
+
+const solution = nums => {
+
+    let prefix = nums[0]
+
+    for(let i = 1; i < nums.length; i++) {
+        // console.log(nums[i])
+        for(let j = 0; j < prefix.length; j++) {
+            // console.log(prefix[j]);
+            // console.log(temp)
+            if(nums[i][j] !== prefix[j]) {
+                prefix = prefix.slice(0, j);
+                // console.log(prefix.slice(0, j));
+                // console.log("****")
+                break;
+            }
+        }
+    }
+    return prefix;
+}
+console.log(solution(["flower","flow","flight"]));
+console.log(solution(["dog","racecar","car"]));
+
+
+
+const solution = nums => {
+    // return nums.reverse();
+
+    // for(let i = 0; i < nums.length / 2; i++) {
+    //     let j = nums.length -1 - i;
+    //     [nums[i], nums[j]] = [nums[j], nums[i]];
+    // }
+    // return nums;
+
+    let i = 0;
+    let j = nums.length - 1;
+    while(i < j) {
+        [nums[i], nums[j]] = [nums[j], nums[i]];
+        i++;
+        j--;
+    }
+    return nums;
+}
+console.log(solution(["h","e","l","l","o"]))
+
+
+
+const solution = nums => {
+    nums.sort((a,b)=> a-b);
+    
+    let sum = 0;
+    for(let i = 0; i < nums.length; i+=2) {
+        sum += nums[i];
+    }
+    return sum;
+}
+console.log(solution([1,4,3,2]));
+console.log(solution([6,2,6,5,1,2]));
+
+
+
+const solution = (nums, val) => {
+
+    for(let i = 0; i < nums.length; i++) {
+        for(let j = i+1; j < nums.length; j++) {
+            // console.log(nums[i], nums[j]);
+            if(nums[i] + nums[j] === val) {
+                return [i, j]
+            }
+        }
+    }
+}
+
+const solution = (nums, val) => {
+
+    let map = new Map();
+
+    for(let i = 0; i < nums.length; i++) {
+        let remaining = val - nums[i];
+        if(map.has(remaining)) {
+            return [i, map.get(remaining)];
+        }
+
+        map.set(nums[i], i);
+    }
+}
+
+const solution = (nums, val) => {
+    let i = 0;
+    let j = nums.length - 1;
+
+    while(i < j) {
+        if(nums[i] + nums[j] === val) {
+            return [i+1, j+1]
+        } else if(nums[i] + nums[j] > val) {
+            j--;
+        } else {
+            i++;
+        }
+    }
+}
+console.log(solution([2,7,11,15], 9));
+console.log(solution([2,3,4], 6));
+console.log(solution([-1,0], -1));
+
+
+
+const solution = num => {
+
+    let result = [];
+
+    for(let i = 0; i <= num; i++) {
+        let row = [];
+
+        for(let j = 0; j <= i; j++) {
+            if(j === 0 || j === i) {
+                row.push(1);
+            } else {
+                row.push(result[i-1][j] + result[i-1][j-1]);
+            }
+        }
+        result.push(row);
+    }
+
+    return result[result.length-1];
+}
+console.log(solution(3));
+console.log(solution(0));
+console.log(solution(1));
+
+
+const solution = str => {
+
+    str = str.split(" ")
+    // console.log(str)
+    for(let i = 0; i < str.length; i++) {
+        // console.log(str[i].split("").reverse().join(""))
+        str[i] = str[i].split("").reverse().join("");
+    }
+    return str.join(" ");
+}
+console.log(solution("Let's take LeetCode contest"));
+console.log(solution("God Ding"));
+
+
+
+const solution = (str, s) => {
+
+    let seperateIdx = 0;
+
+    for(let i = 0; i < str.length; i++) {
+        if(str[i] === s[seperateIdx]) {
+            seperateIdx++;
+        }
+    }
+    // console.log(seperateIdx)
+    return seperateIdx === s.length
+}
+console.log(solution("ahbgdc", "abc"))
+console.log(solution("ahbgdc", "axc"))
+
+
+
+const solution = (nums1, nums2) => {
+
+    let set1 = new Set(nums1);
+    let set2 = new Set(nums2);
+
+    return([...set1].filter(num => set2.has(num)));
+}
+
+const solution = (nums1, nums2) => {
+
+    let map = new Map();
+
+    for(const num of nums1) {
+        if(!map.has(num)) {
+            map.set(num, 1);
+        } else {
+            let count = map.get(num);
+            map.set(num, count+=1);
+        }
+    }
+
+    // console.log(map);
+    let result = [];
+    for(const num of nums2) {
+        if(map.has(num)) {
+            if(map.get(num) > 0) {
+                result.push(num);
+                let count = map.get(num);
+                map.set(num, count-=1);
+            }
+        }
+    }
+    return result;
+}
+console.log(solution([1,2,2,1], [2,2,2,2,2]));
+console.log(solution([4,9,5], [9,4,9,8,4]));
+
+
+
+const solution = nums => {
+    let set = new Set();
+
+    for(const num of nums) {
+
+        if(set.has(num)) {
+            return num;
+        }
+        set.add(num);
+    }
+
+}
+console.log(solution([1,3,4,2,2]));
+console.log(solution([3,1,3,4,2]));
+
+
+
+const solution = nums => {
+
+    let map = new Map();
+
+    for(let i = 0; i < nums.length; i++) {
+        for(let j = 0; j < nums.length; j++) {
+            // console.log(nums[i][j])
+            let key = i + j;
+            let val = nums[i][j];
+
+            if(!map.has(key)) {
+                map.set(key, [val]);
+            } else {
+                map.set(key, [...map.get(key), val])
+            }
+        }
+    }
+    // console.log(map)
+
+    let result = [];
+    
+    for(const [key, val] of map) {
+        if(key % 2 === 0) {
+            result.push(...val.reverse());
+        } else {
+            result.push(...val);
+        }
+    }
+    return result;
+}
+
+const solution = nums => {
+
+    let result = new Array(nums.length + nums[0].length - 1).fill(null).map(()=>[]);
+    // console.log(result)
+    for(let i = 0; i < nums.length; i++) {
+        for(let j = 0; j < nums.length; j++) {
+            // console.log(nums[i][j])
+            let key = i + j;
+            let val = nums[i][j];
+
+            if(key % 2 === 0) {
+                result[key].unshift(val);
+            } else {
+                result[key].push(val)
+            }
+        }
+    }
+    return result.flat();
+}
+console.log(solution([[1,2,3],[4,5,6],[7,8,9]]));
+console.log(solution([[1,2,3],[4,5,6],[7,8,9]]));
+
+
+
+const solution = nums => {
+
+    let result = [];
+    
+    let top = 0;
+    let buttom = nums.length - 1;
+    let left = 0;
+    let right = nums[0].length - 1;
+
+    while(top <= buttom && left <= right) {
+
+        for(let i = left; i <= right; i++) {
+            result.push(nums[top][i]);
+        }
+        top++;
+
+        for(let i = top; i <= buttom; i++) {
+            result.push(nums[i][right]);
+        }
+        right--;
+
+        if(top < buttom) {
+            for(let i = right; i >= left; i--) {
+                result.push(nums[buttom][i]);
+            }
+            buttom--;
+        }
+
+        if(left < right) {
+            for(let i = buttom; i >= top; i--) {
+                result.push(nums[i][left]);
+            }
+            left++;
+        }
+    }
+    return result;
+}
+console.log(solution([[1,2,3,4],[5,6,7,8],[9,10,11,12]]));
