@@ -1066,3 +1066,411 @@ const solution = nums => {
     return result;
 }
 console.log(solution([[1,2,3,4],[5,6,7,8],[9,10,11,12]]));
+
+
+
+const solution = (nums, val) => {
+
+    let i = 0; 
+    let j = 0;
+    let count = 0;
+    let minCount = Infinity;
+    let sum = 0;
+
+    while(j < nums.length) {
+        sum += nums[j];
+        count++;
+
+        while(sum >= val) {
+            minCount = Math.min(count, minCount);
+            sum -= nums[i];
+            i++;
+            count--;
+        }
+
+        j++;
+    }
+    return minCount === Infinity ? 0 : minCount;
+}
+console.log(solution([2,3,1,2,4,3], 7));
+console.log(solution([1,4,4], 4));
+console.log(solution([1,1,1,1,1,1,1,1], 11));
+
+
+
+const solution = (nums, val) => {
+
+    val = val % nums.length;
+    // console.log(val);
+
+    let result = [];
+
+    for(let i = nums.length - val; i < nums.length; i++) {
+        result.push(nums[i]);
+    }
+
+    for(let i = 0; i < nums.length - val; i++) {
+        result.push(nums[i]);
+    }
+    return result;
+}
+
+const solution = (nums, val) => {
+
+    val = val % nums.length;
+    // console.log(val);
+    let hahaha = nums.splice(nums.length - val);
+    // console.log(nums);
+    return [...hahaha, ...nums]
+}
+console.log(solution([1,2,3,4,5,6,7], 3));
+console.log(solution([-1,-100,3,99], 2));
+
+
+
+const solution = str => {
+
+    str = str.split(" ")
+    let temp = str.filter(word => word.length > 0);
+    // console.log(temp);
+    for(let i = 0; i < temp.length / 2; i++) {
+        let j = temp.length - 1 - i;
+        [temp[i], temp[j]] = [temp[j], temp[i]];
+    }
+    return temp.join(" ");
+}
+console.log(solution("the sky is blue"));
+console.log(solution("  hello     world  "));
+console.log(solution("a good   example"));
+
+
+
+const solution = (nums1, m, nums2, n) => {
+
+    let idx = m + n - 1;
+    let mIdx = m - 1;
+    let nIdx = n - 1;
+
+    while(nIdx >= 0) {
+        if(nums1[mIdx] >= nums2[nIdx]) {
+            nums1[idx] = nums1[mIdx];
+            mIdx--;
+        } else{
+            nums1[idx] = nums2[nIdx];
+            nIdx--;
+        }
+        idx--;
+
+    }
+    return nums1
+}
+console.log(solution([1,2,3,0,0,0],3,[2,5,6],3))
+console.log(solution([1],1,[],0))
+console.log(solution([],0,[1],1))
+
+
+
+const solution = (nums, val) => {
+
+    let i = 0, j = 0;
+    let count = 0, minCount = Infinity, sum = 0;
+
+    while(j < nums.length) {
+        sum += nums[j];
+        count++;
+        
+        while(sum >= val) {
+            minCount = Math.min(count, minCount);
+            sum -= nums[i];
+            count--;
+            i++;
+        }
+        j++;
+    }
+    return minCount === Infinity ? 0 : minCount;
+}
+console.log(solution([2,3,1,2,4,3],7))
+console.log(solution([1,4,4],4))
+console.log(solution([1,1,1,1,1,1,1,1],11))
+
+
+
+const solution = nums => {
+
+    let set = new Set();
+
+    for (const num of nums) {
+        
+        if(set.has(num)) {
+            return true;
+        }
+        set.add(num);
+    }
+    return false;
+}
+
+const solution = nums => {
+
+    let map = new Map();
+
+    for (const num of nums) {
+        
+        if(map.has(num)) {
+            return true;
+        }
+        map.set(num, 1);
+    }
+    return false;
+}
+console.log(solution([1,2,3,1]));
+console.log(solution([1,2,3,4]));
+console.log(solution([1,1,1,3,3,4,3,2,4,2]));
+
+
+
+const solution = nums => {
+
+    if(nums.length === 1) return nums[0];
+
+    let map = new Map();
+    for(const num of nums) {
+        if(!map.has(num)) {
+            map.set(num, 1);
+        } else {
+            let count = map.get(num)
+            map.set(num, map.get(num)+1)
+        }
+    }
+    // console.log(map);
+    for(const [key, val] of map) {
+        if(val === 1) {
+            return key
+        }
+    }
+}
+console.log(solution([2,2,1]));
+console.log(solution([4,1,2,1,2]));
+console.log(solution([1]));
+
+
+
+const solution = num => {
+    // find sqrt of each num,
+    // sum them up
+    num = num.toString();
+    num = num + "0";
+
+    // console.log(num)
+    // console.log(typeof(num))
+
+    while(num.length > 1) {
+
+        let sum = 0;
+
+        for(let i = 0; i < num.length; i++) {
+            sum += num[i] ** 2;
+        }
+        num = sum.toString();
+    }
+    return num == 1
+}
+console.log(solution(19));
+console.log(solution(2));
+console.log(solution(7));
+console.log(solution(1111111));
+
+
+
+const solution = (str1, str2) => {
+
+    let map1 = new Map();
+    let map2 = new Map();
+
+    for(let i = 0; i < str1.length; i++) {
+
+        if(map1.has(str1[i]) && map1.get(str1[i]) !== str2[i]) {
+            return false;
+        }
+        if(map2.has(str2[i]) && map2.get(str2[i]) !== str1[i]) {
+            return false;
+        }
+
+        map1.set(str1[i], str2[i]);
+        map2.set(str2[i], str1[i]);
+    }
+    return true;
+}
+console.log(solution("egg", "add"));
+console.log(solution("foo", "bar"));
+console.log(solution("paper", "title"));
+
+
+
+const solution = (nums1, nums2) => {
+
+    let map = new Map();
+
+    for(let i = 0; i < nums1.length; i++) {
+        map.set(nums1[i], [i]);
+    }
+
+    for(let i = 0; i < nums2.length; i++) {
+        if(map.has(nums2[i])) {
+            map.set(nums2[i], [...map.get(nums2[i]), i]);
+        }
+    }
+
+    // console.log(map)
+    let result = ["", Infinity];
+
+    for(const [key, val] of map) {
+        if(val.length > 1) {
+            let total = val.reduce((a,b)=> a+b);
+            // console.log(total)
+
+            if(total < result[1]) {
+                result[0] = key;
+                result[1] = total;
+            }
+        }
+    }
+
+    return result[0]
+}
+
+const solution = (nums1, nums2) => {
+    let map = new Map();
+
+    for(let i = 0; i < nums1.length; i++) {
+        map.set(nums1[i], i);
+    }
+    let map2 = new Map();
+
+    for(let i = 0; i < nums2.length; i++) {
+        let val = nums2[i]
+
+        if(map.has(val)) {
+            let count = map.get(val) + i;
+
+            if(!map2.has(count)) {
+                map2.set(count, [val]);
+            } else {
+                map2.set(count, [...map2.get(count), val])
+            }
+        }
+    }
+    // console.log(map2);
+
+    let min = Infinity;
+    for(const [key, value] of map2) {
+        if(key < min) {
+            min = key;
+        }
+    }
+    return map2.get(min);
+}
+console.log(solution(["Shogun","Tapioca Express","Burger King","KFC"], ["Piatti","The Grill at Torrey Pines","Hungry Hunter Steakhouse","Shogun"]))
+console.log(solution(["Shogun","Tapioca Express","Burger King","KFC"], ["KFC","Shogun","Burger King"]))
+
+
+
+const solution = str => {
+    let map = new Map();
+
+    for(let i = 0; i < str.length; i++) {
+        if(!map.has(str[i])) {
+            map.set(str[i], [i]);
+        } else {
+            map.set(str[i], [...map.get(str[i]), i]);
+        }
+    }
+    // console.log(map)
+
+    for(const [key, value] of map) {
+        if(value.length === 1) {
+            return value[0];
+        }
+    }
+    return -1;
+}
+
+const solution = str => {
+    let map = new Map();
+
+    for(let i = 0; i < str.length; i++) {
+        if(!map.has(str[i])) {
+            map.set(str[i], {count: 1, idx: i});
+        } else {
+            let occ = map.get(str[i]).count +1;
+            map.set(str[i], {count: occ, idx: i});
+        }
+    }
+    // console.log(map)
+
+    for(const [key, value] of map) {
+        if(value.count === 1) {
+            return value.idx;
+        }
+    }
+    return -1;
+}
+console.log(solution("leetcode"));
+console.log(solution("loveleetcode"));
+console.log(solution("aabb"));
+
+
+
+const solution = (nums, k) => {
+    let map = new Map();
+
+    for(let i = 0; i < nums.length; i++) {
+        let val = nums[i];
+
+        if(map.has(val)) {
+            if(Math.abs(map.get(val) - i) <= k) {
+                return true;
+            }
+        }
+
+
+        map.set(val, i);
+    }
+    return false;
+}
+console.log(solution([1,2,3,1],3));
+console.log(solution([1,0,1,1],1));
+console.log(solution([1,2,3,1,2,3],2));
+
+
+
+const solution = (jewels, stones) => {
+
+    jewels = jewels.split("");
+    let set = new Set(jewels)
+    // console.log(set)
+    let count = 0;
+
+    for(const s of stones) {
+        if(set.has(s)) {
+            count++;
+        }
+    }
+    return count;
+}
+
+const solution = (jewels, stones) => {
+
+    let map = new Map();
+    for(const j of jewels) {
+        map.set(j, 1);
+    }
+    let count = 0;
+    for(const s of stones) {
+        if(map.has(s)) {
+            count++;
+        }
+    }
+    return count;
+}
+console.log(solution("aA", "aAAbbbb"));
+console.log(solution("z", "ZZ"));
