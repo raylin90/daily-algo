@@ -1932,14 +1932,111 @@ const solution = nums => {
 
             return mid;
         } else if(nums[mid] > nums[mid-1]) {
+            // move right
             start = mid + 1;
         } else {
+            // move left
             end = mid - 1;
         }
     }
 }
 console.log(solution([1,2,3,1]));
 console.log(solution([1,2,1,3,5,6,4]));
+
+
+
+const solution = num => {
+
+    num = num.toString();
+    num += "0";
+    
+    while(num.length > 1) {
+        
+        let sum = 0;
+
+        for(let i = 0;i < num.length; i++) {
+            let x = num[i];
+            sum += x ** 2;
+        }
+        num = sum.toString();
+    }
+    return num == 1
+}
+
+console.log(solution(1111111))
+
+
+const sumOfNum = num => {
+    let sum = 0;
+    while(num) {
+        sum += (num % 10) ** 2
+        console.log("sum", sum)
+        console.log(num)
+        num = Math.floor(num / 10)
+        console.log("num", num)
+    }
+    return sum;
+}
+
+const solution = num => {
+    let set = new Set();
+
+    while(true) {
+
+        num = sumOfNum(num);
+
+        if(num === 1) return true;
+        if(set.has(num)) return false;
+
+        set.add(num);
+        console.log(set);
+    }
+}
+console.log(solution(19))
+
+
+
+const solution = (str1, str2) => {
+
+    let map1 = new Map();
+    let map2 = new Map();
+
+    for(let i = 0; i < str1.length; i++) {
+
+        if(map1.has(str1[i]) && map1.get(str1[i]) !== str2[i]) {
+            return false;
+        }
+        if(map2.has(str2[i]) && map2.get(str2[i]) !== str1[i]) {
+            return false;
+        }
+
+        map1.set(str1[i], str2[i]);
+        map2.set(str2[i], str1[i]);
+    }
+    return true;
+}
+console.log(solution("egg", "add"));
+
+
+
+const solution = (nums, val) => {
+
+    let map = new Map();
+
+    for(let i = 0; i < nums.length; i++) {
+
+        if(map.has(nums[i])) {
+            if(Math.abs(map.get(nums[i]) - i) <= val) {
+                return true;
+            }
+        }
+
+        map.set(nums[i], i);
+    }
+    // console.log(map)
+    return false;
+}
+console.log(solution([1,2,3,1,2,3], 2));
 // show passion
 // project, name 
 // no product manager, why project if signate (impact: to other person)
@@ -1947,7 +2044,7 @@ console.log(solution([1,2,1,3,5,6,4]));
 
 /**
  * 
-
+ * 
 impact to user, signaicatate
     workable solution;
  */
