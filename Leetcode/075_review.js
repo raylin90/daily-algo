@@ -1727,7 +1727,167 @@ console.log(solution([{name:"star-1", distance:20},{name:"star-2", distance: 30}
 
 
 
+const solution = (nums, val) => {
 
+    let start = 0;
+    let end = nums.length - 1;
+
+    while(start <= end) {
+        let midPoint = Math.floor((start+end) / 2);
+        // console.log(midPoint);
+
+        if(nums[midPoint] === val) {
+            return midPoint;
+        } else if(nums[midPoint] > val) {
+            // check left
+            end = midPoint - 1;
+        } else {
+            // check right
+            start = midPoint + 1;
+        }
+    }
+}
+
+const binarySearch = (nums, val, start, end) => {
+    while(start <= end) {
+        let midPoint = Math.floor((start+end)/2);
+        if(nums[midPoint] === val) {
+            return midPoint;
+        } else if(nums[midPoint] > val) {
+            // check left
+            return binarySearch(nums, val, start, midPoint-1);
+        } else {
+            // check right
+            return binarySearch(nums, val, midPoint+1, end);
+        }
+    }
+    return -1;
+}
+const solution = (nums, val) => {
+
+    let start = 0;
+    let end = nums.length - 1;
+
+    return binarySearch(nums, val, start, end);
+}
+console.log(solution([-1,0,3,5,9,12],12));
+
+
+
+const solution = num => {
+
+    let start = 0;
+    let end = num;
+
+    while(start <= end) {
+        let mid = Math.floor((start+end)/2);
+
+        if(mid * mid === num) {
+            return mid;
+        } else if(mid * mid > num) {
+            // check left
+            end = mid - 1;
+        } else {
+            // check right
+            start = mid + 1;
+        }
+    }
+    // console.log(start, end);
+    return end;
+}
+console.log(solution(8));
+
+
+
+const solution = num => {
+    let start = 0;
+    let end = num
+
+    while(start <= end) {
+        let mid = Math.floor((start+end)/2);
+
+        if(guess(mid) === 0) {
+            return mid;
+        } else if(guess(mid) === -1) {
+            // check left
+            end = mid - 1;
+        } else if(guess(mid) === 1) {
+            // check right
+            start = mid + 1;
+        }
+    }
+}
+
+
+
+const solution = num => {
+    let start = 0;
+    let end = num;
+
+    while(start <= end) {
+        let mid = Math.floor((start+end)/2);
+        if(isBadVersion(mid)) {
+            // check left
+            end = mid - 1;
+        } else {
+            // check right
+            start = mid + 1;
+        }
+    }
+}
+console.log(solution(4));
+
+
+
+const solution = num => {
+    let start = 0;
+    let end = num;
+
+    while(start <= end) {
+        let mid = Math.floor((start+end) /2);
+        if(mid * mid === num) {
+            return true;
+        } else if(mid * mid > num) {
+            // check left
+            end = mid - 1;
+        } else {
+            // check right
+            start = mid + 1;
+        }
+    }
+    return false;
+}
+console.log(solution(16));
+console.log(solution(14));
+
+
+
+const solution = (letters, char) => {
+
+    if(letters[letters.length - 1] <= char) return letters[0];
+
+    let start = 0;
+    let end = letters.length - 1;
+
+    while(start <= end) {
+        let mid = Math.floor((start+end)/2);
+
+        if(letters[mid] === char) {
+            return letters[mid+1];
+        } else if(letters[mid] > char) {
+            // check left;
+            end = mid - 1;
+        } else {
+            // check right
+            start = mid + 1;
+        }
+    }
+    return letters[start];
+}
+console.log(solution(["c", "f", "j"], "a"));
+console.log(solution(["c", "f", "j"], "c"));
+console.log(solution(["c", "f", "j"], "d"));
+console.log(solution(["a", "b"], "z"));
 // show passion
 // project, name 
 // no product manager, why project if signate (impact: to other person)
