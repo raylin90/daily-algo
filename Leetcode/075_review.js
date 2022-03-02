@@ -1474,3 +1474,268 @@ const solution = (jewels, stones) => {
 }
 console.log(solution("aA", "aAAbbbb"));
 console.log(solution("z", "ZZ"));
+
+
+
+const solution = nums => {
+
+    let map = new Map();
+
+    for(let i = 0; i < nums.length; i++) {
+        let key = nums[i].split("").sort().join("");
+        let value = nums[i];
+
+        if(!map.has(key)) {
+            map.set(key, [value]);
+        } else {
+            map.set(key, [...map.get(key), value]);
+        }
+    }
+    // console.log(map);
+    let result = [];
+    for(const [key, value] of map) {
+        result.push(value);
+    }
+    return result;
+}
+console.log((solution(["eat","tea","tan","ate","nat","bat"])))
+console.log((solution([""])))
+console.log((solution(["a"])))
+
+
+
+const solution = nums => {
+
+    let set = new Set();
+
+    for(let i = 0; i < 9; i++) {
+        for(let j = 0; j < 9; j++) {
+            if(nums[i][j] !== ".") {
+                // console.log(nums[i][j]);
+
+                let rowVal = `row ${i}, value: ${nums[i][j]}`;
+                let colVal = `col ${j}, value: ${nums[i][j]}`;
+                let box = 3 * Math.floor(i / 3) + Math.floor(j / 3);
+                let boxVal = `box ${box}, value: ${nums[i][j]}`
+
+                if(set.has(rowVal) || set.has(colVal) || set.has(boxVal)) {
+                    return false;
+                }
+                
+                set.add(rowVal);
+                set.add(colVal);
+                set.add(boxVal);
+            }
+        }
+    }
+    // console.log(set);
+    return true;
+}
+let board =
+[["5","3",".",".","7",".",".",".","."]
+,["6",".",".","1","9","5",".",".","."]
+,[".","9","8",".",".",".",".","6","."]
+,["8",".",".",".","6",".",".",".","3"]
+,["4",".",".","8",".","3",".",".","1"]
+,["7",".",".",".","2",".",".",".","6"]
+,[".","6",".",".",".",".","2","8","."]
+,[".",".",".","4","1","9",".",".","5"]
+,[".",".",".",".","8",".",".","7","9"]];
+
+let board2 =
+[["8","3",".",".","7",".",".",".","."]
+,["6",".",".","1","9","5",".",".","."]
+,[".","9","8",".",".",".",".","6","."]
+,["8",".",".",".","6",".",".",".","3"]
+,["4",".",".","8",".","3",".",".","1"]
+,["7",".",".",".","2",".",".",".","6"]
+,[".","6",".",".",".",".","2","8","."]
+,[".",".",".","4","1","9",".",".","5"]
+,[".",".",".",".","8",".",".","7","9"]];
+console.log(solution(board2));
+
+
+
+const solution = str => {
+
+    let temp = "";
+    let set = new Set();
+    let max = 0;
+
+    for(let i = 0; i < str.length; i++) {
+        for(let j = i; j < str.length; j++) {
+            // console.log(str[j]);
+            if(!set.has(str[j])) {
+                temp += str[j];
+                set.add(str[j]);
+            } else {
+                max = Math.max(temp.length, max);
+
+                temp= "";
+                set = new Set();
+            }
+        }
+    }
+    return max;
+}
+
+const solution = str => {
+
+    let set = new Set();
+    let max = 0;
+    let i = 0;
+    let j = 0;
+
+    while(j < str.length) {
+
+        if(!set.has(str[j])) {
+            set.add(str[j]);
+            j++;
+            console.log(set);
+        } else {
+            max = Math.max(max, set.size)
+            set.delete(str[i]);
+            i++;
+            console.log(set);
+        }
+    }
+
+    return max;
+}
+console.log(solution("pwwkew"))
+
+
+
+const solution = (nums1, nums2, nums3, nums4) => {
+
+    let count = 0;
+
+    for(let a = 0; a < nums1.length; a++) {
+        for(let b = 0; b < nums2.length; b++) {
+            for(let c = 0; c < nums3.length; c++) {
+                for(let d = 0; d < nums4.length; d++) {
+                    // console.log(nums1[a]);
+                    // console.log(nums2[b]);
+                    // console.log(nums3[c]);
+                    // console.log(nums4[d]);
+                    // console.log("*****")
+                    if(nums1[a] + nums2[b] + nums3[c] + nums4[d] === 0) {
+                        count++;
+                    }
+                }
+            }
+        }
+    }
+
+    return  count;
+}
+
+const solution = (nums1, nums2, nums3, nums4) => {
+    let map = new Map();
+    let count = 0;
+
+    for(let a = 0; a < nums1.length; a++) {
+        for(let b = 0; b < nums2.length; b++) {
+            let sum = nums1[a] + nums2[b];
+            
+            map.set(sum, ((map.get(sum) || 0) + 1));
+        }
+    }
+
+    for(let c = 0; c < nums3.length; c++) {
+        for(let d = 0; d < nums4.length; d++) {
+            let sum = nums3[c] + nums4[d];
+            let remaining = 0 - sum;
+            // console.log(remaining)
+            if(map.has(remaining)) {
+                count += map.get(remaining);
+            }
+        }
+    }
+
+    return count;
+}
+console.log(solution([1,2],[-2,-1],[-1,2],[0,2]))
+
+
+
+const solution = (nums, k) => {
+
+    let map = new Map();
+
+    for(const num of nums) {
+        map.set(num, map.get(num)+1 || 1)
+    }
+
+    let arr = []
+    for(const[key, value] of map) {
+        arr.push([key, value]);
+    }
+    arr.sort((a,b)=>a[0]-b[0]);
+    // console.log(arr);
+
+    let result = [];
+
+    for(let i = 0; i < k; i++) {
+        result.push(arr[i][0]);
+    }
+    return result;
+}
+console.log(solution([1,1,1,2,2,3], 2));
+
+
+
+const solution = (nums, k) => {
+
+    let arr = [];
+    for(const obj of nums) {
+        arr.push([obj.name, obj.distance]);
+    }
+    console.log(arr.sort((a,b)=>a[1]-b[1]));
+
+    let result = [];
+    for(let i = 0; i < k; i++) {
+        result.push(arr[i][0]);
+    }
+    return result;
+}
+console.log(solution([{name:"star-1", distance:20},{name:"star-2", distance: 30},{name:"star-3", distance: 10}], 2));
+
+const solution = (nums, k) => {
+
+    let j = 0;
+    let result = [];
+
+    while(j < k) {
+
+        let min = Infinity;
+        let idx;
+
+        for(let i = 0; i < nums.length; i++) {
+            if(nums[i].distance < min) {
+                min = nums[i].distance;
+                idx = i;
+            }
+        }
+        result.push(nums[idx].name);
+        nums.splice(idx, 1);
+        j++;
+    }
+    return result;
+}
+console.log(solution([{name:"star-1", distance:20},{name:"star-2", distance: 30},{name:"star-3", distance: 10}], 2));
+
+
+
+
+// show passion
+// project, name 
+// no product manager, why project if signate (impact: to other person)
+
+
+/**
+ * 
+
+impact to user, signaicatate
+    workable solution;
+ */
