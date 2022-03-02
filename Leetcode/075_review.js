@@ -1888,6 +1888,58 @@ console.log(solution(["c", "f", "j"], "a"));
 console.log(solution(["c", "f", "j"], "c"));
 console.log(solution(["c", "f", "j"], "d"));
 console.log(solution(["a", "b"], "z"));
+
+
+
+const solution = (nums, target) => {
+
+    let start = 0;
+    let end = nums.length - 1;
+
+    while(start <= end) {
+        let midPoint = Math.floor((start+end)/2);
+        if(nums[midPoint] === target) {
+            return midPoint;
+        } else if(nums[midPoint] >= nums[start]) {
+            // check left
+            if(target >= nums[start] && target <=nums[midPoint]) {
+                // continue left
+                end = midPoint-1;
+            } else {
+                // right
+                start = midPoint+1;
+            }
+        }
+    }
+
+    return -1;
+}
+console.log(solution([4,5,6,7,0,1,2],0));
+console.log(solution([4,5,6,7,0,1,2],3));
+console.log(solution([1],0));
+
+
+
+const solution = nums => {
+    
+    let start = 0;
+    let end = nums.length - 1;
+
+    while(start <= end) {
+        let mid = Math.floor((start + end)/2);
+
+        if(nums[mid] > nums[mid+1] && nums[mid] > nums[mid-1]) {
+
+            return mid;
+        } else if(nums[mid] > nums[mid-1]) {
+            start = mid + 1;
+        } else {
+            end = mid - 1;
+        }
+    }
+}
+console.log(solution([1,2,3,1]));
+console.log(solution([1,2,1,3,5,6,4]));
 // show passion
 // project, name 
 // no product manager, why project if signate (impact: to other person)
