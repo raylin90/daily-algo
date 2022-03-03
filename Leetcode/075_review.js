@@ -2037,9 +2037,266 @@ const solution = (nums, val) => {
     return false;
 }
 console.log(solution([1,2,3,1,2,3], 2));
+
+
+
+const solution = (nums, target) => {
+
+    let start = 0;
+    let end = nums.length - 1;
+
+    while(start <= end) {
+        let mid = Math.ceil((start+end) / 2);
+
+        if(nums[mid] === target) {
+            return mid;
+        } else if(nums[mid] > target) {
+            // check left
+            end = mid - 1;
+        } else {
+            // check right
+            start = mid +1;
+        }
+    }
+    return -1;
+}
+
+const binarySearch = (nums, target, start, end) => {
+
+    while(start <= end) {
+        let mid = Math.floor((start+end) / 2);
+        if(nums[mid] === target) {
+            return mid;
+        } else if(nums[mid] > target) {
+            // left
+            return binarySearch(nums, target, start, mid-1);
+        } else {
+            // right
+            return binarySearch(nums, target, mid+1, end);
+        }
+    }
+    return -1;
+}
+
+const solution = (nums, target) => {
+
+    let start = 0;
+    let end = nums.length - 1;
+
+    return binarySearch(nums, target, start, end);
+}
+console.log(solution([-1,0,3,5,9,12,20], 12));
+
+
+
+const solution = num => {
+    let start = 0;
+    let end = num;
+
+    while(start <= end) {
+        let mid = Math.floor((start+end) / 2);
+        if(mid * mid === num) {
+            return mid;
+        } else if(mid * mid > num) {
+            end = mid - 1;
+        } else {
+            start = mid + 1;
+        }
+    }
+    return end;
+}
+console.log(solution(8));
+
+
+
+const solution = (nums, k) => {
+    let map = new Map();
+    for(const num of nums) {
+        map.set(num, map.get(num)+1 || 1)
+    }
+    // console.log((map))
+    let arr = [...map].sort((a,b)=>a[1]-b[1]);
+    console.log(arr.slice(0, k).map(x => x[0]));
+}
+
+const solution = (nums, k) => {
+
+    let map = new Map();
+    for(const num of nums) {
+        map.set(num, map.get(num)+1 || 1)
+    }
+    // console.log(map)
+    let j = 0;
+    let result = [];
+
+    while(j < k) {
+        let max = -1;
+        let k;
+        for(const [key, val] of map) {
+            if(val > max) {
+                max = val;
+                k = key;
+            }
+        }
+        result.push(k);
+        map.delete(k);
+        j++;
+    }
+    return result;
+}
+console.log(solution([1,1,1,2,2,3,3,3,3,3],2))
+console.log(solution([1],1))
+
+
+
+const solution = str => {
+    let set = new Set();
+    let temp = "";
+    let count = 0;
+
+    for(let i = 0; i < str.length; i++) {
+        for(let j = i; j < str.length; j++) {
+            // console.log(str[j]);
+            if(!set.has(str[j])) {
+                set.add(str[j]);
+                temp += str[j];
+            } else {
+                count = Math.max(count, temp.length);
+                temp="";
+                set = new Set();
+            }
+        }
+    }
+    return count;
+}
+
+const solution = str => {
+    let set = new Set();
+    let count = 0;
+    let i = 0;
+    let j = 0;
+
+    while(j < str.length) {
+
+        while(set.has(str[j])) {
+            set.delete(str[i]);
+            i++;
+        }
+
+        set.add(str[j]);
+        count = Math.max(count, set.size);
+        j++;
+    }
+    console.log(set)
+    console.log(count)
+}
+console.log(solution("abcabcbb"));
+
+
+
+const solution = root => {
+
+    helper(root);
+    let map = new Map();
+    let result = [];
+
+    const helper = root => {
+        if(!root) return "#"
+    
+        let left = helper(root.left);
+        let right = helper(root.right);
+        let key = `${root.val}-${left}-${right}`;
+        
+        if(!map.has(key)) {
+            map.set(key, 1);
+        } else {
+            map.set(key, map.get(key)+1);
+            if(map.get(key) === 2) {
+                result.push(root);
+            }
+        }
+    
+        return key;
+    }
+}
+
+
+
+const solution = num => {
+    if(num === 1 || num === 2) return 1;
+
+    let prev = 0;
+    let curr = 1;
+
+    for(let i = 2; i < num; i++) {
+        let next = prev+curr;
+        prev = curr;
+        curr = next;
+    }
+    return prev + curr;
+}
+console.log(solution(8));
+
+const solution = num => {
+    if(num === 1 || num === 2) return 1;
+    return solution(num-1) + solution(num-2)
+}
+console.log(solution(20))
+
+
+const solution = (nums, target) => {
+    let start = 0;
+    let end = nums.length - 1;
+
+    while(start <= end) {
+        let mid = Math.floor((start+end)/2);
+
+        if(nums[mid] === target) {
+            return mid;
+        } else {
+
+        }
+
+    }
+}
+console.log(solution([4,5,6,7,0,1,2],0));
+
+
+function dynamicFibonacci() {
+    let cache = {};
+    return function fib(n) {
+        // check if already calculated for n
+        if (n in cache) {
+            return cache[n];
+        } else if (n < 2) { // base case
+            return n;
+        } else {
+            // store result in cache
+            cache[n] = fib(n - 1) + fib(n - 2);
+            console.log(cache)
+            return cache[n];
+        }
+    }
+}
+const callFib = dynamicFibonacci();
+console.log(callFib(10)); // 55
+
+
+
+function solution(num) {
+    return fib(num, [0,1]);
+}
+function fib(num, memo) {
+    if(num < 2) return memo[num];
+    if(memo[num]) return memo[num];
+
+    return memo[num] = fib(num-1, memo) + fib(num-2, memo)
+}
+console.log(solution(8));
 // show passion
 // project, name 
 // no product manager, why project if signate (impact: to other person)
+
 
 
 /**
